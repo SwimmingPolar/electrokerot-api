@@ -29,15 +29,10 @@ const log = {
     console.log(
       new Date().toISOString() +
         ' ' +
-        `[${yellowBright('ERROR')}]` +
+        `[${yellowBright('ERROR')}] ${yellowBright(invoker)}` +
         ': ' +
         redBright(error)
     )
-    fs.appendFileSync(
-      `../log/${invoker}-error-log.txt`,
-      new Date().toISOString() + ' - ' + error + '\n'
-    )
-    process.exit(1)
-  },
+  }
 }
 export default log
