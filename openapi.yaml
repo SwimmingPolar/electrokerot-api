@@ -1,0 +1,264 @@
+openapi: 3.0.3
+info:
+  title: Electrokerot Website API
+  contact:
+    email: swimmingpolar@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:5611/api
+tags:
+  - name: parts
+    description: Computer component parts
+  - name: builds
+    description: User created computer build
+  - name: users
+  - name: posts
+  - name: comments
+paths:
+  /parts/{ids}:
+    get:
+      tags:
+        - parts
+      summary: Get parts information of given ids
+      operationId: getPartsByIds
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Part'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /parts/search:
+    post:
+      tags:
+        - parts
+      summary: Get search results
+      operationId: getPartsByFilters
+      requestBody:
+        $ref: '#/components/requestBodies/PartSearchBody'
+      responses:
+        '200':
+          description: 'on success'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Part'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /parts/searchQueries:
+    get:
+      tags:
+        - parts
+      summary: Get list of autocompleted queries
+      operationId: getPartNamesByQuery
+      parameters:
+        - name: query
+          in: query
+          style: form
+          explode: true
+          required: true
+          schema:
+            type: object
+            properties:
+              query:
+                type: string
+              category:
+                $ref: '#/components/schemas/Categories'
+      responses:
+        '200':
+          description: 'on success'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /builds:
+    get:
+      tags:
+        - builds
+      summary: Get user's list of builds
+      operationId: getBuildById
+      responses:
+        '200':
+          description: 'on success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      tags:
+        - builds
+      summary: Create new build
+      operationId: createBuild
+      responses:
+        '200':
+          description: 'on success'
+  /builds/{id}:
+    put:
+      tags:
+        - builds
+      summary: Update build
+      operationId: updateBuild
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'on success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    delete:
+      tags:
+        - builds
+      summary: Delete build
+      operationId: deleteBuild
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'on success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    Part:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        variants:
+          type: array
+          items:
+            # $ref: '#/components/schemas/Part'
+            # self-referencing
+            type: string
+            example:
+              SelfReferencingPartObjects
+        details:
+          $ref: '#/components/schemas/PartDetails'
+        vendors:
+          $ref: '#/components/schemas/PartVendors'
+        prices:
+          $ref: '#/components/schemas/PartPrices'
+    PartDetails:
+      type: object
+      additionalProperties:
+        properties:
+          type:
+            type: string
+          value:
+            type: string
+    PartVendors:
+      type: array
+      items:
+        type: object
+        properties:
+          marketType:
+            type: string
+          vendorsList:
+            type: array
+            items:
+              type: object
+              properties:
+                vendorName:
+                  type: string
+                vendorCode:
+                  type: string
+                url:
+                  type: string
+                  format: uri
+    PartPrices:
+      type: array
+      items:
+        type: object
+        properties:
+          timestamp:
+            type: string
+            format: date-time
+          value:
+            type: string
+    Categories:
+      type: string
+      enum:
+        - cpu
+        - mainboard
+        - memory
+        - graphics
+        - ssd
+        - hdd
+        - power
+        - case
+        - cooler
+  requestBodies:
+    PartSearchBody:
+      description: Part search object
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              category:
+                $ref: '#/components/schemas/Categories'
+              page:
+                type: integer
+                minimum: 1
+              filter:
+                type: object
+                properties:
+                  searchQuery:
+                    type: string
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+            required:
+              - category
+              - page
+  responses:
+    BuildResponse:
+      description: Build information object
+      content:
+        application/json:
+          schema:
+            type: object
+    BadRequest:
+      description: invalid request
+    Unauthorized:
+      description: unauthorized
+    Forbidden:
+      description: request forbidden
+    NotFound:
+      description: url not found
+    ServerError:
+      description: internal server error
+    ServerBusy:
+      description: server is busy
