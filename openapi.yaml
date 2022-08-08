@@ -15,7 +15,8 @@ tags:
     description: User created computer build
   - name: posts
   - name: comments
-  - name: account
+  - name: user
+  - name: auth
 paths:
   /parts/{ids}:
     get:
@@ -31,6 +32,7 @@ paths:
             type: array
             items:
               type: string
+              example: ObjectId
       responses:
         '200':
           description: Ok
@@ -91,6 +93,40 @@ paths:
                 $ref: '#/components/schemas/Part'
         '400':
           $ref: '#/components/responses/BadRequest'
+  /parts:
+    post:
+      tags:
+        - parts
+      summary: Insert part
+      operationId: Insert part by url
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+              required:
+               - url
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Part'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
   /builds:
     get:
       tags:
@@ -106,10 +142,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Build'
-        '400':
-          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
       security:
         - bearerAuth: []
     post:
@@ -117,32 +153,77 @@ paths:
         - builds
       summary: Create new build
       operationId: createBuild
+      requestBody:
+        $ref: '#/components/requestBodies/BuildPost'
       responses:
-        '200':
-          description: Ok
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
       security:
         - bearerAuth: []
-  /builds/{id}:
-    put:
+  /builds/{id}/clone:
+    post:
       tags:
         - builds
-      summary: Update build
-      operationId: updateBuild
+      summary: Clone build
+      operationId: cloneBuildById
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
+            example: ObjectId
       responses:
-        '200':
-          description: Ok
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /builds/{id}:
+    patch:
+      tags:
+        - builds
+      summary: Update build
+      operationId: updateBuild
+      requestBody:
+        $ref: '#/components/requestBodies/BuildUpdate'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
       security:
@@ -158,21 +239,91 @@ paths:
           required: true
           schema:
             type: string
+            example: ObjectId
       responses:
-        '200':
-          description: 'on success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /user:
+    get:
+      tags:
+        - user
+      summary: Get user information
+      operationId: getUserById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    format: email
+                  nickname:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - user
+      summary: Create user
+      operationId: registerUser
+      requestBody:
+        $ref: '#/components/requestBodies/Signup'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    patch:
+      tags:
+        - user
+      summary: Update user profile
+      operationId: updateUserProfile
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateUserProfile'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - user
+      summary: Delete user
+      operationId: deleteUser
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
       security:
         - bearerAuth: []
   /login:
     post:
       tags:
-        - account
+        - auth
       summary: Login
       operationId: login
       requestBody:
@@ -188,8 +339,8 @@ paths:
                   type: string
                   format: password
       responses:
-        '200':
-          description: Ok
+        '204':
+          description: No content
           headers:
             Authorization:
               schema:
@@ -201,57 +352,12 @@ paths:
   /logout:
     get:
       tags:
-        - account
+        - auth
       summary: Logout
       operationId: logout
       responses:
-        '200':
-          description: Ok
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      security:
-        - bearerAuth: []
-  /signup:
-    post:
-      tags:
-        - account
-      summary: Create account
-      operationId: signup
-      requestBody:
-        $ref: '#/components/requestBodies/Signup'
-      responses:
-        '200':
-          description: Ok
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '409':
-          $ref: '#/components/responses/Conflict'
-  /update:
-    put:
-      tags:
-        - account
-      summary: Update account profile
-      operationId: updateAccountProfile
-      requestBody:
-        $ref: '#/components/requestBodies/UpdateAccountProfile'
-      responses:
-        '200':
-          description: Ok
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '409':
-          $ref: '#/components/responses/Conflict'
-      security:
-        - bearerAuth: []
-  /delete:
-    delete:
-      tags:
-        - account
-      summary: Delete account
-      operationId: deleteAccount
-      responses:
-        '200':
-          description: Ok
+        '204':
+          $ref: '#/components/responses/NoContent'
         '401':
           $ref: '#/components/responses/Unauthorized'
       security:
@@ -320,29 +426,76 @@ components:
         _id:
           type: string
           example: ObjectId
-        owner:
-          type: string
-          example: ObjectId
         name:
           type: string
         isSelected:
           type: boolean
+          default: false
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
         parts:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              properties:
-                category:
+          type: object
+          additionalProperties:
+            properties:
+              name:
+                type: string
+              count:
+                type: integer
+                minimum: 1
+              price:
+                type: string
+              partId:
+                type: string
+                example: ObjectId
+              filters:
+                type: array
+                items:
                   type: object
                   properties:
-                    _id:
+                    marketType:
                       type: string
-                      example: ObjectId
-                    count:
-                      type: integer
-                      minimum: 1
-                    filters:
+                      enum:
+                        - openMarket
+                        - mall
+                        - credit
+                        - cash
+                    vendorUrl:
+                      type: string
+                      format: uri
+                    status:
+                      type: string
+                      enum:
+                        - included
+                        - selected
+                        - excluded
+        optimization:
+          type: object
+          properties:
+            hash:
+              type: string
+              example: sha1 hash
+            lowestPrice:
+              type: object
+              additionalProperties:
+                properties:
+                  marketType:
+                    $ref: '#/components/schemas/MarketType'
+                  vendorUrl:
+                    type: string
+                    format: uri
+            leastPackage:
+              type: object
+              additionalProperties:
+                properties:
+                  marketType:
+                    $ref: '#/components/schemas/MarketType'
+                  vendorUrl:
+                    type: string
+                    format: uri
     Categories:
       type: string
       enum:
@@ -355,6 +508,13 @@ components:
         - power
         - case
         - cooler
+    MarketType:
+      type: string
+      enum:
+        - openMarket
+        - mall
+        - credit
+        - cash
   requestBodies:
     PartSearch:
       required: true
@@ -368,7 +528,7 @@ components:
               page:
                 type: integer
                 minimum: 1
-              filter:
+              filters:
                 type: object
                 properties:
                   searchQuery:
@@ -380,6 +540,143 @@ components:
             required:
               - category
               - page
+    BuildPost:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              parts:
+                type: object
+                additionalProperties:
+                  properties:
+                    name:
+                      type: string
+                    count:
+                      type: integer
+                      minimum: 1
+                    price:
+                      type: string
+                    partId:
+                      type: string
+                      example: ObjectId
+                    filters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          marketType:
+                            type: string
+                            enum:
+                              - openMarket
+                              - mall
+                              - credit
+                              - cash
+                          vendorUrl:
+                            type: string
+                            format: uri
+                          status:
+                            type: string
+                            enum:
+                              - included
+                              - selected
+                              - excluded
+              optimization:
+                type: object
+                properties:
+                  hash:
+                    type: string
+                    example: sha1 hash
+                  lowestPrice:
+                    type: object
+                    additionalProperties:
+                      properties:
+                        marketType:
+                          $ref: '#/components/schemas/MarketType'
+                        vendorUrl:
+                          type: string
+                          format: uri
+                  leastPackage:
+                    type: object
+                    additionalProperties:
+                      properties:
+                        marketType:
+                          $ref: '#/components/schemas/MarketType'
+                        vendorUrl:
+                          type: string
+                          format: uri
+    BuildUpdate:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              isSelected:
+                type: boolean
+                default: true
+              parts:
+                type: object
+                additionalProperties:
+                  properties:
+                    name:
+                      type: string
+                    count:
+                      type: integer
+                      minimum: 1
+                    price:
+                      type: string
+                    partId:
+                      type: string
+                      example: ObjectId
+                    filters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          marketType:
+                            type: string
+                            enum:
+                              - openMarket
+                              - mall
+                              - credit
+                              - cash
+                          vendorUrl:
+                            type: string
+                            format: uri
+                          status:
+                            type: string
+                            enum:
+                              - included
+                              - selected
+                              - excluded
+              optimization:
+                type: object
+                properties:
+                  hash:
+                    type: string
+                    example: sha1 hash
+                  lowestPrice:
+                    type: object
+                    additionalProperties:
+                      properties:
+                        marketType:
+                          $ref: '#/components/schemas/MarketType'
+                        vendorUrl:
+                          type: string
+                          format: uri
+                  leastPackage:
+                    type: object
+                    additionalProperties:
+                      properties:
+                        marketType:
+                          $ref: '#/components/schemas/MarketType'
+                        vendorUrl:
+                          type: string
+                          format: uri
     Signup:
       content:
         application/json:
@@ -397,7 +694,7 @@ components:
                 format: password
               nickname:
                 type: string
-    UpdateAccountProfile:
+    UpdateUserProfile:
       content:
         application/json:
           schema:
@@ -412,18 +709,16 @@ components:
               nickname:
                 type: string
   responses:
-    BuildResponse:
-      description: Build information object
-      content:
-        application/json:
-          schema:
-            type: object
+    Created:
+      description: Created
+    NoContent:
+      description: No content
     BadRequest:
-      description: Invalid request
+      description: Bad request (resource validation failure)
     Unauthorized:
       description: Unauthorized access
     Forbidden:
-      description: Request forbidden
+      description: Request forbidden (access to unreachable resource, hit resource limitation)
     NotFound:
       description: Resource not found
     Conflict:
