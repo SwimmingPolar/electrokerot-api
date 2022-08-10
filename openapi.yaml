@@ -10,9 +10,9 @@ servers:
   - url: http://localhost:5611/v1
 tags:
   - name: parts
-    description: Computer component parts
+    description: Computer components
   - name: builds
-    description: User created computer build
+    description: Computer builds
   - name: posts
   - name: reviews
   - name: user
@@ -22,7 +22,7 @@ paths:
     get:
       tags:
         - parts
-      summary: Get parts information of given ids
+      summary: Get parts' information of the given ids
       operationId: getPartsByIds
       parameters:
         - name: ids
@@ -33,6 +33,8 @@ paths:
             items:
               type: string
               example: ObjectId
+            minItems: 1
+            maxItems: 10
       responses:
         '200':
           description: Ok
@@ -75,20 +77,49 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
   /parts/search:
-    post:
+    get:
       tags:
         - parts
       summary: Get search results
       operationId: getPartsByFilters
-      requestBody:
-        $ref: '#/components/requestBodies/PartSearch'
+      parameters:
+        - name: category
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Categories'
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            multipleOf: 1
+        - name: query
+          in: query
+          schema:
+            type: string
+        - name: filters
+          in: query
+          content:
+            application/json:
+              schema:
+                type: object
+                description: 제조사, 용량, 색상, ...
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
       responses:
         '200':
           description: Ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Part'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Part'
         '400':
           $ref: '#/components/responses/BadRequest'
   /parts:
@@ -173,7 +204,7 @@ paths:
     post:
       tags:
         - builds
-      summary: Clone given build
+      summary: Clone the given build
       operationId: cloneBuildById
       parameters:
         - name: id
@@ -464,7 +495,7 @@ paths:
     patch:
       tags:
         - posts
-      summary: Update post
+      summary: Update a post
       operationId: updatePost
       parameters:
         - name: id
@@ -531,6 +562,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - action
               properties:
                 action:
                   type: string
@@ -568,6 +601,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - action
               properties:
                 action:
                   type: string
@@ -591,7 +626,7 @@ paths:
     get:
       tags:
         - posts
-      summary: Get a list of comments of given post
+      summary: Get a list of comments of the given post
       operationId: getCommentsByPostId
       parameters:
         - name: id
@@ -600,14 +635,6 @@ paths:
           schema:
             type: string
             example: ObjectId
-        - name: page
-          in: query
-          required: true
-          schema:
-            type: integer
-            default: 1
-            minimum: 1
-            multipleOf: 1
       responses:
         '200':
           description: Ok
@@ -622,7 +649,164 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
         '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      tags:
+        - posts
+      summary: Create a comment on the given post
+      operationId: createCommentByPostId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+                parent:
+                  description: specify parent to create comment on comment
+                  type: string
+                  example: ObjectId
+      responses:
+        '200':
+          description: Ok
+        '400':
           $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /posts/{postId}/comments/{commentId}:
+    patch:
+      tags:
+        - posts
+      summary: Update a comment of the given post
+      operationId: updateCommentByPostId
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - posts
+      summary: Delete a comment of the given post
+      operationId: deleteCommentByPostId
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /posts/{postId}/comments/{commentId}/vote:
+    post:
+      tags:
+        - posts
+      summary: vote like/dislike on the given comment
+      operationId: voteComment
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - like
+                    - dislike
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
 components:
   schemas:
     Part:
@@ -861,32 +1045,6 @@ components:
           type: string
           format: date-time
   requestBodies:
-    PartSearch:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              category:
-                $ref: '#/components/schemas/Categories'
-              page:
-                type: integer
-                default: 1
-                minimum: 1
-                multipleOf: 1
-              query:
-                type: string
-              filters:
-                type: object
-                description: 제조사, 용량, 색상, ...
-                additionalProperties:
-                  type: array
-                  items:
-                    type: string
-            required:
-              - category
-              - page
     BuildCreate:
       content:
         application/json:
