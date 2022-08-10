@@ -14,7 +14,7 @@ tags:
   - name: builds
     description: User created computer build
   - name: posts
-  - name: comments
+  - name: reviews
   - name: user
   - name: auth
 paths:
@@ -50,21 +50,19 @@ paths:
     get:
       tags:
         - parts
-      summary: Get list of autocompleted queries
+      summary: Get a list of autocompleted queries
       operationId: getPartNamesByQuery
       parameters:
-        - name: query
+        - name: category
           in: query
-          style: form
-          explode: true
           required: true
           schema:
-            type: object
-            properties:
-              query:
-                type: string
-              category:
-                $ref: '#/components/schemas/Categories'
+            $ref: '#/components/schemas/Categories'
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Ok
@@ -97,9 +95,10 @@ paths:
     post:
       tags:
         - parts
-      summary: Insert part
-      operationId: Insert part by url
+      summary: Insert a part
+      operationId: InsertPartByUrl
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -131,7 +130,7 @@ paths:
     get:
       tags:
         - builds
-      summary: Get user's list of builds
+      summary: Get a list of an user's builds
       operationId: getBuildById
       responses:
         '200':
@@ -151,10 +150,10 @@ paths:
     post:
       tags:
         - builds
-      summary: Create new build
+      summary: Create a new build
       operationId: createBuild
       requestBody:
-        $ref: '#/components/requestBodies/BuildPost'
+        $ref: '#/components/requestBodies/BuildCreate'
       responses:
         '201':
           description: Created
@@ -174,7 +173,7 @@ paths:
     post:
       tags:
         - builds
-      summary: Clone build
+      summary: Clone given build
       operationId: cloneBuildById
       parameters:
         - name: id
@@ -204,14 +203,14 @@ paths:
     patch:
       tags:
         - builds
-      summary: Update build
+      summary: Update a build
       operationId: updateBuild
       requestBody:
-        $ref: '#/components/requestBodies/BuildUpdate'
+        $ref: '#/components/requestBodies/BuildCreate'
       parameters:
         - name: id
-          in: path
           required: true
+          in: path
           schema:
             type: string
             example: ObjectId
@@ -231,7 +230,7 @@ paths:
     delete:
       tags:
         - builds
-      summary: Delete build
+      summary: Delete a build
       operationId: deleteBuild
       parameters:
         - name: id
@@ -257,7 +256,7 @@ paths:
     get:
       tags:
         - user
-      summary: Get user information
+      summary: Get the information of an user
       operationId: getUserById
       responses:
         '200':
@@ -279,10 +278,10 @@ paths:
     post:
       tags:
         - user
-      summary: Create user
+      summary: Create an user
       operationId: registerUser
       requestBody:
-        $ref: '#/components/requestBodies/Signup'
+        $ref: '#/components/requestBodies/UserSignup'
       responses:
         '201':
           $ref: '#/components/responses/Created'
@@ -293,10 +292,10 @@ paths:
     patch:
       tags:
         - user
-      summary: Update user profile
+      summary: Update an user's profile
       operationId: updateUserProfile
       requestBody:
-        $ref: '#/components/requestBodies/UpdateUserProfile'
+        $ref: '#/components/requestBodies/UserUpdateProfile'
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
@@ -362,6 +361,268 @@ paths:
           $ref: '#/components/responses/Unauthorized'
       security:
         - bearerAuth: []
+  /posts:
+    get:
+      tags:
+        - posts
+      summary: Get a list of posts
+      operationId: getPostsByFilter
+      parameters:
+        - name: category
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/PostCategory'
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            multipleOf: 1
+        - name: title
+          description: option#1 (only take single option)
+          in: query
+          schema:
+            type: string
+        - name: nickname
+          description: option#2 (only take single option)
+          in: query
+          schema:
+            type: string
+        - name: build
+          description: option#3 (only take single option)
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              example: ObjectId
+        - name: userId
+          in: query
+          description: option#4 (only take single option)
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      tags:
+        - posts
+      summary: Create a post
+      operationId: createPost
+      requestBody:
+        $ref: '#/components/requestBodies/PostCreate'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      security:
+        - bearerAuth: []
+  /posts/{id}:
+    get:
+      tags:
+        - posts
+      summary: Get a post
+      operationId: getPostById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags:
+        - posts
+      summary: Update post
+      operationId: updatePost
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        $ref: '#/components/requestBodies/PostCreate'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - posts
+      summary: Delete a post
+      operationId: deletePostById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /posts/{id}/vote:
+    post:
+      tags:
+        - posts
+      summary: vote like/dislike on a post
+      operationId: vote
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - like
+                    - dislike
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /posts/{id}/bookmark:
+    post:
+      tags:
+        - posts
+      summary: bookmark a post
+      operationId: bookmark
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - bookmark
+                    - unmark
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /posts/{id}/comments:
+    get:
+      tags:
+        - posts
+      summary: Get a list of comments of given post
+      operationId: getCommentsByPostId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            multipleOf: 1
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/BadRequest'
 components:
   schemas:
     Part:
@@ -385,6 +646,7 @@ components:
               SelfReferencingPartObjects
         details:
           type: object
+          description: 제조사, 용량, 색상, ...
           additionalProperties:
             properties:
               type:
@@ -397,7 +659,7 @@ components:
             type: object
             properties:
               marketType:
-                type: string
+                $ref: '#/components/schemas/MarketType'
               vendorsList:
                 type: array
                 items:
@@ -420,6 +682,9 @@ components:
                 format: date-time
               value:
                 type: string
+        updatedAt:
+          type: string
+          format: date-time
     Build:
       type: object
       properties:
@@ -439,13 +704,14 @@ components:
           format: date-time
         parts:
           type: object
+          description: cpu, mainboard, ...
           additionalProperties:
             properties:
               name:
                 type: string
               count:
                 type: integer
-                minimum: 1
+                default: 1
               price:
                 type: string
               partId:
@@ -480,6 +746,7 @@ components:
               example: sha1 hash
             lowestPrice:
               type: object
+              description: cpu, mainboard, ...
               additionalProperties:
                 properties:
                   marketType:
@@ -489,6 +756,7 @@ components:
                     format: uri
             leastPackage:
               type: object
+              description: cpu, mainboard, ...
               additionalProperties:
                 properties:
                   marketType:
@@ -515,6 +783,83 @@ components:
         - mall
         - credit
         - cash
+    Post:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: ObjectId
+        category:
+          type: string
+        owner:
+          type: string
+          example: ObjectId
+        nickname:
+          type: string
+        title:
+          type: string
+        tag:
+          type: string
+        content:
+          type: string
+        builds:
+          type: array
+          items:
+            type: object
+            description: cpu, mainboard, ...
+            additionalProperties:
+              type: object
+              properties:
+                partId:
+                  type: string
+                  example: ObjectId
+                count:
+                  type: number
+          example: builds[0], builds[1], ...
+        likes:
+          type: number
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+        createdAt:
+          type: string
+          format: date-time
+    PostCategory:
+      type: string
+      default: free
+      enum:
+        - free
+    PostTag:
+      type: string
+      default: general
+      enum:
+        - general
+        - question
+        - build
+    Comment:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: ObjectId
+        owner:
+          type: string
+          example: ObjectId
+        parent:
+          type: string
+          example: ObjectId
+        nickname:
+          type: string
+        content:
+          type: string
+        likes:
+          type: number
+        indentation:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
   requestBodies:
     PartSearch:
       required: true
@@ -527,12 +872,14 @@ components:
                 $ref: '#/components/schemas/Categories'
               page:
                 type: integer
+                default: 1
                 minimum: 1
+                multipleOf: 1
+              query:
+                type: string
               filters:
                 type: object
-                properties:
-                  searchQuery:
-                    type: string
+                description: 제조사, 용량, 색상, ...
                 additionalProperties:
                   type: array
                   items:
@@ -540,74 +887,7 @@ components:
             required:
               - category
               - page
-    BuildPost:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-              parts:
-                type: object
-                additionalProperties:
-                  properties:
-                    name:
-                      type: string
-                    count:
-                      type: integer
-                      minimum: 1
-                    price:
-                      type: string
-                    partId:
-                      type: string
-                      example: ObjectId
-                    filters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          marketType:
-                            type: string
-                            enum:
-                              - openMarket
-                              - mall
-                              - credit
-                              - cash
-                          vendorUrl:
-                            type: string
-                            format: uri
-                          status:
-                            type: string
-                            enum:
-                              - included
-                              - selected
-                              - excluded
-              optimization:
-                type: object
-                properties:
-                  hash:
-                    type: string
-                    example: sha1 hash
-                  lowestPrice:
-                    type: object
-                    additionalProperties:
-                      properties:
-                        marketType:
-                          $ref: '#/components/schemas/MarketType'
-                        vendorUrl:
-                          type: string
-                          format: uri
-                  leastPackage:
-                    type: object
-                    additionalProperties:
-                      properties:
-                        marketType:
-                          $ref: '#/components/schemas/MarketType'
-                        vendorUrl:
-                          type: string
-                          format: uri
-    BuildUpdate:
+    BuildCreate:
       content:
         application/json:
           schema:
@@ -617,16 +897,19 @@ components:
                 type: string
               isSelected:
                 type: boolean
-                default: true
+                default: false
               parts:
                 type: object
+                description: cpu, mainboard, ...
                 additionalProperties:
                   properties:
                     name:
                       type: string
                     count:
                       type: integer
+                      default: 1
                       minimum: 1
+                      multipleOf: 1
                     price:
                       type: string
                     partId:
@@ -661,6 +944,7 @@ components:
                     example: sha1 hash
                   lowestPrice:
                     type: object
+                    description: cpu, mainboard, ...
                     additionalProperties:
                       properties:
                         marketType:
@@ -670,6 +954,7 @@ components:
                           format: uri
                   leastPackage:
                     type: object
+                    description: cpu, mainboard, ...
                     additionalProperties:
                       properties:
                         marketType:
@@ -677,7 +962,7 @@ components:
                         vendorUrl:
                           type: string
                           format: uri
-    Signup:
+    UserSignup:
       content:
         application/json:
           schema:
@@ -694,7 +979,7 @@ components:
                 format: password
               nickname:
                 type: string
-    UpdateUserProfile:
+    UserUpdateProfile:
       content:
         application/json:
           schema:
@@ -708,6 +993,42 @@ components:
                 format: password
               nickname:
                 type: string
+    PostCreate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              category:
+                $ref: '#/components/schemas/PostCategory'
+              tag:
+                $ref: '#/components/schemas/PostTag'
+              title:
+                type: string
+              content:
+                type: string
+              builds:
+                type: array
+                items:
+                  type: object
+                  description: cpu, mainboard, ...
+                  additionalProperties:
+                    type: object
+                    properties:
+                      partId:
+                        type: string
+                        example: ObjectId
+                      count:
+                        type: integer
+                        default: 1
+                        minimum: 1
+                        multipleOf: 1
+            required:
+              - category
+              - tag
+              - title
+              - content
   responses:
     Created:
       description: Created
