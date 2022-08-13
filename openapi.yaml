@@ -23,7 +23,7 @@ paths:
       tags:
         - parts
       summary: Get parts' information of the given ids
-      operationId: getPartsByIds
+      operationId: getPartsByPartIds
       parameters:
         - name: ids
           in: path
@@ -127,7 +127,7 @@ paths:
       tags:
         - parts
       summary: Insert a part
-      operationId: InsertPartByUrl
+      operationId: insertPartByUrl
       requestBody:
         required: true
         content:
@@ -162,7 +162,7 @@ paths:
       tags:
         - builds
       summary: Get a list of an user's builds
-      operationId: getBuildById
+      operationId: getBuildsByUserId
       responses:
         '200':
           description: Ok
@@ -182,7 +182,7 @@ paths:
       tags:
         - builds
       summary: Create a new build
-      operationId: createBuild
+      operationId: createBuildByUserId
       requestBody:
         $ref: '#/components/requestBodies/BuildCreate'
       responses:
@@ -205,7 +205,7 @@ paths:
       tags:
         - builds
       summary: Clone the given build
-      operationId: cloneBuildById
+      operationId: cloneBuildByBuildId
       parameters:
         - name: id
           in: path
@@ -235,7 +235,7 @@ paths:
       tags:
         - builds
       summary: Update a build
-      operationId: updateBuild
+      operationId: updateBuildByBuildId
       requestBody:
         $ref: '#/components/requestBodies/BuildCreate'
       parameters:
@@ -262,7 +262,7 @@ paths:
       tags:
         - builds
       summary: Delete a build
-      operationId: deleteBuild
+      operationId: deleteBuildByBuildId
       parameters:
         - name: id
           in: path
@@ -288,7 +288,7 @@ paths:
       tags:
         - user
       summary: Get the information of an user
-      operationId: getUserById
+      operationId: getUserByUserId
       responses:
         '200':
           description: Ok
@@ -304,13 +304,15 @@ paths:
                     type: string
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
       security:
         - bearerAuth: []
     post:
       tags:
         - user
       summary: Create an user
-      operationId: registerUser
+      operationId: createUser
       requestBody:
         $ref: '#/components/requestBodies/UserSignup'
       responses:
@@ -324,7 +326,7 @@ paths:
       tags:
         - user
       summary: Update an user's profile
-      operationId: updateUserProfile
+      operationId: updateUserProfileByUserId
       requestBody:
         $ref: '#/components/requestBodies/UserUpdateProfile'
       responses:
@@ -342,10 +344,91 @@ paths:
       tags:
         - user
       summary: Delete user
-      operationId: deleteUser
+      operationId: deleteUserByUserId
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+        - bearerAuth: []
+  /user/posts:
+    get:
+      tags:
+        - user
+      summary: Get a list of all the posts an user has written
+      operationId: getAllPostsByUserId
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            multipleOf: 1
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+        - bearerAuth: []
+  /user/reviews:
+    get:
+      tags:
+        - user
+      summary: Get a list of all the reviews an user has written
+      operationId: getAllReviewsByUserId
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            multipleOf: 1
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+        - bearerAuth: []
+  /user/comments:
+    get:
+      tags:
+        - user
+      summary: Get a list of all the comments an user has written
+      operationId: getAllCommentsByUserId
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            multipleOf: 1
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
         '401':
           $ref: '#/components/responses/Unauthorized'
       security:
@@ -361,6 +444,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - email
+                - password
               properties:
                 email:
                   type: string
@@ -369,12 +455,22 @@ paths:
                   type: string
                   format: password
       responses:
-        '204':
-          description: No content
+        '200':
+          description: Ok
           headers:
             Authorization:
               schema:
                 type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: ObjectId
+                  nickname:
+                    type: string
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -471,7 +567,7 @@ paths:
       tags:
         - posts
       summary: Get a post
-      operationId: getPostById
+      operationId: getPostByPostId
       parameters:
         - name: id
           in: path
@@ -496,7 +592,7 @@ paths:
       tags:
         - posts
       summary: Update a post
-      operationId: updatePost
+      operationId: updatePostByPostId
       parameters:
         - name: id
           in: path
@@ -523,7 +619,7 @@ paths:
       tags:
         - posts
       summary: Delete a post
-      operationId: deletePostById
+      operationId: deletePostByPostId
       parameters:
         - name: id
           in: path
@@ -549,7 +645,7 @@ paths:
       tags:
         - posts
       summary: vote like/dislike on a post
-      operationId: vote
+      operationId: votePost
       parameters:
         - name: id
           in: path
@@ -677,8 +773,12 @@ paths:
                   type: string
                   example: ObjectId
       responses:
-        '200':
-          description: Ok
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -719,8 +819,12 @@ paths:
                 content:
                   type: string
       responses:
-        '204':
-          $ref: '#/components/responses/NoContent'
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -767,7 +871,7 @@ paths:
       tags:
         - posts
       summary: vote like/dislike on the given comment
-      operationId: voteComment
+      operationId: voteComment[post]
       parameters:
         - name: postId
           in: path
@@ -807,6 +911,417 @@ paths:
           $ref: '#/components/responses/NotFound'
       security:
         - bearerAuth: []
+  /reviews/{partId}:
+    get:
+      tags:
+        - reviews
+      summary: Get a list of reviews on the given part
+      operationId: getReviewsByCursor
+      parameters:
+        - name: partId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+        - name: cursor
+          in: query
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      tags:
+        - reviews
+      summary: Create a review on the given part
+      operationId: createReviewByPartId
+      parameters:
+        - name: partId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /reviews/{id}/:
+    patch:
+      tags:
+        - reviews
+      summary: Update a review
+      operationId: updateReviewByReviewId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                -  content
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - reviews
+      summary: Delete a review
+      operationId: deleteReviewByReviewId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /reviews/{id}/vote:
+    post:
+      tags:
+        - reviews
+      summary: vote like/dislike on a review
+      operationId: voteReview
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - like
+                    - dislike
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /reviews/{id}/comments:
+    get:
+      tags:
+        - reviews
+      summary: Get a list of comments of the given review
+      operationId: getCommentsByReviewId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      tags:
+        - reviews
+      summary: Create a comment on the given review
+      operationId: createCommentByReviewId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Comment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /reviews/{reviewId}/comments/{commentId}:
+    patch:
+      tags:
+        - reviews
+      summary: Update a comment on the given review
+      operationId: updateCommentByReviewIdAndCommentId
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Comment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - reviews
+      summary: Delete a comment of the given review
+      operationId: deleteCommentByReviewIdAndCommentId
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /reviews/{reviewId}/comments/{commentId}/vote:
+    post:
+      tags:
+        - reviews
+      summary: vote like/dislike on the given comment
+      operationId: voteComment[review]
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+              properties:
+                action:
+                  type: string
+                  enum:
+                    - like
+                    - dislike
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+  /verify/{token}:
+    get:
+      tags:
+        - auth
+      summary: Verify an user
+      operationId: verifyUserByToken
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /reset/{token}:
+    post:
+      tags:
+        - auth
+      summary: Reset an user's password
+      operationId: resetPasswordByToken
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - password
+                - passwordConfirm
+              properties:
+                password:
+                 type: string
+                 format: password
+                passwordConfirm:
+                 type: string
+                 format: password
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
 components:
   schemas:
     Part:
@@ -1027,6 +1542,11 @@ components:
         _id:
           type: string
           example: ObjectId
+        documentType:
+          type: string
+        document:
+          type: string
+          example: ObjectId
         owner:
           type: string
           example: ObjectId
@@ -1041,6 +1561,30 @@ components:
           type: number
         indentation:
           type: number
+        createdAt:
+          type: string
+          format: date-time
+    Review:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: ObjectId
+        partId:
+          type: string
+          example: ObjectId
+        owner:
+          type: string
+          example: ObjectId
+        content:
+          type: string
+        likes:
+          type: integer
+          default: 0
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
         createdAt:
           type: string
           format: date-time
@@ -1125,6 +1669,11 @@ components:
         application/json:
           schema:
             type: object
+            required:
+              - email
+              - password
+              - passwordConfirm
+              - nickname
             properties:
               email:
                 type: string
@@ -1142,6 +1691,9 @@ components:
         application/json:
           schema:
             type: object
+            required:
+              - password
+              - passwordConfirm
             properties:
               password:
                 type: string
