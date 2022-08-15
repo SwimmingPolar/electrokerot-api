@@ -571,7 +571,7 @@
                             "GUID": "244db58d-58a3-49a7-a5eb-2e3631842245",
                             "foreignCollection": "",
                             "foreignField": [],
-                            "required": false,
+                            "required": true,
                             "error": {}
                         },
                         {
@@ -1553,49 +1553,6 @@
                     "error": {}
                 },
                 {
-                    "name": "children",
-                    "hackoladeMeta": {},
-                    "isActivated": true,
-                    "type": "document",
-                    "properties": [
-                        {
-                            "name": "count",
-                            "hackoladeMeta": {},
-                            "isActivated": true,
-                            "type": "numeric",
-                            "GUID": "082e6754-1da1-475a-931e-dea8109a2c02",
-                            "default": 0,
-                            "minimum": 0,
-                            "multipleOf": 1,
-                            "required": true,
-                            "error": {}
-                        },
-                        {
-                            "name": "lists",
-                            "hackoladeMeta": {},
-                            "isActivated": true,
-                            "type": "array",
-                            "properties": [
-                                {
-                                    "hackoladeMeta": {},
-                                    "isActivated": true,
-                                    "type": "objectId",
-                                    "GUID": "48a758cd-757a-4066-9e20-da5bdcf91d8d",
-                                    "arrayItem": true,
-                                    "arrayParentType": "array"
-                                }
-                            ],
-                            "additionalItems": true,
-                            "GUID": "f44e7d38-1902-43cd-a1a3-262178836329",
-                            "error": {}
-                        }
-                    ],
-                    "additionalProperties": false,
-                    "GUID": "50963751-6d91-4b68-a720-dc3e40a1ec40",
-                    "required": true,
-                    "error": {}
-                },
-                {
                     "name": "createdAt",
                     "hackoladeMeta": {},
                     "isActivated": true,
@@ -1841,9 +1798,6 @@
         "e8df6bdc-b249-41b1-8932-b533f965c9cd": "comments",
         "64dbd8bd-77da-44e1-afd0-bab8a2a08212": "createdAt",
         "08225433-bbb5-4f69-a2ba-1ab7eab6bc7b": "updatedAt",
-        "50963751-6d91-4b68-a720-dc3e40a1ec40": "children",
-        "082e6754-1da1-475a-931e-dea8109a2c02": "count",
-        "f44e7d38-1902-43cd-a1a3-262178836329": "lists",
         "407fd863-91be-4448-be1f-706ea54d9666": "comments",
         "fc4dee44-ffc2-4fdf-bac0-aa9613998002": "owner",
         "ce9ac5ff-750a-4be1-b271-f4c75805f1bb": "nickname",
@@ -2054,6 +2008,7 @@
                                 "default": 0,
                                 "minimum": 0,
                                 "multipleOf": 1,
+                                "required": true,
                                 "error": {}
                             },
                             {
@@ -2075,18 +2030,16 @@
                                 ],
                                 "additionalItems": true,
                                 "GUID": "4615c7b0-088a-43df-8fc7-1b7438a94891",
+                                "required": true,
                                 "error": {}
                             }
                         ],
                         "additionalProperties": false,
                         "GUID": "39c88400-76ae-4941-bcdf-29cf212c5441",
-                        "required": false,
+                        "required": true,
                         "foreignCollection": "",
                         "foreignField": [],
-                        "error": {
-                            "name": false,
-                            "code": false
-                        }
+                        "error": {}
                     },
                     {
                         "name": "indentation",
@@ -2328,6 +2281,7 @@
                                         "isActivated": true,
                                         "type": "numeric",
                                         "GUID": "cc05b07c-e254-42a1-a7d2-1100dc43544e",
+                                        "required": true,
                                         "error": {}
                                     },
                                     {
@@ -2405,28 +2359,14 @@
                         "facb892d-afae-448f-8af4-2d5c34c1d150"
                     ]
                 ],
-                "required": true,
-                "error": {
-                    "enum": false,
-                    "enums": [
-                        false,
-                        false,
-                        false,
-                        false
-                    ],
-                    "exampleItems": [
-                        false,
-                        false,
-                        false,
-                        false
-                    ]
-                },
+                "required": false,
                 "enum": [
                     "openMarket",
                     "mall",
                     "credit",
                     "cash"
-                ]
+                ],
+                "error": {}
             },
             {
                 "type": "document",
@@ -2446,6 +2386,7 @@
                         "isActivated": true,
                         "type": "string",
                         "GUID": "3ded2bf7-188e-407d-a4f1-e3c5a57c0ea0",
+                        "required": true,
                         "error": {}
                     },
                     {
@@ -2463,6 +2404,7 @@
                         "isActivated": true,
                         "type": "numeric",
                         "GUID": "6d8d8a37-8a0d-48b4-8cba-ee486b66302f",
+                        "required": true,
                         "error": {}
                     },
                     {
@@ -2491,8 +2433,7 @@
                                         "isActivated": true,
                                         "required": true,
                                         "error": {
-                                            "name": false,
-                                            "code": false
+                                            "required": false
                                         }
                                     },
                                     {
@@ -2502,6 +2443,7 @@
                                         "type": "string",
                                         "GUID": "09fb3fd5-28d7-406c-918b-df3b3dbac7ab",
                                         "format": "uri",
+                                        "required": true,
                                         "error": {}
                                     },
                                     {
@@ -2510,24 +2452,13 @@
                                         "isActivated": true,
                                         "type": "string",
                                         "GUID": "05f2bf12-173b-4e13-9afc-d3a47ec47036",
-                                        "error": {
-                                            "enum": false,
-                                            "enums": [
-                                                false,
-                                                false,
-                                                false
-                                            ],
-                                            "exampleItems": [
-                                                false,
-                                                false,
-                                                false
-                                            ]
-                                        },
                                         "enum": [
                                             "included",
                                             "excluded",
                                             "selected"
-                                        ]
+                                        ],
+                                        "required": true,
+                                        "error": {}
                                     }
                                 ],
                                 "additionalProperties": false,
@@ -2627,8 +2558,7 @@
                         "isActivated": true,
                         "required": true,
                         "error": {
-                            "name": false,
-                            "code": false
+                            "required": false
                         }
                     },
                     {
@@ -2638,6 +2568,7 @@
                         "type": "string",
                         "GUID": "22649e16-63e3-4cbf-bcaf-89f8aa4add4b",
                         "format": "uri",
+                        "required": true,
                         "error": {}
                     }
                 ],
@@ -3115,7 +3046,7 @@
     "creationTS": "2022-08-13T23:49:07.595Z",
     "GUID": "5eaee12e-64ba-4dd5-8178-33cbd4721dd3",
     "isLineageEnabled": false,
-    "lastModifTS": "2022-08-15T01:01:24.460Z",
+    "lastModifTS": "2022-08-15T01:21:36.327Z",
     "persistenceSchemaVersion": "6",
     "isCreatedByPlugin": true,
     "pluginInformation": {
@@ -3131,7 +3062,7 @@
                 "erd": [
                     {
                         "GUID": "0575fa4e-2070-47f6-9cb6-8efcdb07b205",
-                        "x": 371.02441077441074,
+                        "x": 290.22441077441044,
                         "y": 550.9818096216405,
                         "width": 161,
                         "height": 51,
@@ -3139,7 +3070,7 @@
                     },
                     {
                         "GUID": "48d7a576-0fc9-421a-8590-f2cdf30ca965",
-                        "x": 275.0244107744106,
+                        "x": 194.22441077441033,
                         "y": 81.98180962164054,
                         "width": 419,
                         "height": 591,
@@ -3147,53 +3078,53 @@
                     },
                     {
                         "GUID": "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
-                        "x": 757.0244107744109,
+                        "x": 676.2244107744106,
                         "y": 84.31514295497391,
-                        "width": 331,
-                        "height": 592,
+                        "width": 328,
+                        "height": 771,
                         "color": {}
                     },
                     {
                         "GUID": "05ca364c-7799-42b0-8f40-ca9823159be1",
-                        "x": 1118.8061262340923,
-                        "y": 80,
-                        "width": 288,
-                        "height": 483,
+                        "x": 1038.0061262340919,
+                        "y": 84,
+                        "width": 286,
+                        "height": 482,
                         "color": {}
                     },
                     {
                         "GUID": "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
-                        "x": 916.6860269360261,
-                        "y": 706.6156480054805,
-                        "width": 264,
-                        "height": 339,
+                        "x": 184.95269360269248,
+                        "y": 872.7489813388131,
+                        "width": 413,
+                        "height": 684,
                         "color": {
                             "hex": "#607d8b"
                         }
                     },
                     {
                         "GUID": "fbb810dd-64f7-4773-9334-ba47ad70c3c5",
-                        "x": 552.7693602693605,
-                        "y": 705.7974661872981,
-                        "width": 256,
-                        "height": 321,
+                        "x": 675.7026936026929,
+                        "y": 872.7307995206334,
+                        "width": 330,
+                        "height": 197,
                         "color": {
                             "hex": "#607d8b"
                         }
                     },
                     {
                         "GUID": "2e33f7af-f9ee-436e-8a3c-bf44ac3c0150",
-                        "x": 1118.484919819667,
+                        "x": 1037.684919819667,
                         "y": 573.6713604976302,
-                        "width": 285,
+                        "width": 289,
                         "height": 104,
                         "color": {}
                     }
                 ],
                 "buckets": [
                     {
-                        "x": 235.02441077441063,
-                        "y": 40,
+                        "x": 144.95269360269248,
+                        "y": 41.98180962164054,
                         "GUID": "af6ed6d9-cdee-42ff-9528-4381df550811"
                     }
                 ],
@@ -3212,14 +3143,24 @@
                     "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8fb0ade20-db0e-4937-88a7-dc674eae395b3801b1f0-856a-493e-9327-2c21fa097123b26d5d35-fa11-4738-a5c0-d7528bdbaadc",
                     "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8fb0ade20-db0e-4937-88a7-dc674eae395b",
                     "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8df68b404-ad0a-48c4-9979-029188fa5e53",
-                    "fbb810dd-64f7-4773-9334-ba47ad70c3c5e8df6bdc-b249-41b1-8932-b533f965c9cd",
                     "05ca364c-7799-42b0-8f40-ca9823159be1227b9e40-f7b4-4ce7-8020-d31a1bc3ce784da51c14-d7d0-4c39-96b4-480ba1cdbd5e",
-                    "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7407fd863-91be-4448-be1f-706ea54d9666",
                     "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7e4d61b30-279b-4372-be33-1dda90291f58",
-                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32e",
                     "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce778e2bb83b-e360-4483-bfd1-7a05cefb06c1",
                     "05ca364c-7799-42b0-8f40-ca9823159be1227b9e40-f7b4-4ce7-8020-d31a1bc3ce78",
-                    "05ca364c-7799-42b0-8f40-ca9823159be1aa078879-bf10-43c1-9fdd-fdc57129c287"
+                    "05ca364c-7799-42b0-8f40-ca9823159be1aa078879-bf10-43c1-9fdd-fdc57129c287",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d76f6724df-1bab-4fd9-9b99-8cd4dbb7ba25",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d7865709f4-1f6d-46b9-9c2d-cc00e7047561",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d7aca2de42-e575-4d12-a816-00f79d34ab7b",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d7354d80ac-ea42-4cf1-85e2-413e5c90b308",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d7780b618d-ed49-4505-880f-818580a6c17d",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d750fc3d38-9c92-4aff-99cd-5395e15ad0e6",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d7a8935ff8-e063-44f1-9029-bf4a25385c7d",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d7d6b766a7-d433-4f4e-b96b-2ff85402b3d7",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32edcd3355d-3085-4d87-a8d7-5fda659e06d7a5eeafe0-e8d6-4b44-8cb4-c4a4ef04e2cab0f1a77d-b335-4559-8f33-f2413dec928ffacb892d-afae-448f-8af4-2d5c34c1d150",
+                    "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7407fd863-91be-4448-be1f-706ea54d9666b3484219-bc35-40fa-b81e-b1e6f621dc989d1caf8b-1e46-4fbf-aab1-3bbce44afcb1a5cab4b0-585f-4f0e-b01c-1a89637834a9",
+                    "fbb810dd-64f7-4773-9334-ba47ad70c3c5e8df6bdc-b249-41b1-8932-b533f965c9cd871c4aa7-b9da-42ae-bae1-ffaa167d101b9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1a5cab4b0-585f-4f0e-b01c-1a89637834a9",
+                    "fbb810dd-64f7-4773-9334-ba47ad70c3c5e8df6bdc-b249-41b1-8932-b533f965c9cd",
+                    "fbb810dd-64f7-4773-9334-ba47ad70c3c5e1f42f2a-57c3-4f2b-a14e-0615545028b6"
                 ],
                 "activeRelationship": "",
                 "activeRelationshipFields": {
