@@ -1,0 +1,3251 @@
+{
+    "modelName": "New Model",
+    "collections": [
+        {
+            "collectionName": "items",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "c5d4c350-387d-4764-9486-ba98f9eb5fc9",
+                    "primaryKey": true,
+                    "required": true,
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "d3d1531c-27e9-42fa-a340-307e9fba26a1"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "0575fa4e-2070-47f6-9cb6-8efcdb07b205",
+            "bucketId": "af6ed6d9-cdee-42ff-9528-4381df550811"
+        },
+        {
+            "collectionName": "parts",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "primaryKey": true,
+                    "required": true,
+                    "GUID": "4b18a0f5-20c3-4d4c-a7bd-2a4129ad287b",
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "name": "pcode",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "feabd240-0f98-45df-9100-219114e92df2",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "name": "fullName",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "string",
+                            "GUID": "5ecdc707-9651-4785-9b41-bfac3b3c90ba",
+                            "required": true,
+                            "error": {}
+                        },
+                        {
+                            "name": "tag",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "string",
+                            "GUID": "13ec7622-5a29-41e3-a6e8-2fbb3653322e",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "GUID": "824647f8-f22e-4947-af4b-b0f89f3eea13",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "GUID": "b9e86441-6829-4a09-b2cd-14ede7e14328",
+                    "name": "category",
+                    "type": "reference",
+                    "$ref": "#model/definitions/category",
+                    "refType": "model",
+                    "ref": "68f277cd-6758-41f2-b551-21bc2f5be27d",
+                    "refIdPath": [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "68f277cd-6758-41f2-b551-21bc2f5be27d"
+                    ],
+                    "isActivated": true,
+                    "required": true,
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "name": "variants",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "ada624b5-5caf-4f6a-b8d5-96d953099d3a",
+                            "arrayItem": true,
+                            "arrayParentType": "array",
+                            "displayName": "pcode",
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "e654c7aa-4bd3-4c21-9568-79e1c3a4dd03",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "sortOrder",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "GUID": "3f6d1851-4a07-48f1-b385-cc70d2b4c027",
+                    "mode": "integer32",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "stock",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "boolean",
+                    "GUID": "fdee77d3-526d-4a71-b075-e0fff2cd7cef",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "isVariant",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "boolean",
+                    "GUID": "c2cc0008-7cf5-4609-b170-9124e81b06c9",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "GUID": "97f97c3b-3fa0-4851-b434-d99635eb831f",
+                    "name": "details",
+                    "type": "reference",
+                    "$ref": "#model/definitions/details",
+                    "refType": "model",
+                    "ref": "eb1af045-d8f5-4112-a06c-2f7c6e8d4f5e",
+                    "refIdPath": [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "eb1af045-d8f5-4112-a06c-2f7c6e8d4f5e"
+                    ],
+                    "isActivated": true,
+                    "required": true,
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "GUID": "1cdee288-3a3b-48db-a4bb-2ec7c6f1c20d",
+                    "name": "vendors",
+                    "type": "reference",
+                    "$ref": "#model/definitions/vendors",
+                    "refType": "model",
+                    "ref": "3b10f854-e260-43c4-9661-535ea5767a09",
+                    "refIdPath": [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "3b10f854-e260-43c4-9661-535ea5767a09"
+                    ],
+                    "isActivated": true,
+                    "required": true,
+                    "error": {
+                        "required": false
+                    }
+                },
+                {
+                    "name": "prices",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "timestamp",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "dab9fcf2-15fd-4a53-b679-601a15b70edc",
+                                    "format": "date",
+                                    "required": true,
+                                    "error": {}
+                                },
+                                {
+                                    "name": "price",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "numeric",
+                                    "GUID": "a706c004-88b1-45af-b86e-991e91121b8b",
+                                    "required": true,
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": true,
+                            "GUID": "990ca942-1d47-4d23-80ea-de680706896d",
+                            "arrayItem": true,
+                            "arrayParentType": "array",
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "a2369c08-94ae-4b9a-b15e-074ba0f4be19",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "isUpdating",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "boolean",
+                    "required": true,
+                    "GUID": "37b11890-4cde-4e3e-9333-0dc6754515bb",
+                    "error": {}
+                },
+                {
+                    "name": "createdAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "required": true,
+                    "GUID": "f214c7dc-c37b-44fc-adad-88b8829db718",
+                    "error": {}
+                },
+                {
+                    "name": "updatedAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "required": true,
+                    "GUID": "a99046de-1b05-4fb5-8e24-be57ca97bc7d",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "1afc81e0-b529-4623-932e-05c0b63d1374"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "48d7a576-0fc9-421a-8590-f2cdf30ca965",
+            "bucketId": "af6ed6d9-cdee-42ff-9528-4381df550811"
+        },
+        {
+            "collectionName": "builds",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "021085d8-3988-4532-90b1-b1b2b2adec3e",
+                    "primaryKey": true,
+                    "required": true,
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "name": "owner",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "97122e21-72a6-4ddd-8f04-118ed8452d9e",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "dd746461-31b6-486d-ab89-af79b2da13d1",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "isSelected",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "boolean",
+                    "GUID": "9d25b7f5-77e5-4907-90e0-7625902b1ad4",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "parts",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "GUID": "65615c72-f997-4d41-8182-09095ef3e3a2",
+                            "name": "cpu",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {
+                                "namingConvention": ""
+                            },
+                            "error": {
+                                "name": false
+                            }
+                        },
+                        {
+                            "GUID": "f9f13528-ddc9-47ee-a788-a19d2b17e62d",
+                            "name": "mainboard",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "error": {
+                                "name": false
+                            }
+                        },
+                        {
+                            "GUID": "cdc64958-6edd-4a6d-9d5c-70e2245df791",
+                            "name": "memory",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "error": {
+                                "name": false
+                            }
+                        },
+                        {
+                            "GUID": "5f973fb2-8759-471d-863e-4a487c743bf3",
+                            "name": "graphics",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "error": {
+                                "name": false
+                            }
+                        },
+                        {
+                            "GUID": "7ab77056-e515-4625-b7bb-69c39c653ac7",
+                            "name": "ssd",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "error": {
+                                "name": false
+                            }
+                        },
+                        {
+                            "GUID": "7d6ab1ce-e3b5-44bb-8ae8-5647bb0c2922",
+                            "name": "hdd",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "error": {
+                                "name": false
+                            }
+                        },
+                        {
+                            "GUID": "8bd48cc2-7e44-473c-9697-4ac9a4cd98d0",
+                            "name": "case",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "error": {
+                                "name": false
+                            }
+                        },
+                        {
+                            "GUID": "33cea047-f75e-462b-b518-1c3817427462",
+                            "name": "power",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "error": {
+                                "name": false
+                            }
+                        },
+                        {
+                            "type": "array",
+                            "properties": [
+                                {
+                                    "GUID": "6188d3da-c1f2-4a11-9195-89788c671d55",
+                                    "type": "reference",
+                                    "$ref": "#model/definitions/buildPartObject",
+                                    "refType": "model",
+                                    "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                                    "refIdPath": [
+                                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                        "3801b1f0-856a-493e-9327-2c21fa097123"
+                                    ],
+                                    "isActivated": true,
+                                    "displayName": "buildPartObject",
+                                    "arrayItem": true,
+                                    "error": {
+                                        "name": false
+                                    }
+                                },
+                                {
+                                    "GUID": "91a0f3c1-ded8-4339-a2ae-b56a36e69c0b",
+                                    "type": "reference",
+                                    "$ref": "#model/definitions/buildPartObject",
+                                    "refType": "model",
+                                    "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                                    "refIdPath": [
+                                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                        "3801b1f0-856a-493e-9327-2c21fa097123"
+                                    ],
+                                    "isActivated": true,
+                                    "displayName": "buildPartObject",
+                                    "arrayItem": true,
+                                    "error": {
+                                        "name": false
+                                    }
+                                }
+                            ],
+                            "additionalItems": false,
+                            "isActivated": true,
+                            "GUID": "df68b404-ad0a-48c4-9979-029188fa5e53",
+                            "hackoladeMeta": {
+                                "namingConvention": ""
+                            },
+                            "name": "cooler",
+                            "error": {}
+                        },
+                        {
+                            "GUID": "fb0ade20-db0e-4937-88a7-dc674eae395b",
+                            "name": "reserved",
+                            "type": "reference",
+                            "$ref": "#model/definitions/buildPartObject",
+                            "refType": "model",
+                            "ref": "3801b1f0-856a-493e-9327-2c21fa097123",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "3801b1f0-856a-493e-9327-2c21fa097123"
+                            ],
+                            "isActivated": true,
+                            "error": {
+                                "name": false
+                            }
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "GUID": "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                    "error": {}
+                },
+                {
+                    "name": "optimization",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "name": "hash",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "string",
+                            "GUID": "244db58d-58a3-49a7-a5eb-2e3631842245",
+                            "foreignCollection": "",
+                            "foreignField": [],
+                            "required": false,
+                            "error": {}
+                        },
+                        {
+                            "GUID": "a9487b18-5e48-425c-b153-45ca87aca32e",
+                            "name": "lowestPrice",
+                            "type": "reference",
+                            "$ref": "#model/definitions/optimizationMethod",
+                            "refType": "model",
+                            "ref": "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "dcd3355d-3085-4d87-a8d7-5fda659e06d7"
+                            ],
+                            "isActivated": true,
+                            "foreignCollection": "",
+                            "foreignField": [],
+                            "hackoladeMeta": {},
+                            "error": {
+                                "name": false,
+                                "code": false
+                            }
+                        },
+                        {
+                            "GUID": "8e2bb83b-e360-4483-bfd1-7a05cefb06c1",
+                            "name": "leastPackage",
+                            "type": "reference",
+                            "$ref": "#model/definitions/optimizationMethod",
+                            "refType": "model",
+                            "ref": "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "dcd3355d-3085-4d87-a8d7-5fda659e06d7"
+                            ],
+                            "isActivated": true,
+                            "foreignCollection": "",
+                            "foreignField": [],
+                            "hackoladeMeta": {},
+                            "error": {
+                                "name": false,
+                                "code": false
+                            }
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "GUID": "ca8afd1c-e6b0-4626-9053-83ad5c40ce77",
+                    "error": {}
+                },
+                {
+                    "name": "createdAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "required": true,
+                    "GUID": "8845452c-2fb3-432b-85d8-f115d53cbdfd",
+                    "error": {}
+                },
+                {
+                    "name": "updatedAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "required": true,
+                    "GUID": "21226097-47e1-4408-bfdb-2fcaa752f0df",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "a11062c0-176f-41b7-9b4e-36b3de65f643"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+            "bucketId": "af6ed6d9-cdee-42ff-9528-4381df550811"
+        },
+        {
+            "collectionName": "users",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "656c8650-b10d-496f-be5c-ff0f7ee9bff9",
+                    "primaryKey": true,
+                    "required": true,
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "name": "email",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "6db61bb1-a7c9-4b0d-8ab3-cddb93ba1ebf",
+                    "format": "email",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "nickname",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "e3443a95-fdfa-4aac-a2c6-2cb46e193de6",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "password",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "e7b52219-51f9-4910-b430-a7daaf6c72a6",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "GUID": "9e63a2bf-8593-4725-86e2-2d4e87aaca8b",
+                    "name": "role",
+                    "type": "reference",
+                    "$ref": "#model/definitions/role",
+                    "refType": "model",
+                    "ref": "80cd215d-4bc8-4198-b57c-8238ba2b6605",
+                    "refIdPath": [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "80cd215d-4bc8-4198-b57c-8238ba2b6605"
+                    ],
+                    "isActivated": true,
+                    "required": true,
+                    "hackoladeMeta": {},
+                    "error": {
+                        "required": false
+                    }
+                },
+                {
+                    "GUID": "3474ae10-4e13-4440-9759-e235e75b9056",
+                    "name": "status",
+                    "type": "reference",
+                    "$ref": "#model/definitions/documentStatus",
+                    "refType": "model",
+                    "ref": "69bb9bf3-5755-4611-98b1-c75828d83d93",
+                    "refIdPath": [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "69bb9bf3-5755-4611-98b1-c75828d83d93"
+                    ],
+                    "isActivated": true,
+                    "required": true,
+                    "hackoladeMeta": {}
+                },
+                {
+                    "name": "bookmarks",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "d49c928d-495b-4a6f-a9af-ebc32b7d6ca2",
+                            "arrayItem": true,
+                            "arrayParentType": "array"
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "aa078879-bf10-43c1-9fdd-fdc57129c287",
+                    "error": {}
+                },
+                {
+                    "name": "build",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "name": "cpu",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "acff6f37-5f75-4713-a406-61817dde9bc8",
+                            "error": {}
+                        },
+                        {
+                            "name": "mainboard",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "0e893f7d-cef0-491f-bfbb-f43bcb9a6c3a",
+                            "error": {}
+                        },
+                        {
+                            "name": "memory",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "ac3ddd62-e442-445e-80e4-ac71bd3c0656",
+                            "error": {}
+                        },
+                        {
+                            "name": "graphics",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "c9fa81e3-cdc8-4a53-b4eb-6d554cf64c4c",
+                            "error": {}
+                        },
+                        {
+                            "name": "ssd",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "869796f1-0259-4115-8fe1-4434e3f64d45",
+                            "error": {}
+                        },
+                        {
+                            "name": "hdd",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "1d9338c7-8042-4427-aa39-91a2953e34e1",
+                            "error": {}
+                        },
+                        {
+                            "name": "power",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "61fab8ff-ee43-40a6-9edc-17cc6b55dc60",
+                            "error": {}
+                        },
+                        {
+                            "name": "case",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "objectId",
+                            "GUID": "ebd89050-dbf3-4086-ae84-328c9e535354",
+                            "error": {}
+                        },
+                        {
+                            "name": "cooler",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "array",
+                            "properties": [
+                                {
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "objectId",
+                                    "GUID": "5f41ae39-bfa8-4a04-9394-6fd8d954031b",
+                                    "arrayItem": true,
+                                    "arrayParentType": "array"
+                                },
+                                {
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "objectId",
+                                    "GUID": "63a0531e-1284-40cc-9911-a4ba8be240f7",
+                                    "arrayItem": true,
+                                    "arrayParentType": "array"
+                                }
+                            ],
+                            "additionalItems": true,
+                            "GUID": "4da51c14-d7d0-4c39-96b4-480ba1cdbd5e",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "GUID": "227b9e40-f7b4-4ce7-8020-d31a1bc3ce78",
+                    "error": {}
+                },
+                {
+                    "name": "avatar",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "binary",
+                    "primaryKey": false,
+                    "GUID": "b960df3c-709c-4f40-bec4-280dfe77cd68",
+                    "error": {}
+                },
+                {
+                    "name": "notifications",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "isChecked",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "boolean",
+                                    "GUID": "9f96e783-087a-45fe-9112-fee7ec94800f",
+                                    "required": true,
+                                    "error": {}
+                                },
+                                {
+                                    "name": "title",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "51ea16f2-b914-40d3-b36e-b9870250d7ab",
+                                    "required": true,
+                                    "error": {}
+                                },
+                                {
+                                    "name": "content",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "6a152ec0-b840-461d-9a23-5f9763571bb0",
+                                    "required": true,
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "GUID": "5666e10e-9c31-41b0-8ec5-6f940304c2b4",
+                            "arrayItem": true,
+                            "arrayParentType": "array"
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "cd953b90-332e-441a-b243-50fd687cc87f",
+                    "error": {}
+                },
+                {
+                    "name": "warnings",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "title",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "cbcf20b7-bf37-4720-b5f5-41942bcf2f77",
+                                    "required": true,
+                                    "error": {}
+                                },
+                                {
+                                    "name": "content",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "6977543b-cde1-408a-918f-92e1ea235da7",
+                                    "required": true,
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "GUID": "cb091871-5984-481a-9c3e-9b1d628f3bd2",
+                            "arrayItem": true,
+                            "arrayParentType": "array"
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "33b1bb0b-21a9-4c77-905c-b35b498bc205",
+                    "error": {}
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "timestamp",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "date",
+                                    "primaryKey": false,
+                                    "GUID": "0de0e7fe-82ba-4ad4-9f36-1d7465a0b699",
+                                    "required": true,
+                                    "error": {}
+                                },
+                                {
+                                    "name": "ip",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "string",
+                                    "GUID": "61783fd8-fb6a-43bb-9018-1c841110a8de",
+                                    "format": "ipv4",
+                                    "required": true,
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "GUID": "19606c52-bdf4-45bd-8d00-c9c778074fa0",
+                            "arrayItem": true,
+                            "arrayParentType": "array"
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "470d752d-9ddb-43ef-bb90-79faa3e73b47",
+                    "name": "loggedInHistory",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "lastLoggedInAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "6f560b91-ddd7-4165-be3f-559598dddb73",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "createdAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "1e898bc2-7c42-4f30-af54-110790e35286",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "updatedAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "38fa16c1-6c0f-45ab-b85a-a9fec1ded77f",
+                    "required": true,
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "f1d443dd-d2c0-4ea4-8ead-1533497fced2"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "05ca364c-7799-42b0-8f40-ca9823159be1",
+            "bucketId": "af6ed6d9-cdee-42ff-9528-4381df550811"
+        },
+        {
+            "collectionName": "posts",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "9d0135b7-7f1a-4a0d-bb4c-0c3837d925cb",
+                    "primaryKey": true,
+                    "required": true,
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "GUID": "fa89a1ee-0ac7-4494-9be3-c392cea2ff12",
+                    "name": "category",
+                    "type": "reference",
+                    "$ref": "#model/definitions/category",
+                    "refType": "model",
+                    "ref": "68f277cd-6758-41f2-b551-21bc2f5be27d",
+                    "refIdPath": [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "68f277cd-6758-41f2-b551-21bc2f5be27d"
+                    ],
+                    "isActivated": true,
+                    "required": true,
+                    "hackoladeMeta": {},
+                    "error": {}
+                },
+                {
+                    "name": "comments",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "GUID": "b3484219-bc35-40fa-b81e-b1e6f621dc98",
+                            "type": "reference",
+                            "$ref": "#model/definitions/comment",
+                            "refType": "model",
+                            "ref": "9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1"
+                            ],
+                            "isActivated": true,
+                            "displayName": "comment",
+                            "hackoladeMeta": {},
+                            "arrayItem": true
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "407fd863-91be-4448-be1f-706ea54d9666",
+                    "error": {}
+                },
+                {
+                    "name": "owner",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "fc4dee44-ffc2-4fdf-bac0-aa9613998002",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "nickname",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "ce9ac5ff-750a-4be1-b271-f4c75805f1bb",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "title",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "400b8422-d6ba-43df-b985-a32c28d8c44b",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "tag",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "7f60e636-4b57-40b7-8c7a-815d8ec33936",
+                    "enum": [
+                        "general",
+                        "question",
+                        "build"
+                    ],
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "content",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "7afeb3ae-ad35-446b-bfdd-48086a2bba1d",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "builds",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "GUID": "e391ba96-1300-4154-8273-fe4c5780ee4e",
+                            "name": "cpu",
+                            "type": "reference",
+                            "$ref": "#model/definitions/cpu",
+                            "refType": "model",
+                            "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {}
+                        },
+                        {
+                            "GUID": "8a248f02-2f5f-48d1-9837-a81cbe59e7ac",
+                            "name": "mainboard",
+                            "type": "reference",
+                            "$ref": "#model/definitions/postBuildObject",
+                            "refType": "model",
+                            "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {}
+                        },
+                        {
+                            "GUID": "38edff64-f5f1-45cc-82f3-30b975666f4d",
+                            "name": "memory",
+                            "type": "reference",
+                            "$ref": "#model/definitions/postBuildObject",
+                            "refType": "model",
+                            "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {}
+                        },
+                        {
+                            "GUID": "bdae43a2-03a1-400c-9fd3-3ca2f6bc8456",
+                            "name": "graphics",
+                            "type": "reference",
+                            "$ref": "#model/definitions/postBuildObject",
+                            "refType": "model",
+                            "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {}
+                        },
+                        {
+                            "GUID": "1f2ef3fd-dfa3-4c0e-9d0a-c98bf7edcb19",
+                            "name": "ssd",
+                            "type": "reference",
+                            "$ref": "#model/definitions/postBuildObject",
+                            "refType": "model",
+                            "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {}
+                        },
+                        {
+                            "GUID": "cf68f158-340c-42c5-adfc-4a1c42ce63d8",
+                            "name": "hdd",
+                            "type": "reference",
+                            "$ref": "#model/definitions/postBuildObject",
+                            "refType": "model",
+                            "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {}
+                        },
+                        {
+                            "GUID": "ac22e635-7ed5-4ab0-afbe-df3bf4c2f813",
+                            "name": "power",
+                            "type": "reference",
+                            "$ref": "#model/definitions/postBuildObject",
+                            "refType": "model",
+                            "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {}
+                        },
+                        {
+                            "GUID": "79af6e2e-4d0d-408f-b494-2520ce11dc59",
+                            "name": "case",
+                            "type": "reference",
+                            "$ref": "#model/definitions/postBuildObject",
+                            "refType": "model",
+                            "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                            ],
+                            "isActivated": true,
+                            "hackoladeMeta": {}
+                        },
+                        {
+                            "name": "cooler",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "array",
+                            "properties": [
+                                {
+                                    "GUID": "48e14d17-7ffb-40c3-af1c-50b2e8721fce",
+                                    "type": "reference",
+                                    "$ref": "#model/definitions/postBuildObject",
+                                    "refType": "model",
+                                    "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                                    "refIdPath": [
+                                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                        "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                                    ],
+                                    "isActivated": true,
+                                    "displayName": "postBuildObject",
+                                    "hackoladeMeta": {},
+                                    "arrayItem": true
+                                },
+                                {
+                                    "GUID": "12d54581-974d-41e1-be21-cfee78d789f9",
+                                    "type": "reference",
+                                    "$ref": "#model/definitions/postBuildObject",
+                                    "refType": "model",
+                                    "ref": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                                    "refIdPath": [
+                                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                        "c86da9b8-0b8e-41a2-9955-d154e9566605"
+                                    ],
+                                    "isActivated": true,
+                                    "displayName": "postBuildObject",
+                                    "hackoladeMeta": {},
+                                    "arrayItem": true
+                                }
+                            ],
+                            "additionalItems": false,
+                            "GUID": "de30dccf-0868-43e3-ad89-af26385b9b92",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "GUID": "e4d61b30-279b-4372-be33-1dda90291f58",
+                    "error": {}
+                },
+                {
+                    "GUID": "ca413e2f-e5bb-4094-9e2b-c0090d4920fe",
+                    "name": "status",
+                    "type": "reference",
+                    "$ref": "#model/definitions/status",
+                    "refType": "model",
+                    "ref": "69bb9bf3-5755-4611-98b1-c75828d83d93",
+                    "refIdPath": [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "69bb9bf3-5755-4611-98b1-c75828d83d93"
+                    ],
+                    "isActivated": true,
+                    "required": true,
+                    "hackoladeMeta": {}
+                },
+                {
+                    "name": "votes",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "GUID": "ed0bbf55-dd8c-48be-8694-21cd4a36e721",
+                            "type": "reference",
+                            "$ref": "#model/definitions/vote",
+                            "refType": "model",
+                            "ref": "cd0fc80e-7604-4fc9-a847-5af1e452d6e5",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "cd0fc80e-7604-4fc9-a847-5af1e452d6e5"
+                            ],
+                            "isActivated": true,
+                            "displayName": "vote",
+                            "hackoladeMeta": {},
+                            "arrayItem": true
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "cc33a279-adc0-4205-9437-c99494890e2c",
+                    "error": {}
+                },
+                {
+                    "name": "createdAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "8075fc66-7e5c-4152-85c8-e1ee11496e80",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "updatedAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "e9cedfbc-24fa-4877-8daf-4d7a0a5e9668",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "lastAccessedAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "0917114e-6632-40c5-aded-0a6bb62695b4",
+                    "required": true,
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "6e1e31d4-3398-462c-bd45-a77d0ee4f6cb"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+            "bucketId": "af6ed6d9-cdee-42ff-9528-4381df550811"
+        },
+        {
+            "collectionName": "reviews",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "c4b26881-8948-4bf5-9390-b2d10267c425",
+                    "primaryKey": true,
+                    "required": true,
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {}
+                },
+                {
+                    "name": "partId",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "required": true,
+                    "GUID": "4f738a69-de44-4951-90fd-bd1fbc7ff6aa",
+                    "error": {}
+                },
+                {
+                    "name": "owner",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "b9cba69c-cfa9-4aa5-b804-2f66ccbdd02b",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "GUID": "31e77a89-7be5-4007-a110-84bacd0d2987",
+                    "name": "status",
+                    "type": "reference",
+                    "$ref": "#model/definitions/documentStatus",
+                    "refType": "model",
+                    "ref": "69bb9bf3-5755-4611-98b1-c75828d83d93",
+                    "refIdPath": [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "69bb9bf3-5755-4611-98b1-c75828d83d93"
+                    ],
+                    "isActivated": true,
+                    "required": true,
+                    "hackoladeMeta": {}
+                },
+                {
+                    "name": "content",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "afba10e3-2c7b-4114-aebe-fbc372b7b392",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "votes",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "GUID": "9d62cf77-30f8-4403-866d-3e95db00d169",
+                            "type": "reference",
+                            "$ref": "#model/definitions/vote",
+                            "refType": "model",
+                            "ref": "cd0fc80e-7604-4fc9-a847-5af1e452d6e5",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "cd0fc80e-7604-4fc9-a847-5af1e452d6e5"
+                            ],
+                            "isActivated": true,
+                            "displayName": "vote",
+                            "hackoladeMeta": {},
+                            "arrayItem": true,
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "e1f42f2a-57c3-4f2b-a14e-0615545028b6",
+                    "error": {}
+                },
+                {
+                    "name": "comments",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "array",
+                    "properties": [
+                        {
+                            "GUID": "871c4aa7-b9da-42ae-bae1-ffaa167d101b",
+                            "type": "reference",
+                            "$ref": "#model/definitions/comment",
+                            "refType": "model",
+                            "ref": "9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1",
+                            "refIdPath": [
+                                "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                "9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1"
+                            ],
+                            "isActivated": true,
+                            "displayName": "comment",
+                            "arrayItem": true,
+                            "error": {}
+                        }
+                    ],
+                    "additionalItems": true,
+                    "GUID": "e8df6bdc-b249-41b1-8932-b533f965c9cd",
+                    "error": {}
+                },
+                {
+                    "name": "children",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "name": "count",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "numeric",
+                            "GUID": "082e6754-1da1-475a-931e-dea8109a2c02",
+                            "default": 0,
+                            "minimum": 0,
+                            "multipleOf": 1,
+                            "required": true,
+                            "error": {}
+                        },
+                        {
+                            "name": "lists",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "array",
+                            "properties": [
+                                {
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "objectId",
+                                    "GUID": "48a758cd-757a-4066-9e20-da5bdcf91d8d",
+                                    "arrayItem": true,
+                                    "arrayParentType": "array"
+                                }
+                            ],
+                            "additionalItems": true,
+                            "GUID": "f44e7d38-1902-43cd-a1a3-262178836329",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "GUID": "50963751-6d91-4b68-a720-dc3e40a1ec40",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "createdAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "64dbd8bd-77da-44e1-afd0-bab8a2a08212",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "updatedAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "08225433-bbb5-4f69-a2ba-1ab7eab6bc7b",
+                    "required": true,
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "8ca7f6c6-253a-4d98-bf2d-62a3b2a39038"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "fbb810dd-64f7-4773-9334-ba47ad70c3c5",
+            "bucketId": "af6ed6d9-cdee-42ff-9528-4381df550811"
+        },
+        {
+            "collectionName": "links",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "da39a303-22d4-48f6-9dcb-8122a4e1e5a1",
+                    "primaryKey": true,
+                    "required": true,
+                    "foreignCollection": "",
+                    "foreignField": [],
+                    "error": {
+                        "name": false,
+                        "code": false
+                    }
+                },
+                {
+                    "name": "owner",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "ce1b3b4d-1571-4dd6-aa93-91cf3fb42607",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "token",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "bc1ba228-1e91-437b-a284-3f4a09f0bd83",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "createdAt",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "f031ae73-8ec7-4ee4-bada-d81fb79706a5",
+                    "required": true,
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "28e65346-4695-49bd-8778-8d5176825ef2"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "2e33f7af-f9ee-436e-8a3c-bf44ac3c0150",
+            "bucketId": "af6ed6d9-cdee-42ff-9528-4381df550811"
+        }
+    ],
+    "buckets": [
+        {
+            "name": "Electrokerot",
+            "type": "bucket",
+            "collectionIds": [
+                "0575fa4e-2070-47f6-9cb6-8efcdb07b205",
+                "2e33f7af-f9ee-436e-8a3c-bf44ac3c0150",
+                "fbb810dd-64f7-4773-9334-ba47ad70c3c5",
+                "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                "48d7a576-0fc9-421a-8590-f2cdf30ca965",
+                "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                "05ca364c-7799-42b0-8f40-ca9823159be1"
+            ],
+            "backgroundColor": {
+                "r": 54,
+                "g": 69,
+                "b": 79,
+                "a": 1
+            },
+            "show": true,
+            "isActivated": true,
+            "GUID": "af6ed6d9-cdee-42ff-9528-4381df550811",
+            "hackoladeMeta": {
+                "namingConvention": ""
+            },
+            "enableSharding": false
+        }
+    ],
+    "views": [],
+    "relationships": [],
+    "users": [],
+    "diagramViews": [],
+    "idToNameHashTable": {
+        "af6ed6d9-cdee-42ff-9528-4381df550811": "Electrokerot",
+        "0575fa4e-2070-47f6-9cb6-8efcdb07b205": "items",
+        "48d7a576-0fc9-421a-8590-f2cdf30ca965": "parts",
+        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358": "builds",
+        "05ca364c-7799-42b0-8f40-ca9823159be1": "users",
+        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7": "posts",
+        "fbb810dd-64f7-4773-9334-ba47ad70c3c5": "reviews",
+        "2e33f7af-f9ee-436e-8a3c-bf44ac3c0150": "links",
+        "9d0135b7-7f1a-4a0d-bb4c-0c3837d925cb": "_id",
+        "c5d4c350-387d-4764-9486-ba98f9eb5fc9": "_id",
+        "4b18a0f5-20c3-4d4c-a7bd-2a4129ad287b": "_id",
+        "c4b26881-8948-4bf5-9390-b2d10267c425": "_id",
+        "da39a303-22d4-48f6-9dcb-8122a4e1e5a1": "_id",
+        "656c8650-b10d-496f-be5c-ff0f7ee9bff9": "_id",
+        "021085d8-3988-4532-90b1-b1b2b2adec3e": "_id",
+        "cd0fc80e-7604-4fc9-a847-5af1e452d6e5": "vote",
+        "3d319e62-c4b9-41d9-9bc0-df0e87071dbb": "voter",
+        "9cc92303-950b-42b0-abd4-dcefbd6bd83a": "action",
+        "9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1": "comment",
+        "093591d9-639f-4ecd-bce6-523b3193b3d9": "_id",
+        "f97fe256-6318-488a-b2e4-4133f6669e38": "documentType",
+        "1bfef539-9928-4ee3-bf3d-04c5eefd1a8e": "document",
+        "4c72ee3b-13bf-4691-a0af-ce9a452bee06": "owner",
+        "07807e5c-9a1c-403d-b190-46b1fa3d4314": "parent",
+        "39c88400-76ae-4941-bcdf-29cf212c5441": "children",
+        "5a30caaf-ed2a-48a4-a0cd-3cc5f0228033": "count",
+        "4615c7b0-088a-43df-8fc7-1b7438a94891": "list",
+        "5cdf9de2-7cea-4aed-a8a7-aca3a459dc11": "indentation",
+        "486670b6-302b-42fc-89a4-cba92630b842": "content",
+        "b621d2f2-2340-4096-bc5e-0fba0bc7cc24": "votes",
+        "feabd240-0f98-45df-9100-219114e92df2": "pcode",
+        "824647f8-f22e-4947-af4b-b0f89f3eea13": "name",
+        "5ecdc707-9651-4785-9b41-bfac3b3c90ba": "fullName",
+        "13ec7622-5a29-41e3-a6e8-2fbb3653322e": "tag",
+        "68f277cd-6758-41f2-b551-21bc2f5be27d": "category",
+        "b9e86441-6829-4a09-b2cd-14ede7e14328": "category",
+        "e654c7aa-4bd3-4c21-9568-79e1c3a4dd03": "variants",
+        "3f6d1851-4a07-48f1-b385-cc70d2b4c027": "sortOrder",
+        "fdee77d3-526d-4a71-b075-e0fff2cd7cef": "stock",
+        "c2cc0008-7cf5-4609-b170-9124e81b06c9": "isVariant",
+        "eb1af045-d8f5-4112-a06c-2f7c6e8d4f5e": "details",
+        "18b452d1-8d95-4993-997b-8541bc6ba25e": "^[a-zA-Z0-9_.-ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$",
+        "4ddbdcf9-0f55-40b5-94e6-37c0d6ed5654": "value",
+        "4ecec2f2-c60d-4b98-9912-83db0cac940a": "type",
+        "97f97c3b-3fa0-4851-b434-d99635eb831f": "details",
+        "3b10f854-e260-43c4-9661-535ea5767a09": "vendors",
+        "7def24c6-8fe7-4588-be2a-aa67fb67a7c2": "vendorsList",
+        "dbdb8e29-5ce7-48b4-b070-f07bd09a5e6b": "vendorName",
+        "9f99a8ff-d344-4e32-b442-a277b8f3dd6e": "vendorCode",
+        "7e5cb7fb-7923-4e29-b890-11d305c63f32": "vendorUrl",
+        "cc05b07c-e254-42a1-a7d2-1100dc43544e": "shippingCost",
+        "fcc7302d-5157-458d-bd99-f966c3b5b2af": "price",
+        "1cdee288-3a3b-48db-a4bb-2ec7c6f1c20d": "vendors",
+        "a2369c08-94ae-4b9a-b15e-074ba0f4be19": "prices",
+        "dab9fcf2-15fd-4a53-b679-601a15b70edc": "timestamp",
+        "a706c004-88b1-45af-b86e-991e91121b8b": "price",
+        "37b11890-4cde-4e3e-9333-0dc6754515bb": "isUpdating",
+        "f214c7dc-c37b-44fc-adad-88b8829db718": "createdAt",
+        "a99046de-1b05-4fb5-8e24-be57ca97bc7d": "updatedAt",
+        "97122e21-72a6-4ddd-8f04-118ed8452d9e": "owner",
+        "dd746461-31b6-486d-ab89-af79b2da13d1": "name",
+        "9d25b7f5-77e5-4907-90e0-7625902b1ad4": "isSelected",
+        "7e731756-69a5-44e5-915e-7d36d8d762b8": "parts",
+        "18f6cc72-5afe-4fa6-83ee-dd8caf3da8ba": "marketType",
+        "5364371e-7260-4d6d-add1-974318027ed1": "marketType",
+        "65615c72-f997-4d41-8182-09095ef3e3a2": "cpu",
+        "3801b1f0-856a-493e-9327-2c21fa097123": "buildPartObject",
+        "f9f13528-ddc9-47ee-a788-a19d2b17e62d": "mainboard",
+        "cdc64958-6edd-4a6d-9d5c-70e2245df791": "memory",
+        "5f973fb2-8759-471d-863e-4a487c743bf3": "graphics",
+        "7ab77056-e515-4625-b7bb-69c39c653ac7": "ssd",
+        "7d6ab1ce-e3b5-44bb-8ae8-5647bb0c2922": "hdd",
+        "8bd48cc2-7e44-473c-9697-4ac9a4cd98d0": "case",
+        "33cea047-f75e-462b-b518-1c3817427462": "power",
+        "df68b404-ad0a-48c4-9979-029188fa5e53": "cooler",
+        "fb0ade20-db0e-4937-88a7-dc674eae395b": "reserved",
+        "b0f1a77d-b335-4559-8f33-f2413dec928f": "optimizationPartObject",
+        "dcd3355d-3085-4d87-a8d7-5fda659e06d7": "optimizationMethod",
+        "a5eeafe0-e8d6-4b44-8cb4-c4a4ef04e2ca": "cpu",
+        "6f6724df-1bab-4fd9-9b99-8cd4dbb7ba25": "mainboard",
+        "865709f4-1f6d-46b9-9c2d-cc00e7047561": "memory",
+        "aca2de42-e575-4d12-a816-00f79d34ab7b": "graphics",
+        "354d80ac-ea42-4cf1-85e2-413e5c90b308": "ssd",
+        "780b618d-ed49-4505-880f-818580a6c17d": "hdd",
+        "50fc3d38-9c92-4aff-99cd-5395e15ad0e6": "power",
+        "a8935ff8-e063-44f1-9029-bf4a25385c7d": "case",
+        "d6b766a7-d433-4f4e-b96b-2ff85402b3d7": "cooler",
+        "ca8afd1c-e6b0-4626-9053-83ad5c40ce77": "optimization",
+        "244db58d-58a3-49a7-a5eb-2e3631842245": "hash",
+        "a9487b18-5e48-425c-b153-45ca87aca32e": "lowestPrice",
+        "8e2bb83b-e360-4483-bfd1-7a05cefb06c1": "leastPackage",
+        "8845452c-2fb3-432b-85d8-f115d53cbdfd": "createdAt",
+        "21226097-47e1-4408-bfdb-2fcaa752f0df": "updatedAt",
+        "ce1b3b4d-1571-4dd6-aa93-91cf3fb42607": "owner",
+        "bc1ba228-1e91-437b-a284-3f4a09f0bd83": "token",
+        "f031ae73-8ec7-4ee4-bada-d81fb79706a5": "createdAt",
+        "4f738a69-de44-4951-90fd-bd1fbc7ff6aa": "partId",
+        "b9cba69c-cfa9-4aa5-b804-2f66ccbdd02b": "owner",
+        "afba10e3-2c7b-4114-aebe-fbc372b7b392": "content",
+        "e1f42f2a-57c3-4f2b-a14e-0615545028b6": "votes",
+        "e8df6bdc-b249-41b1-8932-b533f965c9cd": "comments",
+        "64dbd8bd-77da-44e1-afd0-bab8a2a08212": "createdAt",
+        "08225433-bbb5-4f69-a2ba-1ab7eab6bc7b": "updatedAt",
+        "50963751-6d91-4b68-a720-dc3e40a1ec40": "children",
+        "082e6754-1da1-475a-931e-dea8109a2c02": "count",
+        "f44e7d38-1902-43cd-a1a3-262178836329": "lists",
+        "407fd863-91be-4448-be1f-706ea54d9666": "comments",
+        "fc4dee44-ffc2-4fdf-bac0-aa9613998002": "owner",
+        "ce9ac5ff-750a-4be1-b271-f4c75805f1bb": "nickname",
+        "400b8422-d6ba-43df-b985-a32c28d8c44b": "title",
+        "7f60e636-4b57-40b7-8c7a-815d8ec33936": "tag",
+        "7afeb3ae-ad35-446b-bfdd-48086a2bba1d": "content",
+        "e4d61b30-279b-4372-be33-1dda90291f58": "builds",
+        "e391ba96-1300-4154-8273-fe4c5780ee4e": "cpu",
+        "c86da9b8-0b8e-41a2-9955-d154e9566605": "postBuildObject",
+        "de30dccf-0868-43e3-ad89-af26385b9b92": "cooler",
+        "79af6e2e-4d0d-408f-b494-2520ce11dc59": "case",
+        "ac22e635-7ed5-4ab0-afbe-df3bf4c2f813": "power",
+        "cf68f158-340c-42c5-adfc-4a1c42ce63d8": "hdd",
+        "1f2ef3fd-dfa3-4c0e-9d0a-c98bf7edcb19": "ssd",
+        "bdae43a2-03a1-400c-9fd3-3ca2f6bc8456": "graphics",
+        "38edff64-f5f1-45cc-82f3-30b975666f4d": "memory",
+        "8a248f02-2f5f-48d1-9837-a81cbe59e7ac": "mainboard",
+        "cc33a279-adc0-4205-9437-c99494890e2c": "votes",
+        "fa89a1ee-0ac7-4494-9be3-c392cea2ff12": "category",
+        "8075fc66-7e5c-4152-85c8-e1ee11496e80": "createdAt",
+        "e9cedfbc-24fa-4877-8daf-4d7a0a5e9668": "updatedAt",
+        "0917114e-6632-40c5-aded-0a6bb62695b4": "lastAccessedAt",
+        "6db61bb1-a7c9-4b0d-8ab3-cddb93ba1ebf": "email",
+        "e3443a95-fdfa-4aac-a2c6-2cb46e193de6": "nickname",
+        "e7b52219-51f9-4910-b430-a7daaf6c72a6": "password",
+        "9e63a2bf-8593-4725-86e2-2d4e87aaca8b": "role",
+        "80cd215d-4bc8-4198-b57c-8238ba2b6605": "accountRole",
+        "ca413e2f-e5bb-4094-9e2b-c0090d4920fe": "status",
+        "69bb9bf3-5755-4611-98b1-c75828d83d93": "documentStatus",
+        "31e77a89-7be5-4007-a110-84bacd0d2987": "status",
+        "a5cab4b0-585f-4f0e-b01c-1a89637834a9": "status",
+        "250c2676-4ce6-4560-89e3-44a905bc3fea": "updatedAt",
+        "efbe65e3-9aeb-4585-a53d-f5f0617001d5": "createdAt",
+        "3474ae10-4e13-4440-9759-e235e75b9056": "status",
+        "aa078879-bf10-43c1-9fdd-fdc57129c287": "bookmarks",
+        "227b9e40-f7b4-4ce7-8020-d31a1bc3ce78": "build",
+        "acff6f37-5f75-4713-a406-61817dde9bc8": "cpu",
+        "0e893f7d-cef0-491f-bfbb-f43bcb9a6c3a": "mainboard",
+        "ac3ddd62-e442-445e-80e4-ac71bd3c0656": "memory",
+        "c9fa81e3-cdc8-4a53-b4eb-6d554cf64c4c": "graphics",
+        "869796f1-0259-4115-8fe1-4434e3f64d45": "ssd",
+        "1d9338c7-8042-4427-aa39-91a2953e34e1": "hdd",
+        "61fab8ff-ee43-40a6-9edc-17cc6b55dc60": "power",
+        "ebd89050-dbf3-4086-ae84-328c9e535354": "case",
+        "4da51c14-d7d0-4c39-96b4-480ba1cdbd5e": "cooler",
+        "b960df3c-709c-4f40-bec4-280dfe77cd68": "avatar",
+        "cd953b90-332e-441a-b243-50fd687cc87f": "notifications",
+        "6f5015e4-cbb7-4816-8ae2-2424eeddcd46": "New Field",
+        "9f96e783-087a-45fe-9112-fee7ec94800f": "isChecked",
+        "51ea16f2-b914-40d3-b36e-b9870250d7ab": "title",
+        "6a152ec0-b840-461d-9a23-5f9763571bb0": "content",
+        "33b1bb0b-21a9-4c77-905c-b35b498bc205": "warnings",
+        "cbcf20b7-bf37-4720-b5f5-41942bcf2f77": "title",
+        "6977543b-cde1-408a-918f-92e1ea235da7": "content",
+        "1e898bc2-7c42-4f30-af54-110790e35286": "createdAt",
+        "38fa16c1-6c0f-45ab-b85a-a9fec1ded77f": "updatedAt",
+        "470d752d-9ddb-43ef-bb90-79faa3e73b47": "loggedInHistory",
+        "6f560b91-ddd7-4165-be3f-559598dddb73": "lastLoggedInAt"
+    },
+    "definitions": {
+        "type": "definitions",
+        "properties": [
+            {
+                "name": "vote",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "document",
+                "properties": [
+                    {
+                        "name": "voter",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "objectId",
+                        "GUID": "3d319e62-c4b9-41d9-9bc0-df0e87071dbb",
+                        "required": true,
+                        "error": {}
+                    },
+                    {
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "string",
+                        "GUID": "9cc92303-950b-42b0-abd4-dcefbd6bd83a",
+                        "name": "action",
+                        "enum": [
+                            "like",
+                            "dislike"
+                        ],
+                        "required": true,
+                        "error": {}
+                    }
+                ],
+                "additionalProperties": false,
+                "GUID": "cd0fc80e-7604-4fc9-a847-5af1e452d6e5",
+                "definitionRefs": [
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1",
+                        "b621d2f2-2340-4096-bc5e-0fba0bc7cc24",
+                        "1f3808c6-0aca-406c-a662-4a604f86b755"
+                    ],
+                    [
+                        "fbb810dd-64f7-4773-9334-ba47ad70c3c5",
+                        "e1f42f2a-57c3-4f2b-a14e-0615545028b6",
+                        "9d62cf77-30f8-4403-866d-3e95db00d169"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "cc33a279-adc0-4205-9437-c99494890e2c",
+                        "ed0bbf55-dd8c-48be-8694-21cd4a36e721"
+                    ]
+                ],
+                "error": {}
+            },
+            {
+                "name": "comment",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "document",
+                "properties": [
+                    {
+                        "name": "_id",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "objectId",
+                        "GUID": "093591d9-639f-4ecd-bce6-523b3193b3d9",
+                        "required": true,
+                        "primaryKey": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "documentType",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "string",
+                        "GUID": "f97fe256-6318-488a-b2e4-4133f6669e38",
+                        "enum": [
+                            "post",
+                            "review"
+                        ],
+                        "required": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "document",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "objectId",
+                        "GUID": "1bfef539-9928-4ee3-bf3d-04c5eefd1a8e",
+                        "required": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "owner",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "objectId",
+                        "GUID": "4c72ee3b-13bf-4691-a0af-ce9a452bee06",
+                        "required": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "parent",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "objectId",
+                        "GUID": "07807e5c-9a1c-403d-b190-46b1fa3d4314",
+                        "required": false,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "children",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "document",
+                        "properties": [
+                            {
+                                "name": "count",
+                                "hackoladeMeta": {},
+                                "isActivated": true,
+                                "type": "numeric",
+                                "GUID": "5a30caaf-ed2a-48a4-a0cd-3cc5f0228033",
+                                "default": 0,
+                                "minimum": 0,
+                                "multipleOf": 1,
+                                "error": {}
+                            },
+                            {
+                                "name": "list",
+                                "hackoladeMeta": {},
+                                "isActivated": true,
+                                "type": "array",
+                                "properties": [
+                                    {
+                                        "hackoladeMeta": {},
+                                        "isActivated": true,
+                                        "type": "objectId",
+                                        "GUID": "6cb233fc-7333-431d-a1fa-392af08bf68f",
+                                        "arrayItem": true,
+                                        "arrayParentType": "array",
+                                        "displayName": "_id",
+                                        "error": {}
+                                    }
+                                ],
+                                "additionalItems": true,
+                                "GUID": "4615c7b0-088a-43df-8fc7-1b7438a94891",
+                                "error": {}
+                            }
+                        ],
+                        "additionalProperties": false,
+                        "GUID": "39c88400-76ae-4941-bcdf-29cf212c5441",
+                        "required": false,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "indentation",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "numeric",
+                        "GUID": "5cdf9de2-7cea-4aed-a8a7-aca3a459dc11",
+                        "required": true,
+                        "default": 0,
+                        "minimum": 0,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {}
+                    },
+                    {
+                        "name": "content",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "string",
+                        "GUID": "486670b6-302b-42fc-89a4-cba92630b842",
+                        "required": true,
+                        "minLength": 1,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "votes",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "array",
+                        "properties": [
+                            {
+                                "GUID": "1f3808c6-0aca-406c-a662-4a604f86b755",
+                                "type": "reference",
+                                "$ref": "#model/definitions/vote",
+                                "refType": "model",
+                                "ref": "cd0fc80e-7604-4fc9-a847-5af1e452d6e5",
+                                "refIdPath": [
+                                    "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                    "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                    "cd0fc80e-7604-4fc9-a847-5af1e452d6e5"
+                                ],
+                                "isActivated": true,
+                                "displayName": "vote",
+                                "arrayItem": true,
+                                "error": {
+                                    "name": false
+                                }
+                            }
+                        ],
+                        "additionalItems": true,
+                        "GUID": "b621d2f2-2340-4096-bc5e-0fba0bc7cc24",
+                        "error": {}
+                    },
+                    {
+                        "GUID": "a5cab4b0-585f-4f0e-b01c-1a89637834a9",
+                        "name": "status",
+                        "type": "reference",
+                        "$ref": "#model/definitions/documentStatus",
+                        "refType": "model",
+                        "ref": "69bb9bf3-5755-4611-98b1-c75828d83d93",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "69bb9bf3-5755-4611-98b1-c75828d83d93"
+                        ],
+                        "isActivated": true,
+                        "required": true,
+                        "hackoladeMeta": {}
+                    },
+                    {
+                        "name": "createdAt",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "date",
+                        "primaryKey": false,
+                        "required": true,
+                        "GUID": "efbe65e3-9aeb-4585-a53d-f5f0617001d5",
+                        "error": {}
+                    },
+                    {
+                        "name": "updatedAt",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "date",
+                        "primaryKey": false,
+                        "required": true,
+                        "GUID": "250c2676-4ce6-4560-89e3-44a905bc3fea",
+                        "error": {}
+                    }
+                ],
+                "additionalProperties": false,
+                "GUID": "9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1",
+                "definitionRefs": [
+                    [
+                        "fbb810dd-64f7-4773-9334-ba47ad70c3c5",
+                        "e8df6bdc-b249-41b1-8932-b533f965c9cd",
+                        "871c4aa7-b9da-42ae-bae1-ffaa167d101b"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "407fd863-91be-4448-be1f-706ea54d9666",
+                        "b3484219-bc35-40fa-b81e-b1e6f621dc98"
+                    ]
+                ],
+                "error": {}
+            },
+            {
+                "name": "category",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "string",
+                "GUID": "68f277cd-6758-41f2-b551-21bc2f5be27d",
+                "definitionRefs": [
+                    [
+                        "48d7a576-0fc9-421a-8590-f2cdf30ca965",
+                        "b9e86441-6829-4a09-b2cd-14ede7e14328"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "fa89a1ee-0ac7-4494-9be3-c392cea2ff12"
+                    ]
+                ],
+                "enum": [
+                    "cpu",
+                    "mainboard",
+                    "memory",
+                    "graphics",
+                    "ssd",
+                    "hdd",
+                    "case",
+                    "power",
+                    "cooler"
+                ],
+                "required": true,
+                "error": {}
+            },
+            {
+                "name": "details",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "document",
+                "properties": [
+                    {
+                        "name": "^[a-zA-Z0-9_.-ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "document",
+                        "properties": [
+                            {
+                                "name": "value",
+                                "hackoladeMeta": {},
+                                "isActivated": true,
+                                "type": "string",
+                                "GUID": "4ddbdcf9-0f55-40b5-94e6-37c0d6ed5654",
+                                "required": true,
+                                "error": {}
+                            },
+                            {
+                                "name": "type",
+                                "hackoladeMeta": {},
+                                "isActivated": true,
+                                "type": "string",
+                                "GUID": "4ecec2f2-c60d-4b98-9912-83db0cac940a",
+                                "required": true,
+                                "error": {}
+                            }
+                        ],
+                        "additionalProperties": false,
+                        "isPatternField": true,
+                        "GUID": "18b452d1-8d95-4993-997b-8541bc6ba25e",
+                        "error": {},
+                        "sampleName": ""
+                    }
+                ],
+                "additionalProperties": true,
+                "GUID": "eb1af045-d8f5-4112-a06c-2f7c6e8d4f5e",
+                "definitionRefs": [
+                    [
+                        "48d7a576-0fc9-421a-8590-f2cdf30ca965",
+                        "97f97c3b-3fa0-4851-b434-d99635eb831f"
+                    ]
+                ],
+                "required": true,
+                "error": {}
+            },
+            {
+                "name": "vendors",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "document",
+                "properties": [
+                    {
+                        "name": "vendorsList",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "array",
+                        "properties": [
+                            {
+                                "hackoladeMeta": {},
+                                "isActivated": true,
+                                "type": "document",
+                                "properties": [
+                                    {
+                                        "name": "vendorName",
+                                        "hackoladeMeta": {},
+                                        "isActivated": true,
+                                        "type": "string",
+                                        "GUID": "dbdb8e29-5ce7-48b4-b070-f07bd09a5e6b",
+                                        "required": true,
+                                        "error": {}
+                                    },
+                                    {
+                                        "name": "vendorCode",
+                                        "hackoladeMeta": {},
+                                        "isActivated": true,
+                                        "type": "string",
+                                        "GUID": "9f99a8ff-d344-4e32-b442-a277b8f3dd6e",
+                                        "required": false,
+                                        "error": {}
+                                    },
+                                    {
+                                        "name": "vendorUrl",
+                                        "hackoladeMeta": {},
+                                        "isActivated": true,
+                                        "type": "string",
+                                        "GUID": "7e5cb7fb-7923-4e29-b890-11d305c63f32",
+                                        "format": "uri",
+                                        "required": true,
+                                        "error": {}
+                                    },
+                                    {
+                                        "name": "shippingCost",
+                                        "hackoladeMeta": {},
+                                        "isActivated": true,
+                                        "type": "numeric",
+                                        "GUID": "cc05b07c-e254-42a1-a7d2-1100dc43544e",
+                                        "error": {}
+                                    },
+                                    {
+                                        "name": "price",
+                                        "hackoladeMeta": {},
+                                        "isActivated": true,
+                                        "type": "numeric",
+                                        "required": true,
+                                        "GUID": "fcc7302d-5157-458d-bd99-f966c3b5b2af",
+                                        "error": {}
+                                    }
+                                ],
+                                "additionalProperties": false,
+                                "GUID": "9743b108-0b12-4329-9d6f-b4ad2e20ecbc",
+                                "arrayItem": true,
+                                "arrayParentType": "array"
+                            }
+                        ],
+                        "additionalItems": true,
+                        "GUID": "7def24c6-8fe7-4588-be2a-aa67fb67a7c2",
+                        "error": {}
+                    },
+                    {
+                        "GUID": "5364371e-7260-4d6d-add1-974318027ed1",
+                        "name": "marketType",
+                        "type": "reference",
+                        "$ref": "#model/definitions/marketType",
+                        "refType": "model",
+                        "ref": "18f6cc72-5afe-4fa6-83ee-dd8caf3da8ba",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "18f6cc72-5afe-4fa6-83ee-dd8caf3da8ba"
+                        ],
+                        "isActivated": true,
+                        "required": true,
+                        "error": {}
+                    }
+                ],
+                "additionalProperties": false,
+                "GUID": "3b10f854-e260-43c4-9661-535ea5767a09",
+                "definitionRefs": [
+                    [
+                        "48d7a576-0fc9-421a-8590-f2cdf30ca965",
+                        "1cdee288-3a3b-48db-a4bb-2ec7c6f1c20d"
+                    ]
+                ],
+                "required": true,
+                "error": {}
+            },
+            {
+                "name": "marketType",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "string",
+                "GUID": "18f6cc72-5afe-4fa6-83ee-dd8caf3da8ba",
+                "definitionRefs": [
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "3b10f854-e260-43c4-9661-535ea5767a09",
+                        "5364371e-7260-4d6d-add1-974318027ed1"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "65615c72-f997-4d41-8182-09095ef3e3a2",
+                        "b26d5d35-fa11-4738-a5c0-d7528bdbaadc",
+                        "fbe04cf1-e5f6-4acc-9819-b06d49ee10fd",
+                        "f8294c88-9950-4ab6-a3d3-cb5abd8c5c23"
+                    ],
+                    [
+                        "af2c2fd5-1862-4434-b282-85127dece522",
+                        "313abf34-e945-464d-9652-21534f569565",
+                        "facb892d-afae-448f-8af4-2d5c34c1d150"
+                    ]
+                ],
+                "required": true,
+                "error": {
+                    "enum": false,
+                    "enums": [
+                        false,
+                        false,
+                        false,
+                        false
+                    ],
+                    "exampleItems": [
+                        false,
+                        false,
+                        false,
+                        false
+                    ]
+                },
+                "enum": [
+                    "openMarket",
+                    "mall",
+                    "credit",
+                    "cash"
+                ]
+            },
+            {
+                "type": "document",
+                "properties": [
+                    {
+                        "name": "partId",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "objectId",
+                        "GUID": "5c9fdbc5-e9d0-4b16-bbf1-e5455993d842",
+                        "required": true,
+                        "error": {}
+                    },
+                    {
+                        "name": "name",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "string",
+                        "GUID": "3ded2bf7-188e-407d-a4f1-e3c5a57c0ea0",
+                        "error": {}
+                    },
+                    {
+                        "name": "count",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "numeric",
+                        "GUID": "91e2ab92-0a86-48db-82c3-d7a8ed35ba8b",
+                        "required": true,
+                        "error": {}
+                    },
+                    {
+                        "name": "price",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "numeric",
+                        "GUID": "6d8d8a37-8a0d-48b4-8cba-ee486b66302f",
+                        "error": {}
+                    },
+                    {
+                        "name": "filters",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "array",
+                        "properties": [
+                            {
+                                "hackoladeMeta": {},
+                                "isActivated": true,
+                                "type": "document",
+                                "properties": [
+                                    {
+                                        "GUID": "f8294c88-9950-4ab6-a3d3-cb5abd8c5c23",
+                                        "name": "marketType",
+                                        "type": "reference",
+                                        "$ref": "#model/definitions/marketType",
+                                        "refType": "model",
+                                        "ref": "18f6cc72-5afe-4fa6-83ee-dd8caf3da8ba",
+                                        "refIdPath": [
+                                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                            "18f6cc72-5afe-4fa6-83ee-dd8caf3da8ba"
+                                        ],
+                                        "isActivated": true,
+                                        "required": true,
+                                        "error": {
+                                            "name": false,
+                                            "code": false
+                                        }
+                                    },
+                                    {
+                                        "name": "vendorUrl",
+                                        "hackoladeMeta": {},
+                                        "isActivated": true,
+                                        "type": "string",
+                                        "GUID": "09fb3fd5-28d7-406c-918b-df3b3dbac7ab",
+                                        "format": "uri",
+                                        "error": {}
+                                    },
+                                    {
+                                        "name": "status",
+                                        "hackoladeMeta": {},
+                                        "isActivated": true,
+                                        "type": "string",
+                                        "GUID": "05f2bf12-173b-4e13-9afc-d3a47ec47036",
+                                        "error": {
+                                            "enum": false,
+                                            "enums": [
+                                                false,
+                                                false,
+                                                false
+                                            ],
+                                            "exampleItems": [
+                                                false,
+                                                false,
+                                                false
+                                            ]
+                                        },
+                                        "enum": [
+                                            "included",
+                                            "excluded",
+                                            "selected"
+                                        ]
+                                    }
+                                ],
+                                "additionalProperties": false,
+                                "GUID": "fbe04cf1-e5f6-4acc-9819-b06d49ee10fd",
+                                "arrayItem": true,
+                                "arrayParentType": "array"
+                            }
+                        ],
+                        "additionalItems": true,
+                        "GUID": "b26d5d35-fa11-4738-a5c0-d7528bdbaadc",
+                        "error": {}
+                    }
+                ],
+                "additionalProperties": true,
+                "isActivated": true,
+                "GUID": "3801b1f0-856a-493e-9327-2c21fa097123",
+                "hackoladeMeta": {
+                    "namingConvention": ""
+                },
+                "name": "buildPartObject",
+                "error": {},
+                "definitionRefs": [
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "65615c72-f997-4d41-8182-09095ef3e3a2"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "f9f13528-ddc9-47ee-a788-a19d2b17e62d"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "cdc64958-6edd-4a6d-9d5c-70e2245df791"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "5f973fb2-8759-471d-863e-4a487c743bf3"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "7ab77056-e515-4625-b7bb-69c39c653ac7"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "7d6ab1ce-e3b5-44bb-8ae8-5647bb0c2922"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "8bd48cc2-7e44-473c-9697-4ac9a4cd98d0"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "33cea047-f75e-462b-b518-1c3817427462"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "df68b404-ad0a-48c4-9979-029188fa5e53",
+                        "6188d3da-c1f2-4a11-9195-89788c671d55"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "df68b404-ad0a-48c4-9979-029188fa5e53",
+                        "91a0f3c1-ded8-4339-a2ae-b56a36e69c0b"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "7e731756-69a5-44e5-915e-7d36d8d762b8",
+                        "fb0ade20-db0e-4937-88a7-dc674eae395b"
+                    ]
+                ]
+            },
+            {
+                "type": "document",
+                "properties": [
+                    {
+                        "GUID": "facb892d-afae-448f-8af4-2d5c34c1d150",
+                        "name": "marketType",
+                        "type": "reference",
+                        "$ref": "#model/definitions/marketType",
+                        "refType": "model",
+                        "ref": "18f6cc72-5afe-4fa6-83ee-dd8caf3da8ba",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "18f6cc72-5afe-4fa6-83ee-dd8caf3da8ba"
+                        ],
+                        "isActivated": true,
+                        "required": true,
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "vendorUrl",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "string",
+                        "GUID": "22649e16-63e3-4cbf-bcaf-89f8aa4add4b",
+                        "format": "uri",
+                        "error": {}
+                    }
+                ],
+                "additionalProperties": false,
+                "isActivated": true,
+                "GUID": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                "hackoladeMeta": {
+                    "namingConvention": ""
+                },
+                "definitionRefs": [
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "a5eeafe0-e8d6-4b44-8cb4-c4a4ef04e2ca"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "6f6724df-1bab-4fd9-9b99-8cd4dbb7ba25"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "865709f4-1f6d-46b9-9c2d-cc00e7047561"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "aca2de42-e575-4d12-a816-00f79d34ab7b"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "354d80ac-ea42-4cf1-85e2-413e5c90b308"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "780b618d-ed49-4505-880f-818580a6c17d"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "50fc3d38-9c92-4aff-99cd-5395e15ad0e6"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "a8935ff8-e063-44f1-9029-bf4a25385c7d"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "d6b766a7-d433-4f4e-b96b-2ff85402b3d7",
+                        "f6ce68d2-be9d-471e-bea3-7bc681cfa0f9"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                        "d6b766a7-d433-4f4e-b96b-2ff85402b3d7",
+                        "e29fedb6-d7b4-4bf6-96a4-95582a3dd849"
+                    ]
+                ],
+                "name": "optimizationPartObject",
+                "error": {}
+            },
+            {
+                "name": "optimizationMethod",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "document",
+                "properties": [
+                    {
+                        "GUID": "a5eeafe0-e8d6-4b44-8cb4-c4a4ef04e2ca",
+                        "name": "cpu",
+                        "type": "reference",
+                        "$ref": "#model/definitions/cpu",
+                        "refType": "model",
+                        "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                        ],
+                        "isActivated": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "hackoladeMeta": {
+                            "namingConvention": ""
+                        },
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "GUID": "6f6724df-1bab-4fd9-9b99-8cd4dbb7ba25",
+                        "name": "mainboard",
+                        "type": "reference",
+                        "$ref": "#model/definitions/optimizationPartObject",
+                        "refType": "model",
+                        "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                        ],
+                        "isActivated": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "hackoladeMeta": {},
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "GUID": "865709f4-1f6d-46b9-9c2d-cc00e7047561",
+                        "name": "memory",
+                        "type": "reference",
+                        "$ref": "#model/definitions/optimizationPartObject",
+                        "refType": "model",
+                        "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                        ],
+                        "isActivated": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "hackoladeMeta": {},
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "GUID": "aca2de42-e575-4d12-a816-00f79d34ab7b",
+                        "name": "graphics",
+                        "type": "reference",
+                        "$ref": "#model/definitions/optimizationPartObject",
+                        "refType": "model",
+                        "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                        ],
+                        "isActivated": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "hackoladeMeta": {},
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "GUID": "354d80ac-ea42-4cf1-85e2-413e5c90b308",
+                        "name": "ssd",
+                        "type": "reference",
+                        "$ref": "#model/definitions/optimizationPartObject",
+                        "refType": "model",
+                        "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                        ],
+                        "isActivated": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "hackoladeMeta": {},
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "GUID": "780b618d-ed49-4505-880f-818580a6c17d",
+                        "name": "hdd",
+                        "type": "reference",
+                        "$ref": "#model/definitions/optimizationPartObject",
+                        "refType": "model",
+                        "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                        ],
+                        "isActivated": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "hackoladeMeta": {},
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "GUID": "50fc3d38-9c92-4aff-99cd-5395e15ad0e6",
+                        "name": "power",
+                        "type": "reference",
+                        "$ref": "#model/definitions/optimizationPartObject",
+                        "refType": "model",
+                        "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                        ],
+                        "isActivated": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "hackoladeMeta": {},
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "GUID": "a8935ff8-e063-44f1-9029-bf4a25385c7d",
+                        "name": "case",
+                        "type": "reference",
+                        "$ref": "#model/definitions/optimizationPartObject",
+                        "refType": "model",
+                        "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                        "refIdPath": [
+                            "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                            "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                            "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                        ],
+                        "isActivated": true,
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "hackoladeMeta": {},
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    },
+                    {
+                        "name": "cooler",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "array",
+                        "properties": [
+                            {
+                                "GUID": "f6ce68d2-be9d-471e-bea3-7bc681cfa0f9",
+                                "type": "reference",
+                                "$ref": "#model/definitions/optimizationPartObject",
+                                "refType": "model",
+                                "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                                "refIdPath": [
+                                    "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                    "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                    "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                                ],
+                                "isActivated": true,
+                                "displayName": "optimizationPartObject",
+                                "hackoladeMeta": {},
+                                "arrayItem": true
+                            },
+                            {
+                                "GUID": "e29fedb6-d7b4-4bf6-96a4-95582a3dd849",
+                                "type": "reference",
+                                "$ref": "#model/definitions/optimizationPartObject",
+                                "refType": "model",
+                                "ref": "b0f1a77d-b335-4559-8f33-f2413dec928f",
+                                "refIdPath": [
+                                    "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                                    "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                                    "b0f1a77d-b335-4559-8f33-f2413dec928f"
+                                ],
+                                "isActivated": true,
+                                "displayName": "optimizationPartObject",
+                                "hackoladeMeta": {},
+                                "arrayItem": true
+                            }
+                        ],
+                        "additionalItems": false,
+                        "GUID": "d6b766a7-d433-4f4e-b96b-2ff85402b3d7",
+                        "foreignCollection": "",
+                        "foreignField": [],
+                        "error": {
+                            "name": false,
+                            "code": false
+                        }
+                    }
+                ],
+                "additionalProperties": false,
+                "GUID": "dcd3355d-3085-4d87-a8d7-5fda659e06d7",
+                "definitionRefs": [
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "ca8afd1c-e6b0-4626-9053-83ad5c40ce77",
+                        "a9487b18-5e48-425c-b153-45ca87aca32e"
+                    ],
+                    [
+                        "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "ca8afd1c-e6b0-4626-9053-83ad5c40ce77",
+                        "8e2bb83b-e360-4483-bfd1-7a05cefb06c1"
+                    ]
+                ],
+                "error": {}
+            },
+            {
+                "name": "postBuildObject",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "document",
+                "properties": [
+                    {
+                        "name": "partId",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "objectId",
+                        "GUID": "1246b763-6ed3-4264-9995-88a61ecac3af",
+                        "required": true,
+                        "error": {}
+                    },
+                    {
+                        "name": "count",
+                        "hackoladeMeta": {},
+                        "isActivated": true,
+                        "type": "numeric",
+                        "GUID": "7c4a224f-ccf5-4c4e-8ac0-96ed0e50e82b",
+                        "default": 1,
+                        "minimum": 1,
+                        "multipleOf": 1,
+                        "required": true,
+                        "error": {}
+                    }
+                ],
+                "additionalProperties": false,
+                "GUID": "c86da9b8-0b8e-41a2-9955-d154e9566605",
+                "definitionRefs": [
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "e391ba96-1300-4154-8273-fe4c5780ee4e"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "de30dccf-0868-43e3-ad89-af26385b9b92",
+                        "48e14d17-7ffb-40c3-af1c-50b2e8721fce"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "de30dccf-0868-43e3-ad89-af26385b9b92",
+                        "12d54581-974d-41e1-be21-cfee78d789f9"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "79af6e2e-4d0d-408f-b494-2520ce11dc59"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "ac22e635-7ed5-4ab0-afbe-df3bf4c2f813"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "cf68f158-340c-42c5-adfc-4a1c42ce63d8"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "1f2ef3fd-dfa3-4c0e-9d0a-c98bf7edcb19"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "bdae43a2-03a1-400c-9fd3-3ca2f6bc8456"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "38edff64-f5f1-45cc-82f3-30b975666f4d"
+                    ],
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "e4d61b30-279b-4372-be33-1dda90291f58",
+                        "8a248f02-2f5f-48d1-9837-a81cbe59e7ac"
+                    ]
+                ],
+                "error": {}
+            },
+            {
+                "name": "accountRole",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "string",
+                "GUID": "80cd215d-4bc8-4198-b57c-8238ba2b6605",
+                "enum": [
+                    "admin",
+                    "manager",
+                    "user"
+                ],
+                "definitionRefs": [
+                    [
+                        "05ca364c-7799-42b0-8f40-ca9823159be1",
+                        "9e63a2bf-8593-4725-86e2-2d4e87aaca8b"
+                    ]
+                ],
+                "error": {}
+            },
+            {
+                "name": "documentStatus",
+                "hackoladeMeta": {},
+                "isActivated": true,
+                "type": "string",
+                "GUID": "69bb9bf3-5755-4611-98b1-c75828d83d93",
+                "enum": [
+                    "published",
+                    "blocked",
+                    "deleted"
+                ],
+                "required": true,
+                "definitionRefs": [
+                    [
+                        "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "ca413e2f-e5bb-4094-9e2b-c0090d4920fe"
+                    ],
+                    [
+                        "fbb810dd-64f7-4773-9334-ba47ad70c3c5",
+                        "31e77a89-7be5-4007-a110-84bacd0d2987"
+                    ],
+                    [
+                        "6f6c0719-86a1-469a-b57e-f90db03924fa",
+                        "62bc1a35-109f-434c-96d9-99fd76a08abf",
+                        "9d1caf8b-1e46-4fbf-aab1-3bbce44afcb1",
+                        "a5cab4b0-585f-4f0e-b01c-1a89637834a9"
+                    ],
+                    [
+                        "05ca364c-7799-42b0-8f40-ca9823159be1",
+                        "3474ae10-4e13-4440-9759-e235e75b9056"
+                    ]
+                ],
+                "error": {}
+            }
+        ],
+        "GUID": "62bc1a35-109f-434c-96d9-99fd76a08abf"
+    },
+    "polyglotDefinitions": {
+        "type": "polyglotDefinitions",
+        "properties": [],
+        "GUID": "f845bd9b-5f48-47d0-8224-8257b09eeca9"
+    },
+    "externalDefinitions": {
+        "type": "externalDefinitions",
+        "properties": [],
+        "GUID": "e387c296-277a-4c56-93ee-0df7a5c56293"
+    },
+    "sources": [],
+    "decorativeSymbols": [],
+    "dbVersion": "v5.0",
+    "dbVendor": "MongoDB",
+    "appTarget": "MONGODB",
+    "creationTS": "2022-08-13T23:49:07.595Z",
+    "GUID": "5eaee12e-64ba-4dd5-8178-33cbd4721dd3",
+    "isLineageEnabled": false,
+    "lastModifTS": "2022-08-15T01:01:24.460Z",
+    "persistenceSchemaVersion": "6",
+    "isCreatedByPlugin": true,
+    "pluginInformation": {
+        "pluginEngineVersion": "1.0.0"
+    },
+    "applicationInformation": {
+        "version": "6.4.0"
+    },
+    "hackoladeMeta": {},
+    "settings": {
+        "centralPane": {
+            "dbLevel": {
+                "erd": [
+                    {
+                        "GUID": "0575fa4e-2070-47f6-9cb6-8efcdb07b205",
+                        "x": 371.02441077441074,
+                        "y": 550.9818096216405,
+                        "width": 161,
+                        "height": 51,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "48d7a576-0fc9-421a-8590-f2cdf30ca965",
+                        "x": 275.0244107744106,
+                        "y": 81.98180962164054,
+                        "width": 419,
+                        "height": 591,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358",
+                        "x": 757.0244107744109,
+                        "y": 84.31514295497391,
+                        "width": 331,
+                        "height": 592,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "05ca364c-7799-42b0-8f40-ca9823159be1",
+                        "x": 1118.8061262340923,
+                        "y": 80,
+                        "width": 288,
+                        "height": 483,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7",
+                        "x": 916.6860269360261,
+                        "y": 706.6156480054805,
+                        "width": 264,
+                        "height": 339,
+                        "color": {
+                            "hex": "#607d8b"
+                        }
+                    },
+                    {
+                        "GUID": "fbb810dd-64f7-4773-9334-ba47ad70c3c5",
+                        "x": 552.7693602693605,
+                        "y": 705.7974661872981,
+                        "width": 256,
+                        "height": 321,
+                        "color": {
+                            "hex": "#607d8b"
+                        }
+                    },
+                    {
+                        "GUID": "2e33f7af-f9ee-436e-8a3c-bf44ac3c0150",
+                        "x": 1118.484919819667,
+                        "y": 573.6713604976302,
+                        "width": 285,
+                        "height": 104,
+                        "color": {}
+                    }
+                ],
+                "buckets": [
+                    {
+                        "x": 235.02441077441063,
+                        "y": 40,
+                        "GUID": "af6ed6d9-cdee-42ff-9528-4381df550811"
+                    }
+                ],
+                "collapsedNodes": [
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8cdc64958-6edd-4a6d-9d5c-70e2245df791",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b85f973fb2-8759-471d-863e-4a487c743bf3",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b87ab77056-e515-4625-b7bb-69c39c653ac7",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b87d6ab1ce-e3b5-44bb-8ae8-5647bb0c2922",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b88bd48cc2-7e44-473c-9697-4ac9a4cd98d0",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b833cea047-f75e-462b-b518-1c3817427462",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8df68b404-ad0a-48c4-9979-029188fa5e536188d3da-c1f2-4a11-9195-89788c671d55",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8df68b404-ad0a-48c4-9979-029188fa5e5391a0f3c1-ded8-4339-a2ae-b56a36e69c0b",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8f9f13528-ddc9-47ee-a788-a19d2b17e62d3801b1f0-856a-493e-9327-2c21fa097123b26d5d35-fa11-4738-a5c0-d7528bdbaadc",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8f9f13528-ddc9-47ee-a788-a19d2b17e62d",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b865615c72-f997-4d41-8182-09095ef3e3a23801b1f0-856a-493e-9327-2c21fa097123b26d5d35-fa11-4738-a5c0-d7528bdbaadcfbe04cf1-e5f6-4acc-9819-b06d49ee10fdf8294c88-9950-4ab6-a3d3-cb5abd8c5c23",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8fb0ade20-db0e-4937-88a7-dc674eae395b3801b1f0-856a-493e-9327-2c21fa097123b26d5d35-fa11-4738-a5c0-d7528bdbaadc",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8fb0ade20-db0e-4937-88a7-dc674eae395b",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c42713587e731756-69a5-44e5-915e-7d36d8d762b8df68b404-ad0a-48c4-9979-029188fa5e53",
+                    "fbb810dd-64f7-4773-9334-ba47ad70c3c5e8df6bdc-b249-41b1-8932-b533f965c9cd",
+                    "05ca364c-7799-42b0-8f40-ca9823159be1227b9e40-f7b4-4ce7-8020-d31a1bc3ce784da51c14-d7d0-4c39-96b4-480ba1cdbd5e",
+                    "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7407fd863-91be-4448-be1f-706ea54d9666",
+                    "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7e4d61b30-279b-4372-be33-1dda90291f58",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce77a9487b18-5e48-425c-b153-45ca87aca32e",
+                    "1f42a3b5-e8e5-4fb8-bb20-85b2c4271358ca8afd1c-e6b0-4626-9053-83ad5c40ce778e2bb83b-e360-4483-bfd1-7a05cefb06c1",
+                    "05ca364c-7799-42b0-8f40-ca9823159be1227b9e40-f7b4-4ce7-8020-d31a1bc3ce78",
+                    "05ca364c-7799-42b0-8f40-ca9823159be1aa078879-bf10-43c1-9fdd-fdc57129c287"
+                ],
+                "activeRelationship": "",
+                "activeRelationshipFields": {
+                    "childField": [],
+                    "parentField": []
+                },
+                "selectedCollections": [],
+                "displayColorPicker": false,
+                "graphView": {
+                    "erd": [],
+                    "buckets": [],
+                    "decorativeSymbols": [],
+                    "forceLayout": true,
+                    "defaultLinkLength": 300
+                },
+                "diagramViews": [],
+                "decorativeSymbols": [],
+                "nestedCollectionsLayout": "horizontal",
+                "options": []
+            },
+            "collectionLevel": {},
+            "changed": false
+        },
+        "dtDiagram": {
+            "collapsedNodes": [],
+            "shouldDistributeCollections": false
+        }
+    }
+}
