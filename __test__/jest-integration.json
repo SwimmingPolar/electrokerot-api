@@ -1,0 +1,10 @@
+{
+  "moduleFileExtensions": ["js", "ts"],
+  "rootDir": "../",
+  "modulePaths": ["<rootDir>"],
+  "testRegex": ".*\\.integration\\.spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "preset": "@shelf/jest-mongodb"
+}
