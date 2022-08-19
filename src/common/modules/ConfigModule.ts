@@ -6,9 +6,10 @@ const configModule = ConfigModule.forRoot({
   validationSchema: Joi.object({
     NODE_ENV: Joi.string().valid('development', 'production'),
     PORT: Joi.number(),
-    DATABASE_URL: Joi.string().uri({
+    DATABASE_URI: Joi.string().uri({
       scheme: ['mongodb', 'mongodb+srv']
-    })
+    }),
+    DATABASE_NAME: Joi.string()
   }),
   isGlobal: true,
   validationOptions: {

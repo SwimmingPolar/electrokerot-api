@@ -1,7 +1,9 @@
 import {
+  IsAlphanumeric,
   IsEmail,
-  IsNotEmpty,
   MaxLength,
+  MinLength,
+  NotContains,
   registerDecorator,
   ValidationArguments
 } from 'class-validator'
@@ -12,15 +14,18 @@ export default class CreateUserDto {
   @MaxLength(128)
   email: string
 
-  @IsNotEmpty()
-  @MaxLength(128)
+  @NotContains(' ', { message: 'Password cannot contain spaces' })
+  @MinLength(16)
+  @MaxLength(256)
   password: string
 
   @IsEqualTo('password')
   passwordConfirm: string
 
-  @IsNotEmpty()
-  @MaxLength(10)
+  @NotContains(' ', { message: 'Nickname cannot contain spaces' })
+  @IsAlphanumeric()
+  @MinLength(3)
+  @MaxLength(12)
   nickname: string
 }
 

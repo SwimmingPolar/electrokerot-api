@@ -1,24 +1,32 @@
 import { Injectable } from '@nestjs/common'
 import { Db, ObjectId } from 'mongodb'
-import { InjectDb } from 'nest-mongodb-driver'
+import { InjectDb } from 'nest-mongodb'
 import { EntityRepository } from 'src/common/repository/entity.repository'
-import CreateUserDto from 'src/users/dto/CreateUserDto'
 import { Role, User, UserStatus } from 'src/users/entities/user.entity'
 
 @Injectable()
 export class UsersRepository extends EntityRepository<User> {
-  constructor(
-    @InjectDb()
-    private readonly db: Db
-  ) {
+  constructor(@InjectDb() private readonly db: Db) {
     super(db, 'users')
   }
 
-  async createUser(createUserDto: CreateUserDto) {
-    return await this.create(createUserDto)
+  async createUser(user: User) {
+    await user.hashPassword()
+    return await this.create(user)
   }
 
-  async deleteUser(id: string) {}
+  async verifyUser(id: string) {
+    return await this.updateById(id, {
+      role: Role.user,
+      status: UserStatus.active
+    })
+  }
+
+  async deleteUser(id: string) {
+    return await this.updateById(id, {
+      status: UserStatus.deleted
+    })
+  }
 
   async findActiveUserByUserId(id: string) {
     return await this.findOne({

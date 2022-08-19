@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import ConfigModule from './common/modules/ConfigModule'
-import DatabaseModule from './common/modules/MongoDbDriverModule'
+import MongoDbModule from './common/modules/MongoDbModule'
 import { UsersModule } from './users/users.module'
 import { BuildsModule } from './builds/builds.module'
 import { PartsModule } from './parts/parts.module'
@@ -14,7 +14,8 @@ import { AuthModule } from './auth/auth.module'
   imports: [
     // config
     ConfigModule,
-    DatabaseModule,
+    MongoDbModule,
+
     // features
     UsersModule,
     BuildsModule,
