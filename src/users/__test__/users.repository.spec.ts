@@ -1,10 +1,11 @@
 import { Test } from '@nestjs/testing'
 import { MongoClient } from 'mongodb'
 import { getClientToken, MongoModule } from 'nest-mongodb'
+import { User } from 'src/users/entities/User.entity'
 import { UsersRepository } from 'src/users/users.repository'
-import { userStub } from '__test__/stubs/user.stub'
+import { UserStub } from '__test__/stubs/user.stub'
 
-describe('UsersRepository Unit Test', () => {
+describe('unit test: UsersRepository', () => {
   let client: MongoClient
   let usersRepository: UsersRepository
 
@@ -28,25 +29,14 @@ describe('UsersRepository Unit Test', () => {
     await client.close()
   })
 
-  let userId: string
-  beforeEach(async () => {
-    // clear users collection before each test
-    await client
-      .db(globalThis.__MONGO_DB_NAME__)
-      .collection('users')
-      .deleteMany({})
-    // create a single user for each test
-    userId = await usersRepository.createUser(userStub())
-  })
-
   // test repository methods
   describe('createUser', () => {
     it('should be defined', () => {
       expect(usersRepository.createUser).toBeDefined()
     })
     it('should return an object id', async () => {
-      const userId = await usersRepository.createUser(userStub())
-      expect(userId).not.toBeNull()
+      const userId = await usersRepository.createUser(new User(UserStub()))
+      expect(userId).not.toBeFalsy()
     })
   })
 
@@ -55,6 +45,9 @@ describe('UsersRepository Unit Test', () => {
       expect(usersRepository.verifyUser).toBeDefined()
     })
     it('should return 1', async () => {
+      // create an user
+      const userId = await usersRepository.createUser(new User(UserStub()))
+      // verify user
       const result = await usersRepository.verifyUser(userId)
       expect(result).toBe(1)
     })
@@ -65,6 +58,9 @@ describe('UsersRepository Unit Test', () => {
       expect(usersRepository.deleteUser).toBeDefined()
     })
     it('should return 1', async () => {
+      // create user
+      const userId = await usersRepository.createUser(new User(UserStub()))
+      // delete user
       const result = await usersRepository.deleteUser(userId)
       expect(result).toBe(1)
     })
@@ -74,19 +70,28 @@ describe('UsersRepository Unit Test', () => {
     it('should be defined', () => {
       expect(usersRepository.findActiveUserByUserId).toBeDefined()
     })
-    it('with unverified user, should not return an User entity', async () => {
+    test('with unverified user, it should not return an User entity', async () => {
+      // create user
+      const userId = await usersRepository.createUser(new User(UserStub()))
+      // try to find active user
       const user = await usersRepository.findActiveUserByUserId(userId)
-      expect(user).toBeNull()
+      expect(user).toBeFalsy()
     })
-    it('with verified user, should return an User entity', async () => {
+    test('with verified user, it should return an User entity', async () => {
+      // create and verify user
+      const userId = await usersRepository.createUser(new User(UserStub()))
       await usersRepository.verifyUser(userId)
+      // find active user
       const user = await usersRepository.findActiveUserByUserId(userId)
-      expect(user).not.toBeNull()
+      expect(user).not.toBeFalsy()
     })
     it('should return null if user is deleted', async () => {
+      // create user and delete user
+      const userId = await usersRepository.createUser(new User(UserStub()))
       await usersRepository.deleteUser(userId)
+      // try to find active user
       const user = await usersRepository.findActiveUserByUserId(userId)
-      expect(user).toBeNull()
+      expect(user).toBeFalsy()
     })
   })
 
@@ -94,19 +99,31 @@ describe('UsersRepository Unit Test', () => {
     it('should be defined', () => {
       expect(usersRepository.findValidUserByEmail).toBeDefined()
     })
-    it('with unverified user, should return an User entity', async () => {
-      const user = await usersRepository.findValidUserByEmail(userStub().email)
-      expect(user).not.toBeNull()
-    })
-    it('with verified user, should also return an User entity', async () => {
+    test('with verified user, it should return an User entity', async () => {
+      // create and verify user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
       await usersRepository.verifyUser(userId)
-      const user = await usersRepository.findValidUserByEmail(userStub().email)
-      expect(user).not.toBeNull()
+      // find valid user
+      const user = await usersRepository.findValidUserByEmail(userStub.email)
+      expect(user).not.toBeFalsy()
+    })
+    test('with unverified user, it should also return an User entity', async () => {
+      // create and verify user
+      const userStub = new User(UserStub())
+      await usersRepository.createUser(userStub)
+      // try to find valid user
+      const user = await usersRepository.findValidUserByEmail(userStub.email)
+      expect(user).not.toBeFalsy()
     })
     it('should return null if user is deleted', async () => {
+      // create and delete user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
       await usersRepository.deleteUser(userId)
-      const user = await usersRepository.findValidUserByEmail(userStub().email)
-      expect(user).toBeNull()
+      // try to find valid user
+      const user = await usersRepository.findValidUserByEmail(userStub.email)
+      expect(user).toBeFalsy()
     })
   })
 
@@ -114,25 +131,102 @@ describe('UsersRepository Unit Test', () => {
     it('should be defined', () => {
       expect(usersRepository.findValidUserByNickname).toBeDefined()
     })
-    it('with unverified user, should return an User entity', async () => {
-      const user = await usersRepository.findValidUserByNickname(
-        userStub().nickname
-      )
-      expect(user).not.toBeNull()
-    })
-    it('with verified user, should also return an User entity', async () => {
+    test('with verified user, it should return an User entity', async () => {
+      // create and verify user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
       await usersRepository.verifyUser(userId)
+      // find valid user
       const user = await usersRepository.findValidUserByNickname(
-        userStub().nickname
+        userStub.nickname
       )
-      expect(user).not.toBeNull()
+      expect(user).not.toBeFalsy()
+    })
+    test('with unverified user, it should also return an User entity', async () => {
+      const userStub = new User(UserStub())
+      // create and verify user
+      await usersRepository.createUser(userStub)
+      // try to find valid user
+      const user = await usersRepository.findValidUserByNickname(
+        userStub.nickname
+      )
+      expect(user).not.toBeFalsy()
     })
     it('should return null if user is deleted', async () => {
+      // create and delete user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
       await usersRepository.deleteUser(userId)
+      // try to find valid user
       const user = await usersRepository.findValidUserByNickname(
-        userStub().nickname
+        UserStub().nickname
       )
-      expect(user).toBeNull()
+      expect(user).toBeFalsy()
+    })
+  })
+  describe('findValidUserByUserId', () => {
+    it('should be defined', () => {
+      expect(usersRepository.findValidUserByUserId).toBeDefined()
+    })
+    test('with verified user, it should return an User entity', async () => {
+      // create and verify user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
+      await usersRepository.verifyUser(userId)
+      // find valid user
+      const user = await usersRepository.findValidUserByUserId(userId)
+      expect(user).not.toBeFalsy()
+    })
+    test('with unverified user, it should also return an User entity', async () => {
+      // create and verify user
+      const userStub = new User(UserStub())
+      await usersRepository.createUser(userStub)
+      // try to find valid user
+      const user = await usersRepository.findValidUserByUserId(userStub._id)
+      expect(user).not.toBeFalsy()
+    })
+    it('should return null if user is deleted', async () => {
+      // create and delete user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
+      await usersRepository.deleteUser(userId)
+      // try to find valid user
+      const user = await usersRepository.findValidUserByUserId(userStub._id)
+      expect(user).toBeFalsy()
+    })
+  })
+  describe('updateUserByUserId', () => {
+    it('should be defined', () => {
+      expect(usersRepository.updateUserByUserId).toBeDefined()
+    })
+    test('with verified user, it should return an User entity', async () => {
+      // create and verify user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
+      await usersRepository.verifyUser(userId)
+      // update user
+      userStub.nickname = 'newNickname'
+      const result = await usersRepository.updateUserByUserId(userId, userStub)
+      expect(result).toBe(1)
+    })
+    test('with unverified user, it should also return an User entity', async () => {
+      // create and verify user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
+      // update user
+      userStub.nickname = 'newNickname'
+      const result = await usersRepository.updateUserByUserId(userId, userStub)
+      expect(result).toBe(1)
+    })
+    it('should return null if user is deleted', async () => {
+      // create and delete user
+      const userStub = new User(UserStub())
+      const userId = await usersRepository.createUser(userStub)
+      await usersRepository.deleteUser(userId)
+      // try to update user
+      userStub.nickname = 'newNickname'
+      const result = await usersRepository.updateUserByUserId(userId, userStub)
+      expect(result).toBe(0)
     })
   })
 })

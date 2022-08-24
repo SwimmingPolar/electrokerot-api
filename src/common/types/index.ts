@@ -27,5 +27,5 @@ export type CollectionName =
   | 'users'
   | 'posts'
   | 'reviews'
-  | 'links'
+  | 'tokens'
   | 'comments'

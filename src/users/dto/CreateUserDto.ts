@@ -9,13 +9,13 @@ import {
 } from 'class-validator'
 import { ValidationOptions } from 'joi'
 
-export default class CreateUserDto {
+export class CreateUserDto {
   @IsEmail()
   @MaxLength(128)
   email: string
 
   @NotContains(' ', { message: 'Password cannot contain spaces' })
-  @MinLength(16)
+  @MinLength(12)
   @MaxLength(256)
   password: string
 

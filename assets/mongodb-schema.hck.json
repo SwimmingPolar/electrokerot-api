@@ -1370,7 +1370,7 @@
             "bucketId": "af6ed6d9-cdee-42ff-9528-4381df550811"
         },
         {
-            "collectionName": "links",
+            "collectionName": "tokens",
             "type": "object",
             "properties": [
                 {
@@ -1398,11 +1398,24 @@
                     "error": {}
                 },
                 {
-                    "name": "token",
+                    "name": "tokenString",
                     "hackoladeMeta": {},
                     "isActivated": true,
                     "type": "string",
                     "GUID": "bc1ba228-1e91-437b-a284-3f4a09f0bd83",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "action",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "947fcf00-c005-4e38-97b8-cd752fd7cca7",
+                    "enum": [
+                        "passwordReset",
+                        "verification"
+                    ],
                     "required": true,
                     "error": {}
                 },
@@ -1709,7 +1722,17 @@
         }
     ],
     "views": [],
-    "relationships": [],
+    "relationships": [
+        {
+            "name": "New Relationship",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "childCardinality": "1",
+            "GUID": "d4daf878-c8df-465e-9594-304b92a00d8a"
+        }
+    ],
     "users": [],
     "diagramViews": [],
     "idToNameHashTable": {
@@ -1719,7 +1742,7 @@
         "05ca364c-7799-42b0-8f40-ca9823159be1": "users",
         "bae7e3ff-faef-4bf7-a63f-bdc707c2ada7": "posts",
         "fbb810dd-64f7-4773-9334-ba47ad70c3c5": "reviews",
-        "2e33f7af-f9ee-436e-8a3c-bf44ac3c0150": "links",
+        "2e33f7af-f9ee-436e-8a3c-bf44ac3c0150": "tokens",
         "9d0135b7-7f1a-4a0d-bb4c-0c3837d925cb": "_id",
         "4b18a0f5-20c3-4d4c-a7bd-2a4129ad287b": "_id",
         "c4b26881-8948-4bf5-9390-b2d10267c425": "_id",
@@ -1795,7 +1818,6 @@
         "8845452c-2fb3-432b-85d8-f115d53cbdfd": "createdAt",
         "21226097-47e1-4408-bfdb-2fcaa752f0df": "updatedAt",
         "ce1b3b4d-1571-4dd6-aa93-91cf3fb42607": "owner",
-        "bc1ba228-1e91-437b-a284-3f4a09f0bd83": "token",
         "f031ae73-8ec7-4ee4-bada-d81fb79706a5": "createdAt",
         "4f738a69-de44-4951-90fd-bd1fbc7ff6aa": "partId",
         "b9cba69c-cfa9-4aa5-b804-2f66ccbdd02b": "owner",
@@ -1879,7 +1901,10 @@
         "965fab0d-e97d-40fa-abab-7f3d52422e2b": "comments",
         "ba1a4dd8-454b-4796-b6b8-2ea9f718549f": "comments",
         "9f530343-ae91-4486-8425-5da58e3852cb": "cpuCooler",
-        "0a81cfe3-c747-41ec-bd17-05de37ce9e73": "systemCooler"
+        "0a81cfe3-c747-41ec-bd17-05de37ce9e73": "systemCooler",
+        "947fcf00-c005-4e38-97b8-cd752fd7cca7": "action",
+        "bc1ba228-1e91-437b-a284-3f4a09f0bd83": "tokenString",
+        "d4daf878-c8df-465e-9594-304b92a00d8a": "New Relationship"
     },
     "definitions": {
         "type": "definitions",
@@ -3272,7 +3297,7 @@
     "creationTS": "2022-08-13T23:49:07.595Z",
     "GUID": "5eaee12e-64ba-4dd5-8178-33cbd4721dd3",
     "isLineageEnabled": false,
-    "lastModifTS": "2022-08-18T10:25:27.797Z",
+    "lastModifTS": "2022-08-22T04:31:03.671Z",
     "persistenceSchemaVersion": "6",
     "isCreatedByPlugin": true,
     "pluginInformation": {
@@ -3334,8 +3359,8 @@
                         "GUID": "2e33f7af-f9ee-436e-8a3c-bf44ac3c0150",
                         "x": 1279.8773311396092,
                         "y": 746.765470357193,
-                        "width": 289,
-                        "height": 104,
+                        "width": 217,
+                        "height": 123,
                         "color": {}
                     },
                     {

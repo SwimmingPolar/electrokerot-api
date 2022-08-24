@@ -1,12 +1,13 @@
+import bcrypt from 'bcrypt'
 import { Exclude, Type } from 'class-transformer'
 import { ObjectId } from 'mongodb'
+import { TransformObjectId } from 'src/common/decorators/TransformObjectId.decorator'
 import { Category } from 'src/common/types'
-import bcrypt from 'bcrypt'
 
 export class User {
+  @TransformObjectId()
   _id: ObjectId
 
-  @Exclude({ toPlainOnly: true })
   email: string
 
   nickname: string
@@ -19,22 +20,19 @@ export class User {
   @Exclude({ toPlainOnly: true })
   status: UserStatus
 
-  @Exclude({ toPlainOnly: true })
-  @Type(() => ObjectId)
+  @TransformObjectId()
   bookmarks?: ObjectId[]
 
+  @TransformObjectId()
   build?: Record<Category, ObjectId>
 
   avatar?: string
 
-  @Type(() => Notification)
   notifications?: Notification[]
 
-  @Type(() => Warning)
   warnings?: Warning[]
 
   @Exclude({ toPlainOnly: true })
-  @Type(() => LoggedInHistory)
   loggedInHistory?: LoggedInHistory[]
 
   @Exclude({ toPlainOnly: true })
@@ -51,6 +49,24 @@ export class User {
 
   async comparePassword(password: string) {
     return await bcrypt.compare(password, this.password)
+  }
+
+  // constructor({ email, nickname, password }) {
+  constructor(partial: Partial<User>) {
+    if (partial) {
+      Object.assign(this, partial)
+      this._id = new ObjectId()
+      this.role = Role.guest
+      this.status = UserStatus.unverified
+      this.bookmarks = []
+      this.build = {} as Record<Category, ObjectId>
+      this.avatar = ''
+      this.notifications = []
+      this.warnings = []
+      this.loggedInHistory = []
+      this.createdAt = new Date()
+      this.updatedAt = new Date()
+    }
   }
 }
 

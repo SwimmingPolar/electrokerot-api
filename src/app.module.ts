@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common'
+import { AuthModule } from './auth/auth.module'
+import { BuildsModule } from './builds/builds.module'
+import { CommentsModule } from './comments/comments.module'
 import ConfigModule from './common/modules/ConfigModule'
 import MongoDbModule from './common/modules/MongoDbModule'
-import { UsersModule } from './users/users.module'
-import { BuildsModule } from './builds/builds.module'
 import { PartsModule } from './parts/parts.module'
-import { CommentsModule } from './comments/comments.module'
 import { PostsModule } from './posts/posts.module'
 import { ReviewsModule } from './reviews/reviews.module'
-import { LinksModule } from './links/links.module'
-import { AuthModule } from './auth/auth.module'
+import { TokensModule } from './tokens/tokens.module'
+import { UsersModule } from './users/users.module'
 
 @Module({
   imports: [
@@ -23,8 +23,8 @@ import { AuthModule } from './auth/auth.module'
     CommentsModule,
     PostsModule,
     ReviewsModule,
-    LinksModule,
-    AuthModule
+    AuthModule,
+    TokensModule
   ]
 })
 export class AppModule {}

@@ -8,12 +8,12 @@ export abstract class EntityRepository<T> {
     this.collection = db.collection(collectionName)
   }
 
-  protected async create(entity: Partial<T>) {
-    return (await this.collection.insertOne(entity)).insertedId.toString()
+  protected async create(entity: T) {
+    return (await this.collection.insertOne(entity)).insertedId
   }
 
-  protected async findById(id: string) {
-    return await this.collection.findOne<T>({ _id: new ObjectId(id) })
+  protected async findById(_id: ObjectId) {
+    return await this.collection.findOne<T>({ _id })
   }
 
   protected async findOne(filter: Filter<Partial<T>>) {
@@ -24,13 +24,9 @@ export abstract class EntityRepository<T> {
     return await this.collection.find<T>(filter).toArray()
   }
 
-  protected async updateById(id: string, entity: Partial<T>) {
-    return (
-      await this.collection.updateOne(
-        { _id: new ObjectId(id) },
-        { $set: entity }
-      )
-    ).modifiedCount
+  protected async updateById(_id: ObjectId, entity: Partial<T>) {
+    return (await this.collection.updateOne({ _id }, { $set: entity }))
+      .modifiedCount
   }
 
   protected async updateOne(filter: Filter<Partial<T>>, entity: Partial<T>) {
@@ -43,8 +39,7 @@ export abstract class EntityRepository<T> {
       .modifiedCount
   }
 
-  protected async delete(id: string) {
-    return (await this.collection.deleteOne({ _id: new ObjectId(id) }))
-      .deletedCount
+  protected async deleteOne(filter: Filter<Partial<T>>) {
+    return (await this.collection.deleteOne(filter)).deletedCount
   }
 }
