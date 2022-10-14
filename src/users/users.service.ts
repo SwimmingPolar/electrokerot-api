@@ -43,6 +43,7 @@ export class UsersService {
     // destructure profile fields for individual update checkups
     const { nickname } = updateUserDto
 
+    // check nickname
     if (nickname && nickname !== user.nickname) {
       // check if nickname is already taken
       const isNickNameConflicts =
@@ -51,6 +52,8 @@ export class UsersService {
         throw new ConflictException('Nickname already exists')
       }
     }
+    // check other field
+    // check other field
 
     // update user
     // remove passwordConfirm from updateUserDto

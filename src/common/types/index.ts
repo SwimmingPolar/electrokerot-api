@@ -1,18 +1,24 @@
 import { ObjectId } from 'mongodb'
 
-export type MarketType = 'openMarket' | 'mall' | 'credit' | 'cash'
+export enum MarketType {
+  openMarket = 'openMarket',
+  mall = 'mall',
+  credit = 'credit',
+  cash = 'cash'
+}
 
-export type Category =
-  | 'cpu'
-  | 'mainboard'
-  | 'memory'
-  | 'graphics'
-  | 'ssd'
-  | 'hdd'
-  | 'power'
-  | 'case'
-  | 'cpuCooler'
-  | 'systemCooler'
+export enum Category {
+  cpu = 'cpu',
+  motherboard = 'motherboard',
+  memory = 'memory',
+  graphics = 'graphics',
+  ssd = 'ssd',
+  hdd = 'hdd',
+  power = 'power',
+  case = 'case',
+  cpuCooler = 'cpuCooler',
+  systemCooler = 'systemCooler'
+}
 
 export interface Vote {
   voter: ObjectId

@@ -8,7 +8,7 @@ export abstract class EntityRepository<T> {
     this.collection = db.collection(collectionName)
   }
 
-  protected async create(entity: T) {
+  protected async create(entity: Partial<T>) {
     return (await this.collection.insertOne(entity)).insertedId
   }
 
@@ -41,5 +41,9 @@ export abstract class EntityRepository<T> {
 
   protected async deleteOne(filter: Filter<Partial<T>>) {
     return (await this.collection.deleteOne(filter)).deletedCount
+  }
+
+  protected async countDocuments(filter: Filter<Partial<T>>) {
+    return await this.collection.countDocuments(filter)
   }
 }

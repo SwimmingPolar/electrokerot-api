@@ -162,7 +162,7 @@ describe('integration test: UsersModule', () => {
   describe('POST /users', () => {
     describe('Status 201', () => {
       test('with valid request body', async () => {
-        await request
+        const res = await request
           .post('/users')
           .type('application/json')
           .send(UserStub())
@@ -268,6 +268,28 @@ describe('integration test: UsersModule', () => {
       })
     })
     describe('Status 400', () => {
+      test('with empty request body', async () => {
+        const userStub = new User(UserStub())
+        const { _id: userId, email, password } = userStub
+        await usersRepository.createUser(userStub)
+
+        // verify user
+        await usersRepository.verifyUser(userId)
+
+        // login
+        await requestAgent
+          .post('/login')
+          .type('application/json')
+          .send({
+            email,
+            password
+          })
+          .expect(200)
+
+        // request with invalid request body
+        await requestAgent.patch('/users').send({}).expect(400)
+      })
+
       test('with invalid request body', async () => {
         const userStub = new User(UserStub())
         const { _id: userId, email, password } = userStub

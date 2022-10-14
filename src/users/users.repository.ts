@@ -15,7 +15,11 @@ export class UsersRepository extends EntityRepository<User> {
     delete user['passwordConfirm']
 
     await user.hashPassword()
-    return await this.create(user)
+    return await this.create({
+      ...user,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
   }
 
   async verifyUser(_id: ObjectId) {
@@ -92,7 +96,7 @@ export class UsersRepository extends EntityRepository<User> {
           }
         }
       },
-      user
+      { ...user, updatedAt: new Date() }
     )
   }
 }

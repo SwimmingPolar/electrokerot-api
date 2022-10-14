@@ -1,7 +1,7 @@
-import { Optional } from '@nestjs/common'
 import { PickType } from '@nestjs/mapped-types'
 import {
   IsAlphanumeric,
+  IsOptional,
   MaxLength,
   MinLength,
   NotContains
@@ -16,6 +16,6 @@ export class UpdateUserDto extends PickType(CreateUserDto, [
   @IsAlphanumeric()
   @MinLength(3)
   @MaxLength(12)
-  @Optional()
+  @IsOptional()
   nickname: string
 }
