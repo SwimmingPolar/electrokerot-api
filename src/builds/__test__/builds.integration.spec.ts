@@ -123,7 +123,9 @@ describe('integration test: BuildsModule', () => {
 
         // create builds
         await Promise.all(
-          Array.from({ length: 3 }, () => requestAgent.post('/builds'))
+          Array.from({ length: 3 }, () =>
+            requestAgent.post('/builds').expect(201)
+          )
         )
         // get all builds info
         const { body } = await requestAgent.get('/builds').expect(200)
@@ -170,7 +172,9 @@ describe('integration test: BuildsModule', () => {
 
         // create 10 builds
         await Promise.all(
-          Array.from({ length: 10 }, () => requestAgent.post('/builds'))
+          Array.from({ length: 10 }, () =>
+            requestAgent.post('/builds').expect(201)
+          )
         )
         // attempt to create 11th build
         await requestAgent.post('/builds').expect(403)
@@ -185,7 +189,9 @@ describe('integration test: BuildsModule', () => {
 
         // create 3 builds
         await Promise.all(
-          Array.from({ length: 3 }, () => requestAgent.post('/builds'))
+          Array.from({ length: 3 }, () =>
+            requestAgent.post('/builds').expect(201)
+          )
         )
 
         // create build
@@ -245,7 +251,9 @@ describe('integration test: BuildsModule', () => {
 
         // create 10 builds
         await Promise.all(
-          Array.from({ length: 10 }, () => requestAgent.post('/builds'))
+          Array.from({ length: 10 }, () =>
+            requestAgent.post('/builds').expect(201)
+          )
         )
         // get all builds info
         const { body: builds } = await requestAgent.get('/builds').expect(200)

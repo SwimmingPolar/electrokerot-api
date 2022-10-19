@@ -5,9 +5,9 @@ import {
   MinLength,
   NotContains,
   registerDecorator,
-  ValidationArguments
+  ValidationArguments,
+  ValidationOptions
 } from 'class-validator'
-import { ValidationOptions } from 'joi'
 
 export class CreateUserDto {
   @IsEmail()

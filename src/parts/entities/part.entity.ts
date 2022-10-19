@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer'
 import { ObjectId } from 'mongodb'
 import { Category, MarketType } from 'src/common/types'
 
@@ -5,21 +6,27 @@ export class Part {
   _id: ObjectId
   pcode: string
   name: FullName
-  category: Category
-  variants: ObjectId[]
+  category: keyof typeof Category
+  variants: string[]
   sortOrder: number
   stock: boolean
+
+  @Exclude({ toPlainOnly: true })
   isVariant: boolean
+
+  @Exclude({ toPlainOnly: true })
   isUpdating: boolean
   details: Details
   vendors: Vendors
   prices: Prices
+
+  @Exclude({ toPlainOnly: true })
   createdAt: Date
   updatedAt: Date
 }
 
 interface FullName {
-  name: string
+  fullName: string
   tag?: string
 }
 

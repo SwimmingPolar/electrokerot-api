@@ -1,15 +1,32 @@
-import { PipeTransform, Injectable, BadRequestException } from '@nestjs/common'
+import {
+  registerDecorator,
+  ValidationArguments,
+  ValidationOptions
+} from 'class-validator'
 import { ObjectId } from 'mongodb'
 
-@Injectable()
-export class IsMongodbId implements PipeTransform {
-  transform(value: any): ObjectId {
-    const validObjectId = ObjectId.isValid(value)
+export function IsMongodbId(
+  property: string,
+  validationOptions?: ValidationOptions
+) {
+  return function (object: unknown, propertyName: string) {
+    registerDecorator({
+      name: 'IsMongodbId',
+      target: object.constructor,
+      propertyName: propertyName,
+      constraints: [property],
+      options: validationOptions,
+      validator: {
+        validate(value: string, args: ValidationArguments) {
+          const [relatedPropertyName] = args.constraints
+          const relatedProperty = (args.object as any)[relatedPropertyName]
+          const ids = Array.isArray(relatedProperty)
+            ? relatedProperty
+            : [relatedProperty]
 
-    if (!validObjectId) {
-      throw new BadRequestException('Invalid Id')
-    }
-
-    return new ObjectId(value)
+          return ids.every(id => ObjectId.isValid(id))
+        }
+      }
+    })
   }
 }

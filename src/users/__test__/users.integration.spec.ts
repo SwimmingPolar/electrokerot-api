@@ -162,7 +162,7 @@ describe('integration test: UsersModule', () => {
   describe('POST /users', () => {
     describe('Status 201', () => {
       test('with valid request body', async () => {
-        const res = await request
+        await request
           .post('/users')
           .type('application/json')
           .send(UserStub())

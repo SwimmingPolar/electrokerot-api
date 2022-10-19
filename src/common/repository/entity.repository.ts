@@ -12,6 +12,10 @@ export abstract class EntityRepository<T> {
     return (await this.collection.insertOne(entity)).insertedId
   }
 
+  protected async find(filter: Filter<Partial<T>>) {
+    return this.collection.find<T>(filter)
+  }
+
   protected async findById(_id: ObjectId) {
     return await this.collection.findOne<T>({ _id })
   }
@@ -45,5 +49,9 @@ export abstract class EntityRepository<T> {
 
   protected async countDocuments(filter: Filter<Partial<T>>) {
     return await this.collection.countDocuments(filter)
+  }
+
+  protected aggregate(pipeline: any[]) {
+    return this.collection.aggregate<T>(pipeline).toArray()
   }
 }

@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config'
 import { MongoModule } from 'nest-mongodb'
 
-const mongoDbModule = MongoModule.forRootAsync({
+const MongoDbModule = MongoModule.forRootAsync({
   inject: [ConfigService],
   useFactory: async (configService: ConfigService) => ({
     uri: configService.get<string>('DATABASE_URI'),
@@ -9,4 +9,4 @@ const mongoDbModule = MongoModule.forRootAsync({
   })
 })
 
-export default mongoDbModule
+export default MongoDbModule

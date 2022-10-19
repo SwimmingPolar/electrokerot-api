@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
-import { plainToClass } from 'class-transformer'
+import { plainToInstance } from 'class-transformer'
 import { Request } from 'express'
 import { ObjectId } from 'mongodb'
 import { ExtractJwt, Strategy } from 'passport-jwt'
@@ -40,7 +40,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     // transform to class instance
-    user = plainToClass(User, user)
+    user = plainToInstance(User, user)
 
     return user
   }

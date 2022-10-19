@@ -8,24 +8,26 @@ type indexSignature<T> = {
 
 // BIG ASSUMPTION: target is valid ObjectId object or ObjectId string
 export const TransformObjectId = () =>
-  Transform(({ key, obj, type }) => {
+  Transform(({ value, obj, key, type }) => {
+    value = value && value?.length > 0 ? value : obj[key]
+
     // target is not a valid ObjectId object
     // and is falsy (empty string, null, undefined, length 0)
     // then return original value
     if (
-      !(obj[key] instanceof ObjectId) &&
-      (!obj[key] || Object.keys(obj[key]).length === 0)
+      !(value instanceof ObjectId) &&
+      (!value || Object.keys(value).length === 0)
     ) {
-      return obj[key]
+      return value
     }
 
     // handle single value, array, object
     const isIndexAccessible =
-      typeof obj[key] !== 'string' && Object.keys(obj[key]).length > 0
+      typeof value !== 'string' && Object.keys(value).length > 0
     // if input is single value, transform to array
     // to be able to use index access
     const targets: indexSignature<string> | indexSignature<ObjectId> =
-      isIndexAccessible ? obj[key] : [obj[key]]
+      isIndexAccessible ? value : [value]
 
     // save original value to be able to type check,
     // and return original value if transformation didn't take place
@@ -41,7 +43,9 @@ export const TransformObjectId = () =>
         // if targets are string, convert to ObjectId
         if (!isObjectId(targets)) {
           for (const key of Object.keys(targets)) {
-            transformed[key] = new ObjectId(targets[key])
+            if (ObjectId.isValid(targets[key])) {
+              transformed[key] = new ObjectId(targets[key])
+            }
           }
         } else {
           // When transforming to class instance,

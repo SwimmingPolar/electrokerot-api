@@ -14,11 +14,14 @@ import {
   MinLength,
   registerDecorator,
   ValidateNested,
-  ValidationArguments
+  ValidationArguments,
+  ValidationOptions
 } from 'class-validator'
+import { ObjectId } from 'mongodb'
+import { IsMongodbId } from '../../common/decorators/IsMongodbId'
+import { TransformObjectId } from '../../common/decorators/TransformObjectId.decorator'
 import { Category, MarketType } from '../../common/types'
 import { FilterStatus } from '../entities/build.entity'
-import { ValidationOptions } from 'joi'
 
 enum Reserved {
   reserved = 'reserved'
@@ -62,7 +65,7 @@ class PartInfo {
 
   @Min(0, { message: 'Count cannot be lower than 0' })
   @Max(32, { message: 'Count cannot be higher than 32' })
-  @LimitPartCountValue()
+  @LimitPartCountValue({ message: 'Count value is not appropriate' })
   @IsOptional()
   count?: number
 
@@ -170,7 +173,10 @@ function LimitPartCountValue(validationOptions?: ValidationOptions) {
       options: validationOptions,
       validator: {
         validate(value: any, args: ValidationArguments) {
-          const { count, category } = args.object as any
+          const { count, category } = args.object as {
+            count: number
+            category: keyof typeof PartCategory
+          }
 
           switch (category) {
             case 'cpu':
@@ -195,4 +201,10 @@ function LimitPartCountValue(validationOptions?: ValidationOptions) {
       }
     })
   }
+}
+
+export class UpdateBuildParam {
+  @IsMongodbId('buildId', { message: 'Invalid build id' })
+  @TransformObjectId()
+  buildId: ObjectId
 }

@@ -14,8 +14,6 @@ class Part {
   name: string
   count: number
   price: number
-
-  @Type(() => Filter)
   filters: Filter[]
 }
 
@@ -54,7 +52,6 @@ export class Build {
   @TransformObjectId()
   _id: ObjectId
 
-  @Exclude({ toPlainOnly: true })
   @TransformObjectId()
   owner: ObjectId
 

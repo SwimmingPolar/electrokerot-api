@@ -9,12 +9,12 @@ import {
   Post,
   Req
 } from '@nestjs/common'
-import { ObjectId } from 'mongodb'
 import { Private } from '../auth/decorator/guard.decorator'
-import { IsMongodbId } from '../common/decorators/IsMongodbId'
 import { User } from '../users/entities/User.entity'
 import { BuildsService } from './builds.service'
-import { UpdateBuildDto } from './dto/UpdateBuildDto'
+import { CloneBuildParam } from './dto/CloneBuildDto'
+import { DeleteBuildParam } from './dto/DeleteBuildDto'
+import { UpdateBuildDto, UpdateBuildParam } from './dto/UpdateBuildDto'
 
 @Private()
 @Controller('builds')
@@ -36,7 +36,7 @@ export class BuildsController {
   @HttpCode(201)
   async cloneBuild(
     @Req() { user }: { user: User },
-    @Param('buildId', IsMongodbId) buildId: ObjectId
+    @Param() { buildId }: CloneBuildParam
   ) {
     return await this.buildsService.cloneBuild(user, buildId)
   }
@@ -45,7 +45,7 @@ export class BuildsController {
   @HttpCode(204)
   async updateBuild(
     @Req() { user }: { user: User },
-    @Param('buildId', IsMongodbId) buildId: ObjectId,
+    @Param() { buildId }: UpdateBuildParam,
     @Body() updateBuildDto: UpdateBuildDto
   ) {
     return await this.buildsService.updateBuild(user, buildId, updateBuildDto)
@@ -55,7 +55,7 @@ export class BuildsController {
   @HttpCode(204)
   async deleteBuild(
     @Req() { user }: { user: User },
-    @Param('buildId', IsMongodbId) buildId: ObjectId
+    @Param() { buildId }: DeleteBuildParam
   ) {
     return await this.buildsService.deleteBuild(user, buildId)
   }
