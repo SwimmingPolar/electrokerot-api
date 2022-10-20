@@ -14,7 +14,7 @@ export class Synonyms {
 @Injectable()
 export class SynonymsRepository extends EntityRepository<Synonyms> {
   constructor(@InjectDb() private readonly db: Db) {
-    super(db, 'synonyms')
+    super(db, 'synonyms', Synonyms)
   }
 
   async findSynonyms(tokens: string[]) {

@@ -8,7 +8,7 @@ import { Part } from './entities/part.entity'
 @Injectable()
 export class PartsRepository extends EntityRepository<Part> {
   constructor(@InjectDb() private readonly db: Db) {
-    super(db, 'parts')
+    super(db, 'parts', Part)
   }
 
   async findPartByPartId(_id: ObjectId) {
@@ -88,21 +88,32 @@ export class PartsRepository extends EntityRepository<Part> {
 
     // if search engine doesn't return any result, then try to find with normal query
     return (
-      await this.find({
-        category,
-        'name.fullName': {
-          $regex: new RegExp(query, 'i')
+      await this.aggregate([
+        {
+          $match: {
+            category,
+            'name.fullName': {
+              $regex: query,
+              $options: 'i'
+            }
+          }
+        },
+        {
+          $sort: {
+            sortOrder: -1
+          }
+        },
+        {
+          $limit: 5
+        },
+        {
+          $project: {
+            _id: 0,
+            'name.fullName': 1
+          }
         }
-      })
-    )
-      .sort({ sortOrder: -1 })
-      .limit(5)
-      .project({
-        _id: 0,
-        'name.fullName': 1
-      })
-      .toArray()
-      .then((parts: any[]) => parts.map<string>(part => part.name.fullName))
+      ])
+    ).map(part => part.name.fullName)
   }
 
   /**

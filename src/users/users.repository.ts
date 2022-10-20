@@ -7,7 +7,7 @@ import { Role, User, UserStatus } from 'src/users/entities/User.entity'
 @Injectable()
 export class UsersRepository extends EntityRepository<User> {
   constructor(@InjectDb() private readonly db: Db) {
-    super(db, 'users')
+    super(db, 'users', User)
   }
 
   async createUser(user: User) {

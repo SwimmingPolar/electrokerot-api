@@ -2,7 +2,6 @@ import { Exclude, Type } from 'class-transformer'
 import { ObjectId } from 'mongodb'
 import { TransformObjectId } from 'src/common/decorators/TransformObjectId.decorator'
 
-@Exclude()
 export class Token {
   @TransformObjectId()
   _id: ObjectId

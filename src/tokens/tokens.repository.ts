@@ -7,7 +7,7 @@ import { Action, Token } from 'src/tokens/entities/Token.entity'
 @Injectable()
 export class TokensRepository extends EntityRepository<Token> {
   constructor(@InjectDb() private readonly db: Db) {
-    super(db, 'tokens')
+    super(db, 'tokens', Token)
   }
 
   async createToken(token: Token) {

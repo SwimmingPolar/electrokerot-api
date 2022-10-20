@@ -1,8 +1,10 @@
 import { Exclude } from 'class-transformer'
 import { ObjectId } from 'mongodb'
 import { Category, MarketType } from 'src/common/types'
+import { TransformObjectId } from '../../common/decorators/TransformObjectId.decorator'
 
 export class Part {
+  @TransformObjectId()
   _id: ObjectId
   pcode: string
   name: FullName

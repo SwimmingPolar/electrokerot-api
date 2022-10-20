@@ -7,7 +7,7 @@ import { Build } from './entities/build.entity'
 @Injectable()
 export class BuildsRepository extends EntityRepository<Build> {
   constructor(@InjectDb() private readonly db: Db) {
-    super(db, 'builds')
+    super(db, 'builds', Build)
   }
 
   async createBuild(build: Partial<Build>) {
