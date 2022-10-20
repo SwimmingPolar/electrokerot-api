@@ -4,6 +4,9 @@ import { Collection, MongoClient, ObjectId } from 'mongodb'
 import { getClientToken, MongoModule } from 'nest-mongodb'
 import supertestRequest from 'supertest'
 import { PartsStubs } from '../../../__test__/stubs/part.stub'
+import { SynonymsDocuments } from '../../../__test__/stubs/synonyms.stub'
+import { SynonymsModule } from '../../synonyms/synonyms.module'
+import { Synonyms } from '../../synonyms/synonyms.repository'
 import { Part } from '../entities/part.entity'
 import { PartsModule } from '../parts.module'
 import { PartsRepository } from '../parts.repository'
@@ -14,6 +17,7 @@ describe('integration test: PartsModule', () => {
   let request: ReturnType<typeof supertestRequest>
   let partsCollection: Collection<Part>
   let partsRepository: PartsRepository
+  let synonymsCollection: Collection<Synonyms>
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
@@ -22,7 +26,8 @@ describe('integration test: PartsModule', () => {
           globalThis.__MONGO_URI__,
           globalThis.__MONGO_DB_NAME__
         ),
-        PartsModule
+        PartsModule,
+        SynonymsModule
       ]
     }).compile()
 
@@ -51,6 +56,11 @@ describe('integration test: PartsModule', () => {
         insertOne: PartsStubs[key]
       }))
     )
+    // insert synonyms
+    synonymsCollection = client
+      .db(globalThis.__MONGO_DB_NAME__)
+      .collection('synonyms')
+    await synonymsCollection.insertMany(SynonymsDocuments)
   })
 
   afterAll(async () => {

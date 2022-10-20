@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing'
-import { Collection, Document, MongoClient, ObjectId } from 'mongodb'
+import { Collection, MongoClient, ObjectId } from 'mongodb'
 import { getClientToken, MongoModule } from 'nest-mongodb'
 import { PartsStubs } from '../../../__test__/stubs/part.stub'
 import { Category } from '../../common/types'

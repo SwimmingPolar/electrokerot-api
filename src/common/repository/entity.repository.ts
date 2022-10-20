@@ -51,7 +51,7 @@ export abstract class EntityRepository<T> {
     return await this.collection.countDocuments(filter)
   }
 
-  protected aggregate(pipeline: any[]) {
+  protected async aggregate(pipeline: any[]) {
     return this.collection.aggregate<T>(pipeline).toArray()
   }
 }

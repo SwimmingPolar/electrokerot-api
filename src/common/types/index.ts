@@ -35,3 +35,4 @@ export type CollectionName =
   | 'reviews'
   | 'tokens'
   | 'comments'
+  | 'synonyms'

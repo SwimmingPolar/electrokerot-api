@@ -9,6 +9,7 @@ import { PostsModule } from './posts/posts.module'
 import { ReviewsModule } from './reviews/reviews.module'
 import { TokensModule } from './tokens/tokens.module'
 import { UsersModule } from './users/users.module'
+import { SynonymsModule } from './synonyms/synonyms.module'
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { UsersModule } from './users/users.module'
     PostsModule,
     ReviewsModule,
     AuthModule,
-    TokensModule
+    TokensModule,
+    SynonymsModule
   ]
 })
 export class AppModule {}
