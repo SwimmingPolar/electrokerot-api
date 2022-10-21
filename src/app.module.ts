@@ -10,6 +10,7 @@ import { ReviewsModule } from './reviews/reviews.module'
 import { TokensModule } from './tokens/tokens.module'
 import { UsersModule } from './users/users.module'
 import { SynonymsModule } from './synonyms/synonyms.module'
+import { LifecycleModule } from './lifecycle/lifecycle.module'
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { SynonymsModule } from './synonyms/synonyms.module'
     ReviewsModule,
     AuthModule,
     TokensModule,
-    SynonymsModule
+    SynonymsModule,
+    LifecycleModule
   ]
 })
 export class AppModule {}
