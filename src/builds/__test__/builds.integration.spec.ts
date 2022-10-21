@@ -984,13 +984,29 @@ describe('integration test: BuildsModule', () => {
         const { email, password } = await createUser({ verify: true })
         await loginUser({ email, password })
 
-        // create build
+        // create 2 build
+        await requestAgent.post('/builds').expect(201)
         const { body: build } = await requestAgent.post('/builds').expect(201)
         // delete build
         await requestAgent.delete(`/builds/${build._id}`).expect(204)
         // get all builds info (should be 0)
         const { body: builds } = await requestAgent.get('/builds').expect(200)
-        expect(builds).toHaveLength(0)
+        expect(builds).toHaveLength(1)
+      })
+      test('try to delete the only build left', async () => {
+        const { email, password } = await createUser({ verify: true })
+        await loginUser({ email, password })
+
+        // create 1 build
+        const { body: build } = await requestAgent.post('/builds').expect(201)
+        // delete build
+        await requestAgent.delete(`/builds/${build._id}`).expect(204)
+        await requestAgent.delete(`/builds/${build._id}`).expect(204)
+        await requestAgent.delete(`/builds/${build._id}`).expect(204)
+        // get all builds info (should be 0)
+        const { body: builds } = await requestAgent.get('/builds').expect(200)
+        expect(builds).toHaveLength(1)
+        expect(build._id).toEqual(builds[0]._id)
       })
       test(`with someone else's build id`, async () => {
         const { email, password } = await createUser({ verify: true })

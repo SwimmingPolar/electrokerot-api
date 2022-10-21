@@ -21,28 +21,29 @@ export class AuthService {
   ) {}
   async login(loginDto: LoginDto) {
     const { email, password } = loginDto
-    const validUser = await this.usersRepository.findValidUserByEmail(email)
+    const user = await this.usersRepository.findValidUserByEmail(email)
 
     // there is no valid user with this email
-    if (!validUser) {
+    if (!user) {
       throw new UnauthorizedException()
     }
 
-    // user is found but is not verified or blocked
-    const isNotAllowedUser = [
-      UserStatus.blocked,
-      UserStatus.unverified
-    ].includes(validUser.status)
-    if (isNotAllowedUser) {
-      throw new ForbiddenException()
-    }
+    // user not verified or blocked
+    if (user.status !== UserStatus.active) {
+      if (user.status === UserStatus.unverified) {
+        throw new ForbiddenException('Verify your account')
+      }
+      if (user.status === UserStatus.blocked) {
+        throw new ForbiddenException('Your account is blocked')
+      }
 
-    const user = plainToInstance(User, validUser)
+      throw new ForbiddenException('Your account is not active')
+    }
 
     // user is found but password is not matched
     const isValidPassword = await user.comparePassword(password)
     if (!isValidPassword) {
-      throw new UnauthorizedException()
+      throw new UnauthorizedException('Invalid credentials')
     }
 
     return {

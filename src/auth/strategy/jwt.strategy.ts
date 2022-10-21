@@ -5,11 +5,10 @@ import {
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
-import { plainToInstance } from 'class-transformer'
 import { Request } from 'express'
 import { ObjectId } from 'mongodb'
 import { ExtractJwt, Strategy } from 'passport-jwt'
-import { User, UserStatus } from 'src/users/entities/User.entity'
+import { UserStatus } from 'src/users/entities/User.entity'
 import { UsersRepository } from 'src/users/users.repository'
 
 @Injectable()
@@ -27,20 +26,24 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: any) {
     const _id = new ObjectId(payload._id)
 
-    let user = await this.usersRepository.findValidUserByUserId(_id)
+    const user = await this.usersRepository.findValidUserByUserId(_id)
 
     // user not found
     if (!user) {
-      throw new UnauthorizedException()
+      throw new UnauthorizedException('User not found')
     }
 
     // user not verified or blocked
     if (user.status !== UserStatus.active) {
-      throw new ForbiddenException()
-    }
+      if (user.status === UserStatus.unverified) {
+        throw new ForbiddenException('Verify your account')
+      }
+      if (user.status === UserStatus.blocked) {
+        throw new ForbiddenException('Your account is blocked')
+      }
 
-    // transform to class instance
-    user = plainToInstance(User, user)
+      throw new ForbiddenException('Your account is not active')
+    }
 
     return user
   }
