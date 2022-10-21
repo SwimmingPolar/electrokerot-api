@@ -2,9 +2,9 @@ FROM node:18-alpine3.15
 
 # copy necessary files
 WORKDIR /app
-COPY package*.json .
+COPY package*.json ./
 RUN npm ci
-COPY . .
+COPY . ./
 
 # build for production
 RUN npm run build --production
