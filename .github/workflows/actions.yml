@@ -30,14 +30,14 @@ jobs:
         echo "DATABASE_NAME=$DATABASE_NAME" >> .env
         echo "JWT_SECRET=$JWT_SECRET" >> .env
         
-    - name: Run through test
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+#     - name: Run through test
+#       uses: actions/setup-node@v3
+#       with:
+#         node-version: ${{ matrix.node-version }}
+#         cache: 'npm'
+#     - run: npm ci
+#     - run: npm run build --if-present
+#     - run: npm test
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -58,7 +58,7 @@ jobs:
         ECR_REPOSITORY: swimmingpolar
       run: |
         docker build -t public.ecr.aws/p7h9v5n4/swimmingpolar/test:latest .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker push public.ecr.aws/p7h9v5n4/swimmingpolar/test:latest
 
     - name: Log out of Amazon ECR
       if: always()
