@@ -60,7 +60,7 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest .
-        docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
+        docker push --all-tags $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY
 
     - name: Log out of Amazon ECR
       if: always()
