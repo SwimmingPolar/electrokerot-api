@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb'
 import { IsMongodbId } from '../../common/decorators/IsMongodbId'
 import { TransformObjectId } from '../../common/decorators/TransformObjectId.decorator'
 
-export class PartsIdsParam {
+export class PartsIdsQuery {
   @Transform(({ value }) => value.split(','))
   @ValidateNested({ each: true })
   @IsMongodbId('ids', { message: 'Invalid part id' })

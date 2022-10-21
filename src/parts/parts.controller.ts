@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common'
 import { plainToInstance } from 'class-transformer'
-import { PartsIdsParam } from './dto/GetPartsByIdsDto'
+import { PartsIdsQuery } from './dto/GetPartsByIdsDto'
 import { SearchPartsQuery } from './dto/SearchPartsDto'
 import { SearchQueriesQuery } from './dto/SearchQueriesDto'
 import { Part } from './entities/part.entity'
@@ -9,6 +9,11 @@ import { PartsService } from './parts.service'
 @Controller('parts')
 export class PartsController {
   constructor(private readonly partsService: PartsService) {}
+
+  @Get()
+  async getPartsByIds(@Query() { ids }: PartsIdsQuery) {
+    return await this.partsService.getPartsByIds(ids)
+  }
 
   @Get('searchQueries')
   async getSearchQueries(@Query() searchQueriesQuery: SearchQueriesQuery) {
@@ -21,11 +26,5 @@ export class PartsController {
       Part,
       await this.partsService.searchParts(searchPartsQuery)
     )
-  }
-
-  // controller order matters
-  @Get(':ids')
-  async getPartsByIds(@Param() { ids }: PartsIdsParam) {
-    return await this.partsService.getPartsByIds(ids)
   }
 }

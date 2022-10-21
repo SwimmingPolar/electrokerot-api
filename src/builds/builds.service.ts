@@ -10,6 +10,7 @@ import { PartsRepository } from '../parts/parts.repository'
 import { User } from '../users/entities/User.entity'
 import { BuildsRepository } from './builds.repository'
 import { UpdateBuildDto } from './dto/UpdateBuildDto'
+import { Build } from './entities/build.entity'
 
 @Injectable()
 export class BuildsService {
@@ -98,8 +99,9 @@ export class BuildsService {
       buildId,
       userId
     )
+
     // if build not found, throw 404
-    if (!targetBuild) {
+    if (buildId !== undefined && !targetBuild) {
       throw new NotFoundException('Build not found')
     }
 
@@ -186,7 +188,7 @@ export class BuildsService {
             // part's category doesn't match the category in the request
             // throw 400
             if (!part || part?.category !== category) {
-              throw new BadRequestException('Invalid partId')
+              throw new BadRequestException('Invalid category or partId')
             }
             // if partId is valid, reset name and price field
             // and set count as default of 1 or given value
@@ -196,14 +198,12 @@ export class BuildsService {
           }
           // if partId is not given, it means changing part's info (name, count, price)
           else {
-            // if name is given, then remove partId from the build
+            // if name is given, then remove previously saved partId from the build
             if (name) {
               partId = undefined
             }
-            // @Issue: partId should be ObjectId when fetched from db
-            // but for some reason it's string, so we need to convert it ObjectId if necessary
-            // the type of partId will still be ObjectId in Build entity class
-            partId = partId ?? targetBuild?.parts?.[category]?.partId
+            partId =
+              partId ?? targetBuild?.parts?.[category]?.partId?.toHexString()
             // when partId is given, name and price are not needed (can't be changed)
             if (partId) {
               if (name !== undefined || price !== undefined) {
@@ -243,6 +243,10 @@ export class BuildsService {
   }
 
   async deleteBuild({ _id: userId }: User, buildId: ObjectId) {
+    const buildCount = await this.buildsRepository.countBuildsByUserId(userId)
+    if (buildCount <= 1) {
+      return
+    }
     const targetBuild = await this.buildsRepository.findBuildByBuildIdAndUserId(
       buildId,
       userId

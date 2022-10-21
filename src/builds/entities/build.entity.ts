@@ -1,4 +1,4 @@
-import { Exclude, Type } from 'class-transformer'
+import { Type } from 'class-transformer'
 import { ObjectId } from 'mongodb'
 import { Category, MarketType } from 'src/common/types'
 import { TransformObjectId } from '../../common/decorators/TransformObjectId.decorator'
@@ -43,7 +43,10 @@ class Parts {
   case: Part
 
   @Type(() => Part)
-  cooler: Part
+  cpuCooler: Part
+
+  @Type(() => Part)
+  systemCooler: Part
 
   @Type(() => Part)
   reserved: Part

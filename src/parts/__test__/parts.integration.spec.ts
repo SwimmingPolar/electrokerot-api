@@ -73,7 +73,7 @@ describe('integration test: PartsModule', () => {
       test('with one valid partId', async () => {
         const { cpu } = PartsStubs
         const { body } = await request
-          .get(`/parts/${cpu._id.toHexString()}`)
+          .get(`/parts?ids=${cpu._id.toHexString()}`)
           .expect(200)
 
         // with 1 request, we should get 1 part
@@ -89,7 +89,7 @@ describe('integration test: PartsModule', () => {
           part._id.toHexString()
         )
         const { body } = await request
-          .get(`/parts/${partIds.join(',')}`)
+          .get(`/parts?ids=${partIds.join(',')}`)
           .expect(200)
 
         // with 3 requests, we should get 3 parts
@@ -117,14 +117,14 @@ describe('integration test: PartsModule', () => {
           PartsStubs[key]._id.toHexString()
         )
 
-        await request.get(`/parts/${partIds.join(',')}`).expect(200)
+        await request.get(`/parts?ids=${partIds.join(',')}`).expect(200)
       })
       // test with partIds that are not in the database
       test('with one valid partId and another one with valid partId but not in the db', async () => {
         const { cpu } = PartsStubs
         const { body } = await request
           .get(
-            `/parts/${cpu._id.toHexString()},${new ObjectId().toHexString()}`
+            `/parts?ids=${cpu._id.toHexString()},${new ObjectId().toHexString()}`
           )
           .expect(200)
 
@@ -138,11 +138,11 @@ describe('integration test: PartsModule', () => {
     })
     describe('Status 400', () => {
       test('with invalid partId', async () => {
-        await request.get('/parts/123').expect(400)
+        await request.get('/parts?ids=123').expect(400)
       })
       test('with one valid partId and other with invalid partId', async () => {
         const { cpu } = PartsStubs
-        await request.get(`/parts/${cpu._id.toHexString()},123`).expect(400)
+        await request.get(`/parts?ids=${cpu._id.toHexString()},123`).expect(400)
       })
       test('with 10 valid partIds plus another which exceeds the limit of max ids in one request', async () => {
         // ids will be 10 valid ids
@@ -152,7 +152,7 @@ describe('integration test: PartsModule', () => {
         // plus one more id
         partIds.push(new ObjectId().toHexString())
 
-        await request.get(`/parts/${partIds.join(',')}`).expect(400)
+        await request.get(`/parts?ids=${partIds.join(',')}`).expect(400)
       })
     })
   })
