@@ -71,6 +71,9 @@ export abstract class EntityRepository<T> {
   }
 
   protected async aggregate(pipeline: any[]) {
-    return await this.collection.aggregate<T>(pipeline).toArray()
+    return plainToInstance(
+      this.classConstructor,
+      await this.collection.aggregate<T>(pipeline).toArray()
+    )
   }
 }

@@ -5,11 +5,10 @@ import {
   UnauthorizedException
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { plainToInstance } from 'class-transformer'
 import { LoginDto } from 'src/auth/dto/LoginDto'
 import { Action } from 'src/tokens/entities/Token.entity'
 import { TokensService } from 'src/tokens/tokens.service'
-import { User, UserStatus } from 'src/users/entities/User.entity'
+import { UserStatus } from 'src/users/entities/User.entity'
 import { UsersRepository } from '../users/users.repository'
 
 @Injectable()
@@ -114,9 +113,7 @@ export class AuthService {
     }
 
     // find valid user (active, blocked, unverified)
-    let user = await this.usersRepository.findValidUserByUserId(owner)
-    // transform to class instance
-    user = plainToInstance(User, user)
+    const user = await this.usersRepository.findValidUserByUserId(owner)
     // assign new password
     Object.assign(user, { password })
     // hash password
