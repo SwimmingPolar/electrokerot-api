@@ -16,6 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Set .env file
       env:
         PORT: ${{ secrets.PORT }}
@@ -28,17 +29,12 @@ jobs:
         echo "DATABASE_NAME=$DATABASE_NAME" >> .env
         echo "JWT_SECRET=$JWT_SECRET" >> .env
         
-    - name: Step 1
-      run: |
-        pwd
-        ls -al
-    
-#     - name: Use Node.js ${{ matrix.node-version }}
-#       uses: actions/setup-node@v3
-#       with:
-#         node-version: ${{ matrix.node-version }}
-#         cache: 'npm'
-#     - run: npm ci
-#     - run: npm run build --if-present
-#     - run: npm test
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
 
