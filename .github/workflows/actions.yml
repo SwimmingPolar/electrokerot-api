@@ -15,9 +15,10 @@ jobs:
         node-version: [16.x]
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
     
-    - name: Set .env file
+    - name: Set up .env file
       env:
         PORT: ${{ secrets.PORT }}
         DATABASE_URI: ${{ secrets.DATABASE_URI }}
@@ -29,7 +30,7 @@ jobs:
         echo "DATABASE_NAME=$DATABASE_NAME" >> .env
         echo "JWT_SECRET=$JWT_SECRET" >> .env
         
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Run through test
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
@@ -37,4 +38,27 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Login to Amazon ECR Public
+      id: login-ecr-public
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registry-type: public
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build and push docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.AWS_PUBLIC_REGISTRY }}/electrokerot-web-dev:latest
+    
 
