@@ -57,7 +57,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: swimmingpolar
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+        docker build -t public.ecr.aws/p7h9v5n4/swimmingpolar/test:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
     - name: Log out of Amazon ECR
