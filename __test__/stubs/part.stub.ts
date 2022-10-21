@@ -5221,7 +5221,7 @@ export const PartsStubs = {
       ]
     }
   },
-  cpuColler: {
+  cpuCooler: {
     _id: new ObjectId(),
     pcode: '10467378',
     category: 'cooler',
@@ -6004,7 +6004,7 @@ export const PartsStubs = {
       ]
     }
   },
-  systemColler: {
+  systemCooler: {
     _id: new ObjectId(),
     pcode: '17141027',
     category: 'cooler',

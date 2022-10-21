@@ -502,7 +502,7 @@ components:
           format: date-time
         parts:
           type: object
-          description: cpu, mainboard, ...
+          description: cpu, motherboard, ...
           additionalProperties:
             properties:
               name:
@@ -544,7 +544,7 @@ components:
               example: sha1 hash
             lowestPrice:
               type: object
-              description: cpu, mainboard, ...
+              description: cpu, motherboard, ...
               additionalProperties:
                 properties:
                   marketType:
@@ -554,7 +554,7 @@ components:
                     format: uri
             leastPackage:
               type: object
-              description: cpu, mainboard, ...
+              description: cpu, motherboard, ...
               additionalProperties:
                 properties:
                   marketType:
@@ -566,7 +566,7 @@ components:
       type: string
       enum:
         - cpu
-        - mainboard
+        - motherboard
         - memory
         - graphics
         - ssd
@@ -604,7 +604,7 @@ components:
           type: array
           items:
             type: object
-            description: cpu, mainboard, ...
+            description: cpu, motherboard, ...
             additionalProperties:
               type: object
               properties:
@@ -701,7 +701,7 @@ components:
                 default: false
               parts:
                 type: object
-                description: cpu, mainboard, ...
+                description: cpu, motherboard, ...
                 additionalProperties:
                   properties:
                     name:
@@ -745,7 +745,7 @@ components:
                     example: sha1 hash
                   lowestPrice:
                     type: object
-                    description: cpu, mainboard, ...
+                    description: cpu, motherboard, ...
                     additionalProperties:
                       properties:
                         marketType:
@@ -755,7 +755,7 @@ components:
                           format: uri
                   leastPackage:
                     type: object
-                    description: cpu, mainboard, ...
+                    description: cpu, motherboard, ...
                     additionalProperties:
                       properties:
                         marketType:
@@ -821,7 +821,7 @@ components:
                 type: array
                 items:
                   type: object
-                  description: cpu, mainboard, ...
+                  description: cpu, motherboard, ...
                   additionalProperties:
                     type: object
                     properties:

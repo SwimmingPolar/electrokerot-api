@@ -17,7 +17,7 @@ type FullName {
 
 enum PartCategory {
   cpu
-  mainboard
+  motherboard
   memory
   graphics
   ssd
@@ -58,16 +58,16 @@ type Prices {
 // Build Model //
 /////////////////
 type Parts {
-  cpu       Build_PartObject
-  mainboard Build_PartObject
-  memory    Build_PartObject
-  graphics  Build_PartObject
-  ssd       Build_PartObject
-  hdd       Build_PartObject
-  power     Build_PartObject
-  case      Build_PartObject
-  cooler    Build_PartObject[]
-  reserved  Build_PartObject
+  cpu         Build_PartObject
+  motherboard Build_PartObject
+  memory      Build_PartObject
+  graphics    Build_PartObject
+  ssd         Build_PartObject
+  hdd         Build_PartObject
+  power       Build_PartObject
+  case        Build_PartObject
+  cooler      Build_PartObject[]
+  reserved    Build_PartObject
 }
 
 type Build_PartObject {
@@ -97,15 +97,15 @@ type Optimization {
 }
 
 type OptimizedBuild {
-  cpu       OptimizedBuild_PartObject
-  mainboard OptimizedBuild_PartObject
-  memory    OptimizedBuild_PartObject
-  graphics  OptimizedBuild_PartObject
-  ssd       OptimizedBuild_PartObject
-  hdd       OptimizedBuild_PartObject
-  power     OptimizedBuild_PartObject
-  case      OptimizedBuild_PartObject
-  cooler    OptimizedBuild_PartObject[]
+  cpu         OptimizedBuild_PartObject
+  motherboard OptimizedBuild_PartObject
+  memory      OptimizedBuild_PartObject
+  graphics    OptimizedBuild_PartObject
+  ssd         OptimizedBuild_PartObject
+  hdd         OptimizedBuild_PartObject
+  power       OptimizedBuild_PartObject
+  case        OptimizedBuild_PartObject
+  cooler      OptimizedBuild_PartObject[]
 }
 
 type OptimizedBuild_PartObject {
@@ -137,15 +137,15 @@ enum Status {
 }
 
 type UserBuild {
-  cpu       String   @db.ObjectId
-  mainboard String   @db.ObjectId
-  memory    String   @db.ObjectId
-  graphics  String   @db.ObjectId
-  ssd       String   @db.ObjectId
-  hdd       String   @db.ObjectId
-  power     String   @db.ObjectId
-  case      String   @db.ObjectId
-  cooler    String[] @db.ObjectId
+  cpu         String   @db.ObjectId
+  motherboard String   @db.ObjectId
+  memory      String   @db.ObjectId
+  graphics    String   @db.ObjectId
+  ssd         String   @db.ObjectId
+  hdd         String   @db.ObjectId
+  power       String   @db.ObjectId
+  case        String   @db.ObjectId
+  cooler      String[] @db.ObjectId
 }
 
 type Notification {
@@ -173,15 +173,15 @@ type Vote {
 }
 
 type PostBuild {
-  cpu       Post_BuildPartObject
-  mainboard Post_BuildPartObject
-  memory    Post_BuildPartObject
-  graphics  Post_BuildPartObject
-  ssd       Post_BuildPartObject
-  hdd       Post_BuildPartObject
-  power     Post_BuildPartObject
-  case      Post_BuildPartObject
-  cooler    Post_BuildPartObject[]
+  cpu         Post_BuildPartObject
+  motherboard Post_BuildPartObject
+  memory      Post_BuildPartObject
+  graphics    Post_BuildPartObject
+  ssd         Post_BuildPartObject
+  hdd         Post_BuildPartObject
+  power       Post_BuildPartObject
+  case        Post_BuildPartObject
+  cooler      Post_BuildPartObject[]
 }
 
 type Post_BuildPartObject {
