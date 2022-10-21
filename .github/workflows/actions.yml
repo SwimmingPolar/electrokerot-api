@@ -28,15 +28,8 @@ jobs:
         echo "JWT_SECRET=$JWT_SECRET" >> .env
         
     - name: Step 1
-    - run: |
-        if [ "${{ secrets.PORT }}" == "5611" ]; then
-          echo "Match"
-        else
-          echo "Not matched"
-        fi
-    - run: |
+      run: |
         pwd
-    - run: |
         ls -al
         
     
