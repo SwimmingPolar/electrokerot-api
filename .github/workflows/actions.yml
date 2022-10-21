@@ -15,20 +15,30 @@ jobs:
         node-version: [16.x]
 
     steps:
-    - name: Set .env file
-      env:
-        PORT: ${{ secrets.PORT }}
-        DATABASE_URI: ${{ secrets.DATABASE_URI }}
-        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      run: |
-        echo "PORT=$PORT" >> .env
-        echo "DATABASE_URI=$DATABASE_URI" >> .env
-        echo "DATABASE_NAME=$DATABASE_NAME" >> .env
-        echo "JWT_SECRET=$JWT_SECRET" >> .env
+#     - name: Set .env file
+#       env:
+#         PORT: ${{ secrets.PORT }}
+#         DATABASE_URI: ${{ secrets.DATABASE_URI }}
+#         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+#         JWT_SECRET: ${{ secrets.JWT_SECRET }}
+#       run: |
+#         echo "PORT=$PORT" >> .env
+#         echo "DATABASE_URI=$DATABASE_URI" >> .env
+#         echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+#         echo "JWT_SECRET=$JWT_SECRET" >> .env
+        
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        file_name: .env
+        envkey_PORT: ${{ secrets.PORT }}
+        envkey_DATABASE_URI: ${{ secrets.DATABASE_URI }}
+        envkey_DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+        envkey_JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        
     - name: Step 1
       run: |
-        if [ "${{ secrets.JWT_SECRET }}" == "33c887679af6b8c0075636f6000ce06fade5a6350642425bb02ab31c0b42ab1847e76f9d8b07c144421f3948c0b2619e821413282b659d26f37895ecac248065697f0e6b73f50cfb7fcbea1f938204d94d002adeb5b0dda3ec7c37a22c5083e26233022230a3e5a6d89ce85bc1782f52247712c677affd156b175c32f9e47342" ]; then
+        if [ "${{ secrets.PORT }}" == "5611" ]; then
           echo "Match"
         else
           echo "Not matched"
