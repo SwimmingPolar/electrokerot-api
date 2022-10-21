@@ -52,13 +52,15 @@ jobs:
       with:
         registry-type: public
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push docker image to Amazon ECR Public
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: swimmingpolar
+        REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+        REGISTRY_ALIAS: p7h9v5n4
+        REPOSITORY: swimmingpolar
+        IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t public.ecr.aws/p7h9v5n4/swimmingpolar/test:latest .
-        docker push public.ecr.aws/p7h9v5n4/swimmingpolar/test:latest
+        docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
+        docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
 
     - name: Log out of Amazon ECR
       if: always()
