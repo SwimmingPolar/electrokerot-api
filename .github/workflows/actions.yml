@@ -14,6 +14,18 @@ jobs:
         node-version: [16.x]
 
     steps:
+    - name: Setup .env file
+      env:
+        PORT: ${{ secrets.PORT }}
+        DATABASE_URI: ${{ secrets.DATABASE_URI }}
+        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      run: |
+        echo "PORT=$PORT" >> .env
+        echo "DATABASE_URI=$DATABASE_URI" >> .env
+        echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+        echo "JWT_SECRET=$JWT_SECRET" >> .env
+    
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
