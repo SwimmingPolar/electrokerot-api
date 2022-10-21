@@ -26,7 +26,13 @@ jobs:
         echo "DATABASE_URI=$DATABASE_URI" >> .env
         echo "DATABASE_NAME=$DATABASE_NAME" >> .env
         echo "JWT_SECRET=$JWT_SECRET" >> .env
-        cat .env
+    - name: Step 1
+      run: |
+        if [ "${{ secrets.PORT }}" == "5611" ]; then
+          echo "Match"
+        else
+          echo "Not matched"
+        fi
     
 #     - uses: actions/checkout@v3
 #     - name: Use Node.js ${{ matrix.node-version }}
