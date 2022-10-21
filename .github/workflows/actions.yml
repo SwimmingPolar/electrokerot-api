@@ -15,34 +15,30 @@ jobs:
         node-version: [16.x]
 
     steps:
-#     - name: Set .env file
-#       env:
-#         PORT: ${{ secrets.PORT }}
-#         DATABASE_URI: ${{ secrets.DATABASE_URI }}
-#         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-#         JWT_SECRET: ${{ secrets.JWT_SECRET }}
-#       run: |
-#         echo "PORT=$PORT" >> .env
-#         echo "DATABASE_URI=$DATABASE_URI" >> .env
-#         echo "DATABASE_NAME=$DATABASE_NAME" >> .env
-#         echo "JWT_SECRET=$JWT_SECRET" >> .env
-        
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1.3
-      with:
-        file_name: .env
-        envkey_PORT: ${{ secrets.PORT }}
-        envkey_DATABASE_URI: ${{ secrets.DATABASE_URI }}
-        envkey_DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        envkey_JWT_SECRET: ${{ secrets.JWT_SECRET }}
+    - name: Set .env file
+      env:
+        PORT: ${{ secrets.PORT }}
+        DATABASE_URI: ${{ secrets.DATABASE_URI }}
+        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      run: |
+        echo "PORT=$PORT" >> .env
+        echo "DATABASE_URI=$DATABASE_URI" >> .env
+        echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+        echo "JWT_SECRET=$JWT_SECRET" >> .env
         
     - name: Step 1
-      run: |
+    - run: |
         if [ "${{ secrets.PORT }}" == "5611" ]; then
           echo "Match"
         else
           echo "Not matched"
         fi
+    - run: |
+        pwd
+    - run: |
+        ls -al
+        
     
 #     - uses: actions/checkout@v3
 #     - name: Use Node.js ${{ matrix.node-version }}
