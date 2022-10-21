@@ -15,71 +15,76 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up .env file
-        env:
-          PORT: ${{ secrets.PORT }}
-          DATABASE_URI: ${{ secrets.DATABASE_URI }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      - name: GitHub Tag Name example
         run: |
-          echo "PORT=$PORT" >> .env
-          echo "DATABASE_URI=$DATABASE_URI" >> .env
-          echo "DATABASE_NAME=$DATABASE_NAME" >> .env
-          echo "JWT_SECRET=$JWT_SECRET" >> .env
+          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+        # - name: Checkout repository
+        #   uses: actions/checkout@v3
 
-      - name: Run through test
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+        # - name: Set up .env file
+        #   env:
+        #     PORT: ${{ secrets.PORT }}
+        #     DATABASE_URI: ${{ secrets.DATABASE_URI }}
+        #     DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+        #     JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        #   run: |
+        #     echo "PORT=$PORT" >> .env
+        #     echo "DATABASE_URI=$DATABASE_URI" >> .env
+        #     echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+        #     echo "JWT_SECRET=$JWT_SECRET" >> .env
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: us-east-1
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        # - name: Run through test
+        #   uses: actions/setup-node@v3
+        #   with:
+        #     node-version: ${{ matrix.node-version }}
+        #     cache: 'npm'
+        # - run: npm ci
+        # - run: npm run build --if-present
+        # - run: npm test
 
-      - name: Login to Amazon ECR Public
-        id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registry-type: public
+        # - name: Configure AWS Credentials
+        #   uses: aws-actions/configure-aws-credentials@v1
+        #   with:
+        #     aws-region: us-east-1
+        #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      #     - name: Build, tag, and push docker image to Amazon ECR Public
-      #       env:
-      #         REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
-      #         REGISTRY_ALIAS: ${{ secrets.REGISTRY_ALIAS }}
-      #         REPOSITORY: swimmingpolar
-      #         IMAGE_TAG: ${{ github.sha }}
-      #       run: |
-      #         docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest .
-      #         docker push --all-tags $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY
-      - name: Set up Docker Buildx
-        if: contains(github.ref, 'deploy')
-        uses: docker/setup-buildx-action@v2
+        # - name: Login to Amazon ECR Public
+        #   id: login-ecr-public
+        #   uses: aws-actions/amazon-ecr-login@v1
+        #   with:
+        #     registry-type: public
 
-      - name: Build and push
-        if: contains(github.ref, 'deploy')
-        env:
-          REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
-          REGISTRY_ALIAS: ${{ secrets.REGISTRY_ALIAS }}
-          REPOSITORY: swimmingpolar
-          IMAGE_TAG: ${{ github.sha }}
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
-            $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest
+        #     - name: Build, tag, and push docker image to Amazon ECR Public
+        #       env:
+        #         REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+        #         REGISTRY_ALIAS: ${{ secrets.REGISTRY_ALIAS }}
+        #         REPOSITORY: swimmingpolar
+        #         IMAGE_TAG: ${{ github.sha }}
+        #       run: |
+        #         docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest .
+        #         docker push --all-tags $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY
 
-      - name: Log out of Amazon ECR
-        run: docker logout ${{ steps.login-ecr-public.outputs.registry }}
+        # - name: Set up Docker Buildx
+        #   if: contains(github.ref, 'deploy')
+        #   uses: docker/setup-buildx-action@v2
+
+        # - name: Build and push
+        #   if: contains(github.ref, 'deploy')
+        #   env:
+        #     REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+        #     REGISTRY_ALIAS: ${{ secrets.REGISTRY_ALIAS }}
+        #     REPOSITORY: swimmingpolar
+        #     IMAGE_TAG: ${{ github.sha }}
+        #   uses: docker/build-push-action@v2
+        #   with:
+        #     context: .
+        #     file: ./Dockerfile
+        #     push: true
+        #     tags: |
+        #       $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
+        #       $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest
+
+        # - name: Log out of Amazon ECR
+        #   run: docker logout ${{ steps.login-ecr-public.outputs.registry }}
