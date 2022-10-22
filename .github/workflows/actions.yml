@@ -15,10 +15,15 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - name: GitHub Tag Name example
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Check output
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
         run: |
-          echo "Tag Name: ${{ github.ref }}"
-          echo "Tag name from github.ref_name: ${{  github.ref }}"
+          echo $RELEASE_VERSION
+          echo ${{ steps.vars.outputs.tag }}
         # - name: Checkout repository
         #   uses: actions/checkout@v3
 
