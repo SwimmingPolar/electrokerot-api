@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Set output
         run: |
-          echo ${{ github.ref }}
+          echo ${{ github.ref_name }}
         # - name: Checkout repository
         #   uses: actions/checkout@v3
 
