@@ -78,8 +78,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
-            $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest
+            ${{ env.REGISTRY }}/${{ env.REGISTRY_ALIAS }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
+            ${{ env.REGISTRY }}/${{ env.REGISTRY_ALIAS }}/${{ env.REPOSITORY }}:latest
 
       - name: Log out of Amazon ECR
         run: docker logout ${{ steps.login-ecr-public.outputs.registry }}
