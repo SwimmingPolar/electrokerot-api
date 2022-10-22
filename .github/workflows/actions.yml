@@ -3,7 +3,7 @@ name: Node.js CI
 on:
   push:
     tags:
-      - 'dev-release-*'
+      - '*'
 
 jobs:
   build:
@@ -29,14 +29,13 @@ jobs:
           echo "DATABASE_NAME=$DATABASE_NAME" >> .env
           echo "JWT_SECRET=$JWT_SECRET" >> .env
 
-      # - name: Run through test
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-      #     cache: 'npm'
-      # - run: npm ci
-      # - run: npm run build --if-present
-      # - run: npm test
+      - name: Run through test
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test
 
       - name: Configure AWS Credentials
         if: startsWith(github.ref_name, 'dev-release-')
@@ -52,16 +51,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         with:
           registry-type: public
-
-          # - name: Build, tag, and push docker image to Amazon ECR Public
-          #   env:
-          #     REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
-          #     REGISTRY_ALIAS: ${{ secrets.REGISTRY_ALIAS }}
-          #     REPOSITORY: swimmingpolar
-          #     IMAGE_TAG: ${{ github.sha }}
-          #   run: |
-          #     docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest .
-          #     docker push --all-tags $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY
 
       - name: Set up Docker Buildx
         if: startsWith(github.ref_name, 'dev-release-')
