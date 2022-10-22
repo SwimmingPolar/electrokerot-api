@@ -20,6 +20,7 @@ jobs:
       - name: Set output
         run: |
           echo ${{ github.ref_name }}
+          echo ${{ github.ref }}
         # - name: Checkout repository
         #   uses: actions/checkout@v3
 
