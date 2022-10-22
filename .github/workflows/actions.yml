@@ -39,6 +39,7 @@ jobs:
       # - run: npm test
 
       - name: Configure AWS Credentials
+        if: startsWith(github.ref_name, 'dev-release-')
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: us-east-1
@@ -46,6 +47,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Login to Amazon ECR Public
+        if: startsWith(github.ref_name, 'dev-release-')
         id: login-ecr-public
         uses: aws-actions/amazon-ecr-login@v1
         with:
@@ -65,21 +67,38 @@ jobs:
         if: startsWith(github.ref_name, 'dev-release-')
         uses: docker/setup-buildx-action@v2
 
+      - name: Cache Docker layers
+        if: startsWith(github.ref_name, 'dev-release-')
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
       - name: Build and push
         if: startsWith(github.ref_name, 'dev-release-')
         env:
           REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
           REGISTRY_ALIAS: ${{ secrets.REGISTRY_ALIAS }}
-          REPOSITORY: swimmingpolar
+          REPOSITORY: test
           IMAGE_TAG: ${{ github.sha }}
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.REGISTRY_ALIAS }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
             ${{ env.REGISTRY }}/${{ env.REGISTRY_ALIAS }}/${{ env.REPOSITORY }}:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+
+      - name: Move cache
+        if: startsWith(github.ref_name, 'dev-release-')
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
       - name: Log out of Amazon ECR
+        if: startsWith(github.ref_name, 'dev-release-')
         run: docker logout ${{ steps.login-ecr-public.outputs.registry }}
