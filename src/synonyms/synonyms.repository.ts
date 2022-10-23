@@ -9,7 +9,10 @@ export class Synonyms {
   _id: ObjectId
   mappingType: MappingType
   synonyms: string[]
+  synonymType: SynonymType
 }
+
+export type SynonymType = 'vendor' | 'part'
 
 @Injectable()
 export class SynonymsRepository extends EntityRepository<Synonyms> {

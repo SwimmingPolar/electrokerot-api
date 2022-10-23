@@ -1,31 +1,39 @@
 import { ObjectId } from 'mongodb'
-import { MappingType } from '../../src/synonyms/synonyms.repository'
+import {
+  MappingType,
+  SynonymType
+} from '../../src/synonyms/synonyms.repository'
 
 export const SynonymsDocuments = [
   {
     _id: new ObjectId(),
     mappingType: 'equivalent' as MappingType,
-    synonyms: ['asus', '에이수스', '에이서스', '아수스']
+    synonyms: ['asus', '에이수스', '에이서스', '아수스'],
+    synonymType: 'vendor' as SynonymType
   },
   {
     _id: new ObjectId(),
     mappingType: 'equivalent' as MappingType,
-    synonyms: ['zotac', 'ZOTAC', '조탁', '조택']
+    synonyms: ['zotac', 'ZOTAC', '조탁', '조택'],
+    synonymType: 'vendor' as SynonymType
   },
   {
     _id: new ObjectId(),
     mappingType: 'equivalent' as MappingType,
-    synonyms: ['GAMING', '게이밍']
+    synonyms: ['GAMING', '게이밍'],
+    synonymType: 'word' as SynonymType
   },
   {
     _id: new ObjectId(),
     mappingType: 'equivalent' as MappingType,
-    synonyms: ['strix', '스트릭스']
+    synonyms: ['strix', '스트릭스'],
+    synonymType: 'vendor' as SynonymType
   },
   {
     _id: new ObjectId(),
     mappingType: 'equivalent' as MappingType,
-    synonyms: ['rog', '로그']
+    synonyms: ['rog', '로그'],
+    synonymType: 'word' as SynonymType
   }
 ]
 

@@ -38,22 +38,35 @@ describe('unit test: Synonyms Module', () => {
   })
 
   describe('replaceQueryWithSynonyms', () => {
-    it('should return query sotring replaced with appropriate synonyms', async () => {
+    it('should return query string replaced with appropriate synonyms', async () => {
       // #1
       let original = 'ZOTAC GAMING 지포스 RTX 4090'.toLowerCase()
       let incoming = '조택 게이밍 지포스 RTX 4090'
-      let result = (
-        await synonymsService.replaceQueryWithSynonyms(incoming)
-      )?.toLowerCase()
-      expect(result).toEqual(original)
+      const { query: query1 } = await synonymsService.replaceQueryWithSynonyms(
+        incoming
+      )
+      expect(query1?.toLocaleLowerCase()).toEqual(original)
 
       // #2
       original = 'ASUS ROG STRIX LC II A B C'.toLowerCase()
       incoming = '아수스 로그 스트릭스 LC II A B C'
-      result = (
-        await synonymsService.replaceQueryWithSynonyms(incoming)
-      )?.toLowerCase()
-      expect(result).toEqual(original)
+      const { query: query2 } = await synonymsService.replaceQueryWithSynonyms(
+        incoming
+      )
+
+      expect(query2?.toLowerCase()).toEqual(original)
+    })
+
+    it('should return object containing query string and vendors list', async () => {
+      const original = 'ZOTAC GAMING 지포스 RTX 4090'.toLowerCase()
+      const incoming = '조택 게이밍 지포스 RTX 4090'
+      const { query, vendors } = await synonymsService.replaceQueryWithSynonyms(
+        incoming
+      )
+
+      expect(query?.toLowerCase()).toEqual(original)
+      expect(vendors).toHaveLength(1)
+      expect(vendors[0]).toEqual('zotac')
     })
   })
 })

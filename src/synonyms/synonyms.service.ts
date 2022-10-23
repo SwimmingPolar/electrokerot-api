@@ -7,7 +7,7 @@ export class SynonymsService {
 
   async replaceQueryWithSynonyms(query: string) {
     if (!query) {
-      return query
+      return { query, vendorsFilter: undefined }
     }
 
     const tokens = query
@@ -22,19 +22,36 @@ export class SynonymsService {
       .split(',')
 
     const synonyms = await this.synonymsRepository.findSynonyms(tokens)
+    const vendors: string[] = []
     let replacementCount = synonyms?.length ?? 0
 
     tokens.forEach(token => {
       synonyms.forEach(synonym => {
         if (synonym.synonyms.includes(token)) {
           query = query.replace(token, synonym.synonyms[0])
+
+          if (synonym.synonymType === 'vendor') {
+            vendors.push(synonym.synonyms[0])
+          }
+
           replacementCount--
           if (replacementCount === 0) {
-            return query
+            return {
+              query,
+              vendorsFilter: {
+                $in: vendors.map(vendor => new RegExp(vendor, 'i'))
+              }
+            }
           }
         }
       })
     })
-    return query
+
+    return {
+      query,
+      vendorsFilter: {
+        $in: vendors.map(vendor => new RegExp(vendor, 'i'))
+      }
+    }
   }
 }

@@ -21,8 +21,16 @@ export class PartsRepository extends EntityRepository<Part> {
 
   async findPartsNamesByCategoryAndQuery(
     category: keyof typeof Category,
-    query: string
+    query: string,
+    extraFilter?: any
   ): Promise<string[]> {
+    const match = {
+      category
+    }
+    if (extraFilter !== undefined) {
+      match['details.제조회사.value'] = extraFilter
+    }
+
     const result =
       (await this.aggregate([
         {
@@ -34,6 +42,13 @@ export class PartsRepository extends EntityRepository<Part> {
               }
               // @Issue: synonyms not working correctly (need fix from Atlas)
               // synonyms: 'vendorSynonyms'
+            }
+          }
+        },
+        {
+          $set: {
+            _metaSearchScore: {
+              $meta: 'searchScore'
             }
           }
         },
@@ -64,12 +79,7 @@ export class PartsRepository extends EntityRepository<Part> {
           }
         },
         {
-          $unset: '_metaSearchScore'
-        },
-        {
-          $match: {
-            category
-          }
+          $match: match
         },
         {
           $limit: 5
@@ -133,12 +143,14 @@ export class PartsRepository extends EntityRepository<Part> {
     category,
     page = 1,
     keyword,
-    details = {}
+    details = {},
+    extraFilter
   }: {
     category: keyof typeof Category
     page: number
     keyword: string
     details: Record<string, string[]>
+    extraFilter: any
   }) {
     // handle empty string
     keyword = Boolean(keyword) ? keyword : null
@@ -183,6 +195,10 @@ export class PartsRepository extends EntityRepository<Part> {
     // So, we need to filter out the variants of the same part
     if (!keyword) {
       match['isVariant'] = false
+    }
+
+    if (extraFilter !== undefined) {
+      match['details.제조회사.value'] = extraFilter
     }
 
     // translate filter to object that mongodb understands

@@ -13,25 +13,35 @@ export class PartsService {
   ) {}
 
   async getSearchQueries({ category, query }: SearchQueriesQuery) {
-    query = await this.synonymsService.replaceQueryWithSynonyms(query)
+    // replace query with synonyms and separate vendors from query
+    const { query: replacedQuery, vendorsFilter } =
+      await this.synonymsService.replaceQueryWithSynonyms(query)
+    const extraFilter = vendorsFilter.$in?.length ? vendorsFilter : undefined
+
     return await this.partsRepository.findPartsNamesByCategoryAndQuery(
       category,
-      query
+      replacedQuery,
+      extraFilter
     )
   }
 
   async searchParts({
     category,
     page,
-    query: keyword,
+    query,
     filters: details
   }: SearchPartsQuery) {
-    keyword = await this.synonymsService.replaceQueryWithSynonyms(keyword)
+    // replace query with synonyms and separate vendors from query
+    const { query: replacedQuery, vendorsFilter } =
+      await this.synonymsService.replaceQueryWithSynonyms(query)
+    const extraFilter = vendorsFilter.$in?.length ? vendorsFilter : undefined
+
     return await this.partsRepository.findPartsByFilters({
       category,
       page,
-      keyword,
-      details
+      keyword: replacedQuery,
+      details,
+      extraFilter
     })
   }
 
