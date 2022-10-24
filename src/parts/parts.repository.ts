@@ -24,12 +24,12 @@ export class PartsRepository extends EntityRepository<Part> {
     query: string,
     extraFilter?: any
   ): Promise<string[]> {
-    const match = {
-      category
-    }
-    if (extraFilter !== undefined) {
-      match['details.제조회사.value'] = extraFilter
-    }
+    const match = Object.assign(
+      {
+        category
+      },
+      extraFilter ? extraFilter : {}
+    )
 
     const result =
       (await this.aggregate([
@@ -150,7 +150,7 @@ export class PartsRepository extends EntityRepository<Part> {
     page: number
     keyword: string
     details: Record<string, string[]>
-    extraFilter: any
+    extraFilter?: any
   }) {
     // handle empty string
     keyword = Boolean(keyword) ? keyword : null
@@ -185,9 +185,12 @@ export class PartsRepository extends EntityRepository<Part> {
         ]
       )
 
-    let match = {
-      category
-    }
+    let match = Object.assign(
+      {
+        category
+      },
+      extraFilter ? extraFilter : {}
+    )
 
     // If search keyword is provided, delegate the sorting to the full text search engine.
     // And variants information provided by the original data provider is used
@@ -195,10 +198,6 @@ export class PartsRepository extends EntityRepository<Part> {
     // So, we need to filter out the variants of the same part
     if (!keyword) {
       match['isVariant'] = false
-    }
-
-    if (extraFilter !== undefined) {
-      match['details.제조회사.value'] = extraFilter
     }
 
     // translate filter to object that mongodb understands

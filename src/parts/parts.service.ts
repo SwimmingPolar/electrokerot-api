@@ -11,17 +11,27 @@ export class PartsService {
     private readonly partsRepository: PartsRepository,
     private readonly synonymsService: SynonymsService
   ) {}
+  protected transformVendorsListIntoFilter(vendorsList: string[]) {
+    return vendorsList.length !== 0
+      ? {
+          'details.제조회사.value': {
+            $in: vendorsList.map(vendor => new RegExp(vendor, 'i'))
+          }
+        }
+      : {}
+  }
 
   async getSearchQueries({ category, query }: SearchQueriesQuery) {
     // replace query with synonyms and separate vendors from query
-    const { query: replacedQuery, vendorsFilter } =
+    const { query: replacedQuery, vendorsInQuery } =
       await this.synonymsService.replaceQueryWithSynonyms(query)
-    const extraFilter = vendorsFilter.$in?.length ? vendorsFilter : undefined
+    // transform separated vendors into filters that mongodb can understand
+    const vendorsFilter = this.transformVendorsListIntoFilter(vendorsInQuery)
 
     return await this.partsRepository.findPartsNamesByCategoryAndQuery(
       category,
       replacedQuery,
-      extraFilter
+      vendorsFilter
     )
   }
 
@@ -32,16 +42,17 @@ export class PartsService {
     filters: details
   }: SearchPartsQuery) {
     // replace query with synonyms and separate vendors from query
-    const { query: replacedQuery, vendorsFilter } =
+    const { query: replacedQuery, vendorsInQuery } =
       await this.synonymsService.replaceQueryWithSynonyms(query)
-    const extraFilter = vendorsFilter.$in?.length ? vendorsFilter : undefined
+    // transform separated vendors into filters that mongodb can understand
+    const vendorsFilter = this.transformVendorsListIntoFilter(vendorsInQuery)
 
     return await this.partsRepository.findPartsByFilters({
       category,
       page,
       keyword: replacedQuery,
       details,
-      extraFilter
+      extraFilter: vendorsFilter
     })
   }
 

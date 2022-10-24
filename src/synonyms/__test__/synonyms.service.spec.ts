@@ -60,13 +60,12 @@ describe('unit test: Synonyms Module', () => {
     it('should return object containing query string and vendors list', async () => {
       const original = 'ZOTAC GAMING 지포스 RTX 4090'.toLowerCase()
       const incoming = '조택 게이밍 지포스 RTX 4090'
-      const { query, vendors } = await synonymsService.replaceQueryWithSynonyms(
-        incoming
-      )
+      const { query, vendorsInQuery } =
+        await synonymsService.replaceQueryWithSynonyms(incoming)
 
       expect(query?.toLowerCase()).toEqual(original)
-      expect(vendors).toHaveLength(1)
-      expect(vendors[0]).toEqual('zotac')
+      expect(vendorsInQuery).toHaveLength(1)
+      expect(vendorsInQuery[0]).toBe('zotac')
     })
   })
 })
