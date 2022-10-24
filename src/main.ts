@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config'
 import { NestFactory, Reflector } from '@nestjs/core'
 import cookieParser from 'cookie-parser'
 import { AppModule } from 'src/app.module'
+import { InvalidJsonFilter } from './common/filters/InvalidJsonFilter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -16,6 +17,7 @@ async function bootstrap() {
     })
   )
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)))
+  app.useGlobalFilters(new InvalidJsonFilter())
 
   const configService = app.get(ConfigService)
   const PORT = configService.get<number>('PORT')
