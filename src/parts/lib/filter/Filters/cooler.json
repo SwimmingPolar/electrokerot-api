@@ -1,0 +1,245 @@
+[
+  { "subCategory": "분류", "values": ["시스템 쿨러", "CPU 쿨러"] },
+  {
+    "subCategory": "제조회사",
+    "values": [
+      "3RSYS",
+      "대양케이스",
+      "리안리",
+      "마이크로닉스",
+      "맥스엘리트",
+      "써멀테이크",
+      "앱코",
+      "에너맥스",
+      "이엠텍",
+      "인텔",
+      "잘만",
+      "쿨러마스터",
+      "ALPHACOOL",
+      "ARCTIC",
+      "ASUS",
+      "BRAVOTEC",
+      "CORSAIR",
+      "COUGAR",
+      "darkFlash",
+      "DEEPCOOL",
+      "EVGA",
+      "G.SKILL",
+      "GIGABYTE",
+      "JONSBO",
+      "MSI",
+      "NOCTUA",
+      "NZXT",
+      "PCCOOLER",
+      "SilverStone",
+      "Thermalright"
+    ]
+  },
+  {
+    "category": "AMD 소켓",
+    "values": [
+      "AM5",
+      "AM4",
+      "AM3",
+      "TR4",
+      "sTRX4",
+      "소켓754",
+      "소켓939",
+      "소켓940",
+      "SP3"
+    ]
+  },
+  {
+    "category": "인텔 소켓",
+    "values": [
+      "LGA2011",
+      "LGA2011-V3",
+      "LGA2066",
+      "LGA1700",
+      "LGA1366",
+      "LGA1200",
+      "LGA115x",
+      "LGA4189-4/5(소켓P4/P5)",
+      "LGA3647",
+      "LGA771",
+      "LGA775"
+    ]
+  },
+  { "subCategory": "냉각 방식", "values": ["공랭", "수랭"] },
+  { "subCategory": "라디에이터", "values": ["1열", "2열", "3열"] },
+  {
+    "subCategory": "팬 크기",
+    "values": [
+      "40mm",
+      "50mm",
+      "60mm",
+      "80mm",
+      "90mm",
+      "92mm",
+      "95mm",
+      "100mm",
+      "120mm",
+      "122.8mm",
+      "130mm",
+      "135mm",
+      "136mm",
+      "140mm",
+      "180mm",
+      "200mm"
+    ]
+  },
+  {
+    "subCategory": "팬 두께",
+    "values": [
+      "10T",
+      "12.5T",
+      "14T",
+      "15.4T",
+      "15.6T",
+      "15T",
+      "16T",
+      "24T",
+      "25.5T",
+      "25.6T",
+      "25T",
+      "26.5T",
+      "26T",
+      "27.5T",
+      "27T",
+      "28T",
+      "30T",
+      "32T"
+    ]
+  },
+  {
+    "subCategory": "베어링",
+    "values": [
+      "2볼",
+      "슬리브",
+      "유체",
+      "EBR",
+      "FDB",
+      "HDB",
+      "Hydraulic",
+      "Hydraumatic",
+      "Hydro",
+      "Hydro-Dynamic",
+      "LDB",
+      "Long Life",
+      "Magnetic",
+      "MHDB",
+      "Rifle",
+      "S-FDB",
+      "S-FDB V2",
+      "SSO",
+      "SSO2",
+      "Teflon Nano",
+      "Twister"
+    ]
+  },
+  {
+    "category": "부가기능",
+    "values": [
+      "데이지체인",
+      "리모콘 지원",
+      "수랭 커스텀",
+      "워터블록/로고 회전",
+      "인디게이터",
+      "제로팬(0-dB기술)",
+      "패키지 상품",
+      "팬 컨트롤러",
+      "펌프속도조절",
+      "LCD",
+      "LED 라이트",
+      "PWM 지원",
+      "RGB 컨트롤러"
+    ]
+  },
+  {
+    "subCategory": "최대 소음",
+    "values": ["~15dBA", "15dBA~30dBA", "30dBA~45dBA", "45dBA~"]
+  },
+  {
+    "subCategory": "최대 팬속도",
+    "values": [
+      "~1500RPM",
+      "1500RPM~3000RPM",
+      "3000RPM~4500RPM",
+      "4500RPM~6000RPM",
+      "6000RPM~7500RPM",
+      "7500RPM~"
+    ]
+  },
+  {
+    "subCategory": "최대 풍량",
+    "values": [
+      "~25CFM",
+      "25CFM~50CFM",
+      "50CFM~75CFM",
+      "75CFM~100CFM",
+      "100CFM~125CFM",
+      "125CFM~150CFM",
+      "150CFM~"
+    ]
+  },
+  {
+    "subCategory": "최대 풍압",
+    "values": [
+      "~1.5mmH2O",
+      "1.5mmH2O~3mmH2O",
+      "3mmH2O~4.5mmH2O",
+      "4.5mmH2O~6mmH2O",
+      "6mmH2O~7.5mmH2O",
+      "7.5mmH2O~"
+    ]
+  },
+  {
+    "subCategory": "최저 소음",
+    "values": [
+      "~5dBA",
+      "5dBA~10dBA",
+      "10dBA~15dBA",
+      "15dBA~20dBA",
+      "20dBA~25dBA",
+      "25dBA~"
+    ]
+  },
+  {
+    "subCategory": "컨넥터",
+    "values": [
+      "3-4핀",
+      "3핀",
+      "3핀,4핀",
+      "4핀",
+      "5핀",
+      "6핀",
+      "8핀",
+      "USB(9핀)"
+    ]
+  },
+  {
+    "subCategory": "쿨러 높이",
+    "values": ["~50mm", "50mm~100mm", "100mm~150mm", "150mm~"]
+  },
+  {
+    "subCategory": "히트파이프",
+    "values": ["1개~2개", "3개~4개", "5개~6개", "7개~8개", "9개~10개", "11개~"]
+  },
+  {
+    "subCategory": "LED색상",
+    "values": ["그린", "레드", "블루", "화이트", "non-LED", "RGB"]
+  },
+  {
+    "category": "LED시스템",
+    "values": [
+      "AURA SYNC",
+      "BIOSTAR SYNC",
+      "CHROMA",
+      "MYSTIC LIGHT",
+      "POLYCHROME",
+      "RGB FUSION",
+      "RGB LED",
+      "VIVID"
+    ]
+  }
+]

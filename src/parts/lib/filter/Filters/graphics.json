@@ -1,0 +1,326 @@
+[
+  {
+    "subCategory": "제조회사",
+    "values": [
+      "갤럭시",
+      "리드텍",
+      "액슬",
+      "엠탑코리아",
+      "이도디스플레이",
+      "이엠텍",
+      "AFOX",
+      "AMD",
+      "ARKTEK",
+      "ASRock",
+      "ASUS",
+      "ATUMGENESIS",
+      "COLORFUL",
+      "EVGA",
+      "FORSA",
+      "GAINWARD",
+      "GIGABYTE",
+      "HP",
+      "INNO3D",
+      "KEDA",
+      "MANLI",
+      "MAXSUN",
+      "MSI",
+      "NVIDIA",
+      "PALIT",
+      "PNY",
+      "PowerColor",
+      "SAPPHIRE",
+      "TAGER",
+      "TUL",
+      "XFX",
+      "ZOTAC"
+    ]
+  },
+  { "subCategory": "칩셋 제조사", "values": ["AMD(ATi)", "NVIDIA"] },
+  {
+    "subCategory": "NVIDIA 칩셋",
+    "values": [
+      "RTX A5500",
+      "RTX A5000",
+      "RTX A4500",
+      "RTX A4000",
+      "RTX A2000",
+      "RTX 6000",
+      "RTX 5000",
+      "RTX 4090",
+      "RTX 3090 Ti",
+      "RTX 3090",
+      "RTX 3080 Ti",
+      "RTX 3080",
+      "RTX 3070 Ti",
+      "RTX 3070",
+      "RTX 3060 Ti",
+      "RTX 3060",
+      "RTX 3050",
+      "RTX 2060 SUPER",
+      "RTX 2060",
+      "T1000",
+      "T600",
+      "T400",
+      "GTX1070",
+      "GTX1050 Ti",
+      "GTX1050",
+      "GTX950",
+      "GTX750 Ti",
+      "GTX750",
+      "GTX 1660 Ti",
+      "GTX 1660 SUPER",
+      "GTX 1660",
+      "GTX 1650 SUPER",
+      "GTX 1650",
+      "GTX 1630",
+      "GT1030",
+      "GT730",
+      "GT710",
+      "GT610",
+      "G210",
+      "P2200"
+    ]
+  },
+  {
+    "subCategory": "AMD 칩셋",
+    "values": [
+      "RX 6950 XT",
+      "RX 6900 XT",
+      "RX 6800 XT",
+      "RX 6800",
+      "RX 6750 XT",
+      "RX 6700 XT",
+      "RX 6650 XT",
+      "RX 6600 XT",
+      "RX 6600",
+      "RX 6500 XT",
+      "RX 6400",
+      "RX 580",
+      "RX 570",
+      "RX 550",
+      "WX9100",
+      "WX8200",
+      "WX3200",
+      "WX2100",
+      "W6800",
+      "W6600",
+      "W5700",
+      "W5500",
+      "GPRO E8870"
+    ]
+  },
+  {
+    "subCategory": "사용전력",
+    "values": [
+      "~100W",
+      "100W~200W",
+      "200W~300W",
+      "300W~400W",
+      "400W~500W",
+      "500W~"
+    ]
+  },
+  {
+    "subCategory": "권장 파워용량",
+    "values": [
+      "정격파워 300W 이상",
+      "정격파워 350W 이상",
+      "정격파워 400W 이상",
+      "정격파워 450W 이상",
+      "정격파워 500W 이상",
+      "정격파워 550W 이상",
+      "정격파워 600W 이상",
+      "정격파워 650W 이상",
+      "정격파워 700W 이상",
+      "정격파워 750W 이상",
+      "정격파워 800W 이상",
+      "정격파워 850W 이상",
+      "정격파워 900W 이상",
+      "정격파워 950W 이상",
+      "정격파워 1000W 이상",
+      "정격파워 1200W 이상"
+    ]
+  },
+  {
+    "subCategory": "팬 개수",
+    "values": ["1개 팬", "2개 팬", "3개 팬", "4개 팬"]
+  },
+  {
+    "subCategory": "가로(길이)",
+    "values": ["~100mm", "100mm~200mm", "200mm~300mm", "300mm~"]
+  },
+  {
+    "subCategory": "세로",
+    "values": ["~50mm", "50mm~100mm", "100mm~150mm", "150mm~200mm", "200mm"]
+  },
+  {
+    "subCategory": "높이(두께)",
+    "values": ["~25mm", "25mm~50mm", "50mm~75mm", "75mm~100mm", "100mm~"]
+  },
+  {
+    "subCategory": "모니터 지원",
+    "values": [
+      "최대 모니터 2개",
+      "최대 모니터 3개",
+      "최대 모니터 4개",
+      "최대 모니터 6개"
+    ]
+  },
+  {
+    "category": "냉각방식",
+    "values": ["방열판", "베이퍼챔버", "수냉 쿨링", "팬쿨러", "히트파이프"]
+  },
+  {
+    "subCategory": "베이스클럭",
+    "values": [
+      "~1000MHz",
+      "1000MHz~1500MHz",
+      "1500MHz~2000MHz",
+      "2000MHz~2500MHz",
+      "2500MHz~"
+    ]
+  },
+  {
+    "subCategory": "부스트클럭",
+    "values": [
+      "~1000MHz",
+      "1000MHz~1500MHz",
+      "1500MHz~2000MHz",
+      "2000MHz~2500MHz",
+      "2500MHz~"
+    ]
+  },
+  {
+    "subCategory": "메모리 종류",
+    "values": [
+      "DDR3(DDR3)",
+      "DDR4",
+      "GDDR3(DDR3)",
+      "GDDR4(DDR4)",
+      "GDDR5(DDR5)",
+      "GDDR5X(DDR5X)",
+      "GDDR6(DDR6)",
+      "GDDR6X(DDR6X)",
+      "SDDR3(DDR3)",
+      "SDDR4(DDR4)"
+    ]
+  },
+  {
+    "subCategory": "메모리 클럭",
+    "values": [
+      "~5000MHz",
+      "5000MHz~10000MHz",
+      "10000MHz~15000MHz",
+      "20000MHz~25000MHz",
+      "25000MHz~"
+    ]
+  },
+  {
+    "subCategory": "메모리 용량",
+    "values": [
+      "512MB",
+      "48GB",
+      "32GB",
+      "24GB",
+      "20GB",
+      "16GB",
+      "12GB",
+      "10GB",
+      "8GB",
+      "6GB",
+      "5GB",
+      "4GB",
+      "2GB",
+      "1GB"
+    ]
+  },
+  {
+    "subCategory": "전원 포트",
+    "values": [
+      "6핀 x1 + 8핀 x1개",
+      "6핀 x1개",
+      "8핀 x1개",
+      "8핀 x2 + 6핀 x1개",
+      "8핀 x2개",
+      "8핀 x3개",
+      "12핀 x1개",
+      "16(12+4)핀 x1개"
+    ]
+  },
+  {
+    "subCategory": "전원부",
+    "values": [
+      "28페이즈",
+      "26페이즈",
+      "24페이즈",
+      "23페이즈",
+      "22페이즈",
+      "21페이즈",
+      "20페이즈",
+      "19페이즈",
+      "18페이즈",
+      "17페이즈",
+      "16페이즈",
+      "15페이즈",
+      "14페이즈",
+      "13페이즈",
+      "12페이즈",
+      "11페이즈",
+      "10페이즈",
+      "9페이즈",
+      "8페이즈",
+      "7페이즈",
+      "6페이즈",
+      "5페이즈",
+      "4페이즈",
+      "3페이즈",
+      "2페이즈"
+    ]
+  },
+  {
+    "subCategory": "인터페이스",
+    "values": [
+      "PCIe4.0",
+      "PCIe4.0x16",
+      "PCIe4.0x16(at x8)",
+      "PCIe4.0x16(at x4)",
+      "PCIe3.0x16",
+      "PCIe3.0x16(at x8)",
+      "PCIe3.0x16(at x4)",
+      "PCIe2.0x16",
+      "PCIe2.0x8",
+      "PCI-Express 2.0 x8"
+    ]
+  },
+  {
+    "subCategory": "DisplayPort",
+    "values": ["1개", "2개", "3개", "4개", "6개"]
+  },
+  { "subCategory": "HDMI", "values": ["1개", "2개", "3개"] },
+  {
+    "category": "부가기능",
+    "values": [
+      "4K 해상도 지원",
+      "8K 해상도 지원",
+      "멀티 VGA",
+      "제로팬(0-dB기술)",
+      "Dual BIOS",
+      "HDCP 2.3",
+      "HDCP 지원",
+      "HDR 지원"
+    ]
+  },
+  {
+    "category": "추가 구성",
+    "values": [
+      "백플레이트",
+      "수냉 장착 지원",
+      "오버클럭 물리키",
+      "Dr.MOS 모스펫",
+      "LCD 모니터링",
+      "LED 라이트",
+      "PWM 커넥터"
+    ]
+  }
+]

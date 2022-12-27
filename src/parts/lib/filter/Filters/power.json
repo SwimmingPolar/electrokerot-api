@@ -1,0 +1,144 @@
+[
+  {
+    "subCategory": "제조회사",
+    "values": [
+      "3RSYS",
+      "델타",
+      "롯데알미늄",
+      "마이크로닉스",
+      "맥스엘리트",
+      "비콘즈",
+      "삼성전자",
+      "샤칸",
+      "성주컴텍",
+      "세컨드찬스GEEKSTAR",
+      "스카이디지탈",
+      "시소닉",
+      "써멀테이크",
+      "썬루트",
+      "아이구주",
+      "앱코",
+      "에너맥스",
+      "에너지옵티머스",
+      "이도디스플레이",
+      "잘만",
+      "제이씨현",
+      "케이씨컴아이리스",
+      "쿨러마스터",
+      "큐닉스그룹",
+      "티앤에스인터내셔널NOX",
+      "파워가드",
+      "포게임",
+      "픽스콤VICTOR",
+      "현대파워",
+      "ADATA",
+      "ANIX",
+      "ANP",
+      "Antec",
+      "AONE",
+      "ASUS",
+      "ATUM",
+      "BABEL",
+      "bequiet",
+      "CJENM",
+      "CORSAIR",
+      "COUGAR",
+      "COX",
+      "DEEPCOOL",
+      "EVGA",
+      "FractalDesign",
+      "FSP",
+      "GeIL",
+      "GIGABYTE",
+      "GIGAZONE",
+      "GreatWall",
+      "HOPELY",
+      "KRAFTKOREA",
+      "LG전자",
+      "MSI",
+      "NZXT",
+      "ORBIS",
+      "PNCPARTNER",
+      "PowerFul",
+      "REXCOOL",
+      "SilverStone",
+      "SuperFlower",
+      "topower"
+    ]
+  },
+  { "subCategory": "제품 분류", "values": ["ATX 파워", "M-ATX(SFX) 파워"] },
+  {
+    "subCategory": "정격출력",
+    "values": [
+      "~500W",
+      "500W~1000W",
+      "1000W~1500W",
+      "1500W~2000W",
+      "2000W~2500W",
+      "2500W~"
+    ]
+  },
+  {
+    "subCategory": "80PLUS인증",
+    "values": [
+      "80 PLUS 플레티넘",
+      "80 PLUS 티타늄",
+      "80 PLUS 골드",
+      "80 PLUS 실버",
+      "80 PLUS 브론즈",
+      "80 PLUS 스탠다드"
+    ]
+  },
+  {
+    "subCategory": "케이블연결",
+    "values": ["세미모듈러", "케이블일체형", "풀모듈러"]
+  },
+  {
+    "subCategory": "깊이",
+    "values": ["~100mm", "100mm~150mm", "150mm~200mm", "200mm~250mm", "250mm~"]
+  },
+  { "subCategory": "PCIe 16핀(12+4)", "values": ["2개"] },
+  {
+    "subCategory": "PCIe 8핀(6+2)",
+    "values": [
+      "1개",
+      "2개",
+      "3개",
+      "4개",
+      "5개",
+      "6개",
+      "7개",
+      "8개",
+      "10개",
+      "12개",
+      "16개",
+      "17개",
+      "18개"
+    ]
+  },
+  { "subCategory": "PCIe 6핀", "values": ["1개", "2개", "6개"] },
+  {
+    "category": "부가기능",
+    "values": [
+      "대기전력 1W 미만",
+      "디지털제어",
+      "수동 팬 조절",
+      "자동 팬 조절",
+      "팬리스모드",
+      "프리볼트",
+      "플랫케이블",
+      "LED 라이트"
+    ]
+  },
+  {
+    "category": "LED 시스템",
+    "values": [
+      "AURA SYNC",
+      "MYSTIC LIGHT",
+      "POLYCHROME",
+      "RAZER CHROMA",
+      "RGB FUSION",
+      "TT RGB PLUS"
+    ]
+  }
+]

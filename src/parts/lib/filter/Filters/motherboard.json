@@ -1,0 +1,304 @@
+[
+  {
+    "subCategory": "제조회사",
+    "values": [
+      "디지탈그린텍",
+      "에너지옵티머스",
+      "AFOX",
+      "AMD",
+      "ASRock",
+      "ASUS",
+      "BIOSTAR",
+      "COLORFUL",
+      "ECS",
+      "GIGABYTE",
+      "MSI",
+      "NZXT",
+      "Supermicro"
+    ]
+  },
+  { "subCategory": "제품 분류", "values": ["인텔 CPU용", "AMD CPU용"] },
+  {
+    "subCategory": "CPU 소켓",
+    "values": [
+      "인텔(소켓2066)",
+      "인텔(소켓1700)",
+      "인텔(소켓1200)",
+      "인텔(소켓1150)",
+      "인텔(소켓1151)",
+      "인텔(소켓1151v2)",
+      "인텔(소켓1155)",
+      "인텔(소켓3647)",
+      "인텔(CPU내장)",
+      "AMD(소켓AM5)",
+      "AMD(소켓AM4)",
+      "AMD(소켓TR4)",
+      "AMD(소켓sWRX8)",
+      "AMD(소켓sTRX4)",
+      "AMD(CPU내장)"
+    ]
+  },
+  {
+    "subCategory": "세부 칩셋",
+    "values": [
+      "인텔 Z690",
+      "인텔 Z590",
+      "인텔 Z490",
+      "인텔 Z390",
+      "인텔 X299",
+      "인텔 W480",
+      "인텔 H670",
+      "인텔 H610",
+      "인텔 H570",
+      "인텔 H510",
+      "인텔 H470",
+      "인텔 H410",
+      "인텔 H370",
+      "인텔 H310",
+      "인텔 H81",
+      "인텔 H61",
+      "인텔 C622",
+      "인텔 C621",
+      "인텔 C246",
+      "인텔 C242",
+      "인텔 B660",
+      "인텔 B560",
+      "인텔 B460",
+      "인텔 B365",
+      "인텔 B360",
+      "인텔 B250",
+      "인텔 B75",
+      "AMD B650E",
+      "AMD B650",
+      "AMD B550",
+      "AMD B450",
+      "AMD B350",
+      "AMD X670E",
+      "AMD X670",
+      "AMD X570",
+      "AMD X470",
+      "AMD X399",
+      "AMD X370",
+      "AMD WRX80",
+      "AMD TRX40",
+      "AMD A520",
+      "AMD A320",
+      "인텔 셀러론 N4120",
+      "인텔 셀러론 N4020",
+      "인텔 셀러론 J4025",
+      "인텔 셀러론 J4005"
+    ]
+  },
+  {
+    "subCategory": "폼팩터",
+    "values": [
+      "ATX",
+      "CEB",
+      "E-ATX",
+      "EEB",
+      "M-ATX",
+      "M-DTX",
+      "M-iTX",
+      "Micro-ATX",
+      "uATX",
+      "XL-ATX",
+      "XL-ATX"
+    ]
+  },
+  {
+    "subCategory": "전원부",
+    "values": [
+      "~15페이즈",
+      "15페이즈~20페이즈",
+      "20페이즈~25페이즈",
+      "25페이즈~"
+    ]
+  },
+  {
+    "subCategory": "메모리 종류",
+    "values": ["DDR5", "DDR4", "DDR3"]
+  },
+  {
+    "subCategory": "메모리 용량",
+    "values": [
+      "~32GB",
+      "32GB~64GB",
+      "64GB~128GB",
+      "128GB~256GB",
+      "256GB~512GB",
+      "512GB~"
+    ]
+  },
+  {
+    "subCategory": "메모리 속도",
+    "values": [
+      "6800MHz (PC5-54400)",
+      "6666MHz (PC5-53300)",
+      "6600MHz (PC5-52800)",
+      "6400MHz (PC5-51200)",
+      "6200MHz (PC5-49600)",
+      "6000MHz (PC5-48000)",
+      "6000MHz (PC4-48000)",
+      "5800MHz (PC5-46400)",
+      "5800MHz (PC4-46400)",
+      "5600MHz (PC5-44800)",
+      "5600MHz (PC4-44800)",
+      "5400MHz (PC4-43200)",
+      "5333MHz (PC4-42600)",
+      "5300MHz (PC4-42400)",
+      "5200MHz (PC4-41600)",
+      "5133MHz (PC4-41000)",
+      "5100MHz (PC4-40800)",
+      "5066MHz (PC4-40500)",
+      "5000MHz (PC4-40000)",
+      "4933MHz (PC4-39400)",
+      "4866MHz (PC4-38900)",
+      "4800MHz (PC5-38400)",
+      "4800MHz (PC4-38400)",
+      "4733MHz (PC4-37800)",
+      "4666MHz (PC4-37300)",
+      "4600MHz (PC4-36800)",
+      "4533MHz (PC4-36300)",
+      "4500MHz (PC4-36000)",
+      "4400MHz (PC4-35200)",
+      "4333MHz (PC4-34600)",
+      "4266MHz (PC4-34100)",
+      "4200MHz (PC4-33600)",
+      "4133MHz (PC4-33000)",
+      "4066MHz (PC4-32500)",
+      "4000MHz (PC4-32000)",
+      "3866MHz (PC4-30900)",
+      "3600MHz (PC4-28800)",
+      "3533MHz (PC4-28200)",
+      "3466MHz (PC4-27700)",
+      "3200MHz (PC4-25600)",
+      "3000MHz (PC4-24000)",
+      "2933MHz (PC4-23400)",
+      "2666MHz (PC4-21300)",
+      "2400MHz (PC4-19200)",
+      "1600MHz (PC3-12800)",
+      "1333MHz (PC3-10600)",
+      "PC4-34100 (4,200MHz)",
+      "PC4-41000 (5,133MHz)"
+    ]
+  },
+  {
+    "subCategory": "메모리 슬롯",
+    "values": ["16개", "12개", "8개", "4개", "2개", "1개"]
+  },
+  {
+    "subCategory": "메모리 채널",
+    "values": [2, 4, 6, 8]
+  },
+  { "category": "메모리 기술", "values": ["옵테인", "EXPO", "XMP", "XMP3.0"] },
+  {
+    "category": "무선랜 종류",
+    "values": ["듀얼 LAN", "무선 LAN", "블루투스", "M.2 Key-E(모듈별매)"]
+  },
+  {
+    "subCategory": "유선랜 속도",
+    "values": [
+      "최대 100메가",
+      "최대 기가비트",
+      "최대 2.5기가비트",
+      "최대 5기가비트",
+      "최대 10기가비트"
+    ]
+  },
+  {
+    "subCategory": "내장그래픽",
+    "values": ["인텔 UHD 600", "ASPEED AST2500", "ASPEED AST2510"]
+  },
+  {
+    "category": "그래픽 출력",
+    "values": ["D-SUB", "DP", "DVI", "HDMI", "Type-C"]
+  },
+  { "category": "RAID 지원", "values": ["NVMe RAID", "SATA RAID"] },
+  {
+    "subCategory": "M.2",
+    "values": ["1개", "2개", "3개", "4개", "5개"]
+  },
+  {
+    "category": "M.2 연결",
+    "values": ["NVMe", "PCIe", "PCIe4.0", "PCIe5.0", "SATA"]
+  },
+  {
+    "category": "M.2 폼팩터",
+    "values": ["2230", "2242", "2260", "2280", "22110", "25110"]
+  },
+  {
+    "category": "PCIe버전",
+    "values": ["PCIe5.0", "PCIe4.0", "PCIe3.0", "PCIe", "PCI"]
+  },
+  {
+    "subCategory": "PCIex16",
+    "values": ["7개", "5개", "4개", "3개", "2개", "1개"]
+  },
+  { "subCategory": "PCIex16(at x4)", "values": ["1개", "2개"] },
+  { "subCategory": "PCIex16(at x2)", "values": ["1개"] },
+  { "subCategory": "PCIex16(at x1)", "values": ["1개", "2개"] },
+  { "subCategory": "PCIex8", "values": ["1개", "2개", "3개", "4개"] },
+  { "subCategory": "PCIex4", "values": ["1개", "2개"] },
+  {
+    "subCategory": "PCIex1",
+    "values": ["1개", "2개", "3개", "4개", "11개", "USB 8개", "USB 12개"]
+  },
+  { "subCategory": "썬더볼트4", "values": ["후면 2개"] },
+  { "subCategory": "썬더볼트4 헤더", "values": ["1개"] },
+  { "subCategory": "썬더볼트3 헤더", "values": ["1개"] },
+  {
+    "subCategory": "시스템팬 헤더(4핀)",
+    "values": ["1개", "2개", "3개", "4개", "5개", "6개", "7개", "8개", "9개"]
+  },
+  {
+    "category": "후면단자",
+    "values": [
+      "시리얼포트",
+      "썬더볼트3",
+      "썬더볼트4",
+      "오디오잭",
+      "패러럴포트",
+      "PS/2",
+      "S/PDIF",
+      "Type-C(오디오)",
+      "USB 3.0",
+      "USB 3.1"
+    ]
+  },
+  {
+    "category": "USB 타입",
+    "values": [
+      "Type-A (10Gbps)",
+      "Type-C (5Gbps)",
+      "Type-C (10Gbps)",
+      "Type-C (20Gbps)"
+    ]
+  },
+  { "subCategory": "ARGB 헤더(3핀)", "values": ["1개", "2개", "3개"] },
+  { "subCategory": "ARGB 헤더(6핀)", "values": ["1개"] },
+  { "subCategory": "RGB 헤더(4핀)", "values": ["1개", "2개", "3개"] },
+  {
+    "subCategory": "LED 시스템",
+    "values": [
+      "AURA SYNC",
+      "MYSTIC LIGHT",
+      "NZXT CAM",
+      "POLYCHROME",
+      "RGB FUSION",
+      "VIVID LED"
+    ]
+  },
+  {
+    "category": "특징",
+    "values": [
+      "전원부 방열판",
+      "AMD APU 지원",
+      "Dr.MOS",
+      "LED 라이트",
+      "LED 헤더",
+      "M.2 히트싱크",
+      "TPM헤더",
+      "UEFI"
+    ]
+  }
+]

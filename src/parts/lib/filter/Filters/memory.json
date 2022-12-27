@@ -1,0 +1,147 @@
+[
+  {
+    "subCategory": "제조회사",
+    "values": [
+      "갤럭시",
+      "마이크론",
+      "삼성전자",
+      "실리콘파워",
+      "써멀테이크",
+      "앱코",
+      "에이서",
+      "이메이션",
+      "컴이지",
+      "킹스톤",
+      "타무즈",
+      "트랜센드",
+      "ACPI",
+      "ADATA",
+      "AFOX",
+      "ANACOMDA",
+      "Antec",
+      "Apacer",
+      "CORSAIR",
+      "CYNEX",
+      "ESSENCORE",
+      "FINEMIND",
+      "G.SKILL",
+      "GeIL",
+      "GIGABYTE",
+      "GLOWAY",
+      "HIKVISION",
+      "HP",
+      "KINGMAX",
+      "OCPC",
+      "OLOy",
+      "OWC",
+      "PATRIOT",
+      "PNY",
+      "SK하이닉스",
+      "SOUTHBRIDGE",
+      "TeamGroup",
+      "Terabyte",
+      "V-Color",
+      "ZADAK"
+    ]
+  },
+  { "subCategory": "제품 분류", "values": ["DDR5", "DDR4", "DDR3"] },
+  {
+    "subCategory": "메모리 용량",
+    "values": ["128GB", "64GB", "32GB", "16GB", "8GB", "4GB", "2GB"]
+  },
+  {
+    "subCategory": "동작클럭(대역폭)",
+    "values": [
+      "6600MHz (PC5-52800)",
+      "6400MHz (PC5-51200)",
+      "6200MHz (PC5-49600)",
+      "6000MHz (PC5-48000)",
+      "5600MHz (PC5-44800)",
+      "5200MHz (PC5-41600)",
+      "5066MHz (PC4-40500)",
+      "4800MHz (PC5-38400)",
+      "4800MHz (PC4-38400)",
+      "4600MHz (PC4-36800)",
+      "4400MHz (PC4-35200)",
+      "4266MHz (PC4-34100)",
+      "4133MHz (PC4-33000)",
+      "4000MHz (PC4-32000)",
+      "3866MHz (PC4-30900)",
+      "3800MHz (PC4-30400)",
+      "3733MHz (PC4-29800)",
+      "3600MHz (PC4-28800)",
+      "3466MHz (PC4-27700)",
+      "3200MHz (PC4-25600)",
+      "3000MHz (PC4-24000)",
+      "2933MHz (PC4-23400)",
+      "2800MHz (PC4-22400)",
+      "2666MHz (PC4-21300)",
+      "2400MHz (PC4-19200)",
+      "1600MHz (PC3-12800)",
+      "1333MHz (PC3-10600)"
+    ]
+  },
+  {
+    "subCategory": "램타이밍",
+    "values": [
+      "CL11",
+      "CL14",
+      "CL15",
+      "CL16",
+      "CL17",
+      "CL18",
+      "CL19",
+      "CL20",
+      "CL22",
+      "CL30",
+      "CL32",
+      "CL34",
+      "CL36",
+      "CL38",
+      "CL40",
+      "CL42"
+    ]
+  },
+  {
+    "subCategory": "동작전압",
+    "values": [
+      "1.10V",
+      "1.20V",
+      "1.25V",
+      "1.30V",
+      "1.35V",
+      "1.40V",
+      "1.45V",
+      "1.50V",
+      "1.60V"
+    ]
+  },
+  {
+    "category": "LED 시스템",
+    "values": [
+      "AURA SYNC",
+      "CORSAIR iCUE",
+      "G.SKILL Lighting",
+      "MYSTIC LIGHT",
+      "POLYCHROME",
+      "RAZER CHROMA",
+      "RGB FUSION",
+      "T-FORCE BLITZ",
+      "TT RGB PLUS",
+      "XPG RGB"
+    ]
+  },
+  { "subCategory": "히트싱크", "values": ["미포함", "방열판"] },
+  {
+    "category": "부가기능",
+    "values": [
+      "온다이ECC",
+      "온도센서",
+      "ECC",
+      "EXPO",
+      "LED 라이트",
+      "XMP",
+      "XMP3.0"
+    ]
+  }
+]

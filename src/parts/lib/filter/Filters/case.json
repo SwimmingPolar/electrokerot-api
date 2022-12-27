@@ -1,0 +1,191 @@
+[
+  {
+    "subCategory": "제조회사",
+    "values": [
+      "2MONS",
+      "3RSYS",
+      "갤럭시",
+      "건평정보통신IPLEX",
+      "다산시스템즈",
+      "다얼유",
+      "대양케이스",
+      "라벤타",
+      "리안리",
+      "마이크로닉스",
+      "몬스타",
+      "세컨드찬스GEEKSTAR",
+      "셀텍",
+      "슈미드",
+      "시소닉",
+      "신한아이앤씨WISEGIGA",
+      "써멀테이크",
+      "아이구주",
+      "앱코",
+      "에너맥스",
+      "영재컴퓨터",
+      "오존컴퍼니",
+      "유한하이테크",
+      "이아이인터내셔널",
+      "잘만",
+      "주피터씨앤씨",
+      "컴이지",
+      "쿨러마스터",
+      "큐닉스그룹",
+      "투렉스",
+      "포게임",
+      "피닉스CNS",
+      "ADATA",
+      "AEROCOOL",
+      "ALSEYE",
+      "AMAQUEST",
+      "ANIX",
+      "Antec",
+      "AONE",
+      "ASUS",
+      "bequiet",
+      "BRAVOTEC",
+      "CHENBRO",
+      "COOLMAI",
+      "CORSAIR",
+      "COUGAR",
+      "COX",
+      "DAMONCOM",
+      "darkFlash",
+      "DAVEN",
+      "DEEPCOOL",
+      "FractalDesign",
+      "G.SKILL",
+      "GEEEK",
+      "GEO메트릭퓨처",
+      "GIGABYTE",
+      "HYDRA",
+      "HYTE",
+      "INWIN",
+      "JONSBO",
+      "JONSPLUS",
+      "KRAFTKOREA",
+      "MSI",
+      "NCTOP",
+      "NEWZEN",
+      "NZXT",
+      "ORBIS",
+      "PB이노베이션",
+      "Phanteks",
+      "RAIJINTEK",
+      "Razer",
+      "SilverStone",
+      "SSUPD"
+    ]
+  },
+  {
+    "subCategory": "제품 분류",
+    "values": [
+      "미니ITX",
+      "튜닝 케이스",
+      "PC케이스(ATX)",
+      "PC케이스(M-ATX)",
+      "PC케이스(RTX)"
+    ]
+  },
+  {
+    "category": "지원보드규격",
+    "values": [
+      "표준-ATX",
+      "표준-ITX",
+      "Extended-ATX",
+      "Flex-ATX",
+      "Micro-ATX",
+      "Mini-DTX",
+      "Mini-ITX",
+      "SSI-CEB",
+      "SSI-EEB"
+    ]
+  },
+  {
+    "subCategory": "지원파워규격",
+    "values": ["표준-ATX", "SFX", "SFX-L", "DC to DC", "FLEX", "1U SMPS", "TFX"]
+  },
+  {
+    "subCategory": "쿨링팬",
+    "values": ["1개~2개", "3개~4개", "5개~6개", "7개~9개", "10개~"]
+  },
+  {
+    "subCategory": "깊이(D)",
+    "values": ["~250mm", "250mm~500mm", "500mm~750mm", "750mm~1000mm"]
+  },
+  {
+    "subCategory": "너비(W)",
+    "values": ["~250mm", "250mm~500mm", "500mm~750mm", "750~1000mm", "1000mm~"]
+  },
+  {
+    "subCategory": "높이(H)",
+    "values": ["~250mm", "250mm~500mm", "500mm~750mm", "750~1000mm", "1000mm~"]
+  },
+  {
+    "subCategory": "전면",
+    "values": ["80mm", "120mm", "140mm", "160mm", "180mm", "185mm", "200mm"]
+  },
+  {
+    "subCategory": "후면",
+    "values": ["60mm", "80mm", "120mm", "140mm", "141mm"]
+  },
+  {
+    "subCategory": "측면",
+    "values": ["강철", "강화유리", "아크릴", "쿨링팬", "통풍구"]
+  },
+  {
+    "subCategory": "전면 패널 타입",
+    "values": ["강화유리", "메쉬", "일반(솔리드)"]
+  },
+  {
+    "subCategory": "수랭쿨러 규격",
+    "values": ["최대1열 지원", "최대2열 지원", "최대3열 지원", "최대4열 지원"]
+  },
+  {
+    "subCategory": "파워 위치",
+    "values": [
+      "기타",
+      "상단",
+      "상단 후면",
+      "상단전면",
+      "상단후면",
+      "전면",
+      "하단전면",
+      "하단후면",
+      "후면"
+    ]
+  },
+  {
+    "subCategory": "파워 장착",
+    "values": [
+      "100mm~200mm",
+      "200mm~300mm",
+      "300mm~400mm",
+      "400mm~500mm",
+      "500mm~"
+    ]
+  },
+  {
+    "subCategory": "CPU쿨러 장착",
+    "values": ["~100mm", "100mm~200mm", "200mm~300mm", "300mm~"]
+  },
+  {
+    "subCategory": "GPU 장착",
+    "values": ["~200mm", "200mm~400mm", "400mm~600mm", "600mm~800mm", "800mm~"]
+  },
+  {
+    "subCategory": "13.3cm베이",
+    "values": ["1개~2개", "3개~4개", "5개~6개", "7개~9개", "10개~"],
+    "tag": "CD롬"
+  },
+  {
+    "subCategory": "6.4cm베이",
+    "values": ["1개~2개", "3개~4개", "5개~6개", "7개~9개", "10개~"],
+    "tag": "SSD"
+  },
+  {
+    "subCategory": "8.9cm베이",
+    "values": ["1개~2개", "3개~4개", "5개~6개", "7개~9개", "10개~"],
+    "tag": "HDD"
+  }
+]
