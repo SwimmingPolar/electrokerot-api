@@ -32,7 +32,7 @@ interface FullName {
   tag?: string
 }
 
-type Details = Record<
+export type Details = Record<
   string,
   {
     value: string

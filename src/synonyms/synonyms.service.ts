@@ -37,7 +37,7 @@ export class SynonymsService {
           replacementCount--
           if (replacementCount === 0) {
             return {
-              query,
+              query: query.trim(),
               vendorsInQuery
             }
           }
@@ -46,7 +46,7 @@ export class SynonymsService {
     })
 
     return {
-      query,
+      query: query.trim(),
       vendorsInQuery
     }
   }

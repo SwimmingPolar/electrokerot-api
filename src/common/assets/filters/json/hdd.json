@@ -5,19 +5,7 @@
   },
   {
     "subCategory": "디스크 용량",
-    "values": [
-      "500GB",
-      "1TB",
-      "2TB",
-      "3TB",
-      "4TB",
-      "5TB",
-      "6TB",
-      "8TB",
-      "10TB",
-      "12TB",
-      "14TB"
-    ]
+    "values": ["~1TB", "1TB~2TB", "2TB~5TB", "5TB~10TB", "10TB~20TB", "20TB~"]
   },
   {
     "subCategory": "두께",

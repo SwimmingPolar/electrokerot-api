@@ -1,5 +1,9 @@
 import { ObjectId } from 'mongodb'
 
+export * from './parts'
+
+// @Todo: move types to separate folders
+
 export enum MarketType {
   openMarket = 'openMarket',
   mall = 'mall',

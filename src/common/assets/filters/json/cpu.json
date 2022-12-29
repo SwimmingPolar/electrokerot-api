@@ -160,6 +160,14 @@
     ]
   },
   {
+    "subCategory": "TDP",
+    "values": ["~100W", "100W~150W", "150W~200W", "200W~250W", "250W~"]
+  },
+  {
+    "subCategory": "제조 공정",
+    "values": ["5nm", "7nm", "10nm", "12nm", "14nm"]
+  },
+  {
     "subCategory": "메모리 규격",
     "values": ["DDR5", "DDR4", "DDR3L"]
   },

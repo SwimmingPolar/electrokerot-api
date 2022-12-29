@@ -143,13 +143,13 @@ export class PartsRepository extends EntityRepository<Part> {
     category,
     page = 1,
     keyword,
-    details = {},
+    details,
     extraFilter
   }: {
     category: keyof typeof Category
     page: number
     keyword: string
-    details: Record<string, string[]>
+    details: { [key: string]: any[] }
     extraFilter?: any
   }) {
     // handle empty string
@@ -185,12 +185,28 @@ export class PartsRepository extends EntityRepository<Part> {
         ]
       )
 
-    let match = Object.assign(
+    const match = Object.assign(
       {
         category
       },
       extraFilter ? extraFilter : {}
     )
+    Object.entries(details).forEach(([key, values]) => {
+      // Extract operator (ex, $and, $or)
+      const operator = Object.keys(values)[0]
+      // Assign array values to 'values' variable
+      values = values[operator]
+
+      if (['$and', '$or'].includes(operator)) {
+        match[operator] = values.map(value => ({
+          [`details.${key}.value`]: value
+        }))
+      } else {
+        match[`details.${key}.value`] = values
+      }
+    })
+    console.log(match)
+    console.log(JSON.stringify(match, null, 2))
 
     // If search keyword is provided, delegate the sorting to the full text search engine.
     // And variants information provided by the original data provider is used
@@ -198,17 +214,6 @@ export class PartsRepository extends EntityRepository<Part> {
     // So, we need to filter out the variants of the same part
     if (!keyword) {
       match['isVariant'] = false
-    }
-
-    // translate filter to object that mongodb understands
-    if (details) {
-      const filters = Object.entries(details).reduce((acc, [key, values]) => {
-        acc['details.' + key + '.value'] = {
-          $in: values
-        }
-        return acc
-      }, {})
-      match = { ...match, ...filters }
     }
 
     query.push({

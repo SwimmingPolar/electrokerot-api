@@ -1,4 +1,4 @@
-import { FilterType } from '../lib/converToNumbers'
+import { FilterType } from '../../../types'
 
 export const filterTypes: FilterType = {
   제조회사: {
@@ -46,6 +46,18 @@ export const filterTypes: FilterType = {
   },
   '쓰레드 수': {
     unit: '쓰레드',
+    shouldExist: true,
+    matchingType: 'exact',
+    shouldConvert: true
+  },
+  TDP: {
+    unit: 'W',
+    shouldExist: true,
+    matchingType: 'range',
+    shouldConvert: true
+  },
+  '제조 공정': {
+    unit: 'nm',
     shouldExist: true,
     matchingType: 'exact',
     shouldConvert: true

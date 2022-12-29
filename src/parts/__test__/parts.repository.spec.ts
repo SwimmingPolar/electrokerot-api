@@ -95,34 +95,9 @@ describe('unit test: PartsRepository', () => {
     it('should be defined', () => {
       expect(partsRepository.findPartsByFilters).toBeDefined()
     })
-    it('should return parts by filter', async () => {
-      const filter = {
-        제조회사: '인텔',
-        '코어 수': '8+4코어',
-        '쓰레드 수': '16+4쓰레드',
-        하이퍼스레딩: '○'
-      }
-      const details = Object.entries(filter).reduce((acc, [key, value]) => {
-        acc['details.' + key + '.value'] = value
-        return acc
-      }, {})
-      const result = [
-        {
-          _id: PartsStubs['cpu']._id
-        }
-      ] as Part[]
-      jest
-        .spyOn(partsRepository, 'findPartsByFilters')
-        .mockReturnValueOnce(Promise.resolve(result))
-      const parts = await partsRepository.findPartsByFilters({
-        category: Category['cpu'],
-        page: 1,
-        keyword: '12400',
-        details
-      })
-      expect(parts.length).toBe(1)
-      expect(parts[0]._id).toBe(PartsStubs['cpu']._id)
-    })
+    // @Issue: Can't test this function because of the aggregation pipeline
+    // 'search' stage only works on cloud mongodb
+    it.todo('should return parts by filter')
   })
 })
 

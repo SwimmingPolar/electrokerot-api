@@ -1,4 +1,4 @@
-import { FilterType } from '../lib/converToNumbers'
+import { FilterType } from '../../../types'
 
 export const filterTypes: FilterType = {
   제조회사: {
@@ -12,7 +12,7 @@ export const filterTypes: FilterType = {
     unitSteps: ['MB', 'GB', 'TB', 'PB'],
     hasMultiUnit: true,
     shouldExist: true,
-    matchingType: 'max',
+    matchingType: 'range',
     shouldConvert: true
   },
   두께: {

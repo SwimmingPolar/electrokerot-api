@@ -218,22 +218,7 @@
   },
   {
     "subCategory": "메모리 용량",
-    "values": [
-      "512MB",
-      "48GB",
-      "32GB",
-      "24GB",
-      "20GB",
-      "16GB",
-      "12GB",
-      "10GB",
-      "8GB",
-      "6GB",
-      "5GB",
-      "4GB",
-      "2GB",
-      "1GB"
-    ]
+    "values": ["~4GB", "4GB~8GB", "8GB~16GB", "16GB~32GB", "32GB~"]
   },
   {
     "subCategory": "전원 포트",

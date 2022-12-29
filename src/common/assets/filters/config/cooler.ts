@@ -1,4 +1,4 @@
-import { FilterType } from '../lib/converToNumbers'
+import { FilterType } from '../../../types'
 
 export const filterTypes: FilterType = {
   분류: {

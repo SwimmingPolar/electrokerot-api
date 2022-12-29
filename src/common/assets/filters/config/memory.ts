@@ -1,4 +1,4 @@
-import { FilterType } from '../lib/converToNumbers'
+import { FilterType } from '../../../types'
 
 export const filterTypes: FilterType = {
   제조회사: {
@@ -11,49 +11,42 @@ export const filterTypes: FilterType = {
     shouldExist: true,
     matchingType: 'exact'
   },
-  정격출력: {
-    unit: 'W',
+  '메모리 용량': {
+    unit: 'GB',
+    unitInterval: 1024,
+    unitSteps: ['MB', 'GB', 'TB', 'PB'],
+    hasMultiUnit: true,
     shouldExist: true,
-    matchingType: 'range',
+    matchingType: 'exact',
     shouldConvert: true
   },
-  '80PLUS인증': {
+  '동작클럭(대역폭)': {
     unit: '',
     shouldExist: true,
     matchingType: 'exact'
   },
-  케이블연결: {
+  램타이밍: {
     unit: '',
     shouldExist: true,
-    matchingType: 'exact'
+    matchingType: 'contains'
   },
-  깊이: {
-    unit: 'mm',
+  동작전압: {
+    unit: 'V',
     shouldExist: true,
-    matchingType: 'range',
+    matchingType: 'exact',
     shouldConvert: true
   },
-  'PCIe 16핀(12+4)': {
+  'LED 시스템': {
     unit: '',
     shouldExist: true,
     matchingType: 'exact'
   },
-  'PCIe 8핀(6+2)': {
-    unit: '',
-    shouldExist: true,
-    matchingType: 'exact'
-  },
-  'PCIe 6핀': {
+  히트싱크: {
     unit: '',
     shouldExist: true,
     matchingType: 'exact'
   },
   부가기능: {
-    unit: '',
-    shouldExist: true,
-    matchingType: 'exact'
-  },
-  'LED 시스템': {
     unit: '',
     shouldExist: true,
     matchingType: 'exact'

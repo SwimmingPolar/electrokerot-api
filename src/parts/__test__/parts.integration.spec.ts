@@ -230,22 +230,40 @@ describe('integration test: PartsModule', () => {
         expect(body[0].name.fullName).toBe(PartsStubs.cpu.name.fullName)
       })
       test('with category, page, query and filters', async () => {
-        const result: Part[] = []
+        const mockedFn = jest.fn()
         jest
           .spyOn(partsRepository, 'findPartsByFilters')
-          .mockResolvedValueOnce(result)
+          .mockImplementation(mockedFn)
+
         const filters = encodeURIComponent(
           JSON.stringify({
             제조회사: ['인텔', 'AMD'],
-            '코어 수': ['8+4코어', '8코어'],
-            '쓰레드 수': ['16+4쓰레드', '12쓰레드']
+            '코어 수': ['8코어', '12코어'],
+            'L3 캐시': ['~32MB', '64MB~128MB', '256MB~']
           })
         )
-        const { body } = await request
-          .get(`/parts/search?category=cpu&page=1&query=i5&filters=${filters}`)
-          .expect(200)
 
-        expect(body).toHaveLength(0)
+        await request.get(
+          `/parts/search?category=cpu&page=1&query=
+            ${encodeURIComponent('인텔 i5')}&filters=${filters}`
+        )
+
+        expect(mockedFn).toHaveBeenCalledWith({
+          category: 'cpu',
+          details: {
+            'L3 캐시': {
+              $or: [
+                { $lte: 32 },
+                { $and: [{ $gte: 64 }, { $lte: 128 }] },
+                { $gte: 256 }
+              ]
+            },
+            제조회사: { $in: [/인텔/i, /AMD/i] },
+            '코어 수': { $in: [8, 12] }
+          },
+          keyword: '인텔 i5',
+          page: 1
+        })
       })
     })
     describe('Status 400', () => {
