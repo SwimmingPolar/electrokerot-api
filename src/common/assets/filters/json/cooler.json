@@ -68,6 +68,10 @@
   { "subCategory": "냉각 방식", "values": ["공랭", "수랭"] },
   { "subCategory": "라디에이터", "values": ["1열", "2열", "3열"] },
   {
+    "subCategory": "TDP",
+    "values": ["~50W", "50W~100W", "100W~200W", "200W~300W", "300W~"]
+  },
+  {
     "subCategory": "팬 크기",
     "values": [
       "40mm",

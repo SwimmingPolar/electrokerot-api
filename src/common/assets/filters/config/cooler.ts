@@ -31,6 +31,12 @@ export const filterTypes: FilterType = {
     shouldExist: true,
     matchingType: 'exact'
   },
+  TDP: {
+    unit: 'W',
+    shouldExist: true,
+    matchingType: 'range',
+    shouldConvert: true
+  },
   '팬 크기': {
     unit: '',
     shouldExist: true,

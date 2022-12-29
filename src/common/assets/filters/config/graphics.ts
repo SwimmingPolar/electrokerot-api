@@ -78,6 +78,12 @@ export const filterTypes: FilterType = {
     matchingType: 'range',
     shouldConvert: true
   },
+  '쿠다 프로세서': {
+    unit: '개',
+    shouldExist: true,
+    matchingType: 'range',
+    shouldConvert: true
+  },
   '메모리 종류': {
     unit: '',
     shouldExist: true,
