@@ -22,7 +22,7 @@ const init = () => {
     }
 
     const json = fs.readFileSync(
-      `${process.env.PWD}/assets/filters/json/${partCategory}.json`,
+      `${process.env.PWD}/src/common/assets/filters/json/${partCategory}.json`,
       'utf8'
     )
 
@@ -54,7 +54,8 @@ export const parseFilters = (() => {
       partCategory = '_case'
     }
 
-    const query = {} as any
+    // We need to perform 'and' operation on each filters
+    const andQuery = [] as any
 
     // Prepare json file and config based on the category
     const { json, config } = FiltersObject[partCategory]
@@ -78,92 +79,76 @@ export const parseFilters = (() => {
         ).values
         const usersValueArray = filters[key]
 
-        // Check if the user's value exists in the original values array
-        const isValueExist = usersValueArray.every(value =>
+        // Filter out the values that doesn't exist in the json file
+        const sanitizedValues = usersValueArray.filter(value =>
           originalValuesArray.includes(value)
         )
 
-        // If the value doesn't exist, skip this filter
-        if (!isValueExist) {
-          continue
-        }
+        // Save the sanitized values to the filters object
+        filters[key] = sanitizedValues
       }
 
-      // Convert requested values to the correct type if necessary
-      // Temporary replace to store converted values
-      const temp = [] as number[]
-      if (shouldConvert) {
-        for (const value of filters[key]) {
-          // If it has multi units (ex, 1GB, 1TB, 1PB),
-          // it will be converted inside this function
-          temp.push(...(convertToNumbers(value, config[key]) as number[]))
-        }
-      }
-
-      // If 'shouldConvert' is true, use the converted values
-      // Otherwise, use the original values
-      const values = Array.from(
-        (shouldConvert ? temp : (filters[key] as any[]))
-          // Remove duplicate values
-          .reduce((set, value) => set.add(value), new Set())
-      )
+      // Place to hold the query for each filter
+      const query = {}
+      // Field name in the database
+      const fieldName = `details.${key}.value`
+      // Remove duplicate values
+      const values = [...new Set(filters[key])]
 
       switch (matchingType) {
         case 'exact':
-          query[key] = {
-            $in: values
+          // If conversion is needed, convert the values to numbers
+          const convertedValues =
+            shouldConvert &&
+            values.map(value => convertToNumbers(value, config[key])[0])
+
+          query[fieldName] = {
+            $in: shouldConvert ? convertedValues : values
           }
           break
 
         case 'contains':
           const regex = values.map(value => new RegExp(value as string, 'i'))
-          query[key] = {
+          query[fieldName] = {
             $in: regex
           }
           break
 
         case 'range':
-          query[key] = {
-            $or: filters[key].map(value => {
-              const [min, max] = convertToNumbers(
-                value,
-                config[key]
-              ) as number[]
+          query['$or'] = filters[key].map(value => {
+            const [min, max] = convertToNumbers(value, config[key]) as number[]
 
-              let query = {}
-              // In case of '~32GB', match anything that has less than 32GB
-              const onlyMax = /^~/.test(value)
-              if (onlyMax) {
-                query = {
-                  $lte: min
-                }
+            // In case of '~32GB', match anything that has less than 32GB
+            const onlyMax = /^~/.test(value)
+            if (onlyMax) {
+              return {
+                [fieldName]: { $lte: min }
               }
+            }
 
-              // In case of '32GB~', match anything that has greater than 32GB
-              const onlyMin = /~$/.test(value)
-              if (onlyMin) {
-                query = {
-                  $gte: min
-                }
+            // In case of '32GB~', match anything that has greater than 32GB
+            const onlyMin = /~$/.test(value)
+            if (onlyMin) {
+              return {
+                [fieldName]: { $gte: min }
               }
+            }
 
-              // Default case
-              if (!onlyMax && !onlyMin) {
-                query = {
-                  $and: [
-                    {
-                      $gte: min
-                    },
-                    {
-                      $lte: max
-                    }
-                  ]
-                }
+            // Default case
+            if (!onlyMax && !onlyMin) {
+              return {
+                $and: [
+                  {
+                    [fieldName]: { $gte: min }
+                  },
+                  {
+                    [fieldName]: { $lte: max }
+                  }
+                ]
               }
+            }
+          })
 
-              return query
-            })
-          }
           break
 
         // Reserved
@@ -174,7 +159,12 @@ export const parseFilters = (() => {
         case 'min':
           break
       }
+
+      andQuery.push(query)
     }
-    return query
+
+    return {
+      $and: andQuery
+    }
   }
 })()

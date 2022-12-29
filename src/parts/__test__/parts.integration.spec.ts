@@ -250,19 +250,30 @@ describe('integration test: PartsModule', () => {
 
         expect(mockedFn).toHaveBeenCalledWith({
           category: 'cpu',
+          page: 1,
+          keyword: 'i5',
           details: {
-            'L3 캐시': {
-              $or: [
-                { $lte: 32 },
-                { $and: [{ $gte: 64 }, { $lte: 128 }] },
-                { $gte: 256 }
-              ]
-            },
-            제조회사: { $in: [/인텔/i, /AMD/i] },
-            '코어 수': { $in: [8, 12] }
-          },
-          keyword: '인텔 i5',
-          page: 1
+            $and: [
+              {
+                'details.제조회사.value': { $in: [/인텔/i, /AMD/i] }
+              },
+              {
+                'details.코어 수.value': { $in: [8, 12] }
+              },
+              {
+                $or: [
+                  { 'details.L3 캐시.value': { $lte: 32 } },
+                  {
+                    $and: [
+                      { 'details.L3 캐시.value': { $gte: 64 } },
+                      { 'details.L3 캐시.value': { $lte: 128 } }
+                    ]
+                  },
+                  { 'details.L3 캐시.value': { $gte: 256 } }
+                ]
+              }
+            ]
+          }
         })
       })
     })

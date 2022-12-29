@@ -22,13 +22,13 @@ export class PartsRepository extends EntityRepository<Part> {
   async findPartsNamesByCategoryAndQuery(
     category: keyof typeof Category,
     query: string,
-    extraFilter?: any
+    vendorsFilter?: any
   ): Promise<string[]> {
     const match = Object.assign(
       {
         category
       },
-      extraFilter ? extraFilter : {}
+      vendorsFilter ? vendorsFilter : {}
     )
 
     const result =
@@ -149,7 +149,7 @@ export class PartsRepository extends EntityRepository<Part> {
     category: keyof typeof Category
     page: number
     keyword: string
-    details: { [key: string]: any[] }
+    details: any
     extraFilter?: any
   }) {
     // handle empty string
@@ -189,24 +189,9 @@ export class PartsRepository extends EntityRepository<Part> {
       {
         category
       },
+      details ? details : {},
       extraFilter ? extraFilter : {}
     )
-    Object.entries(details).forEach(([key, values]) => {
-      // Extract operator (ex, $and, $or)
-      const operator = Object.keys(values)[0]
-      // Assign array values to 'values' variable
-      values = values[operator]
-
-      if (['$and', '$or'].includes(operator)) {
-        match[operator] = values.map(value => ({
-          [`details.${key}.value`]: value
-        }))
-      } else {
-        match[`details.${key}.value`] = values
-      }
-    })
-    console.log(match)
-    console.log(JSON.stringify(match, null, 2))
 
     // If search keyword is provided, delegate the sorting to the full text search engine.
     // And variants information provided by the original data provider is used

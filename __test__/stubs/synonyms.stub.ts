@@ -8,6 +8,12 @@ export const SynonymsDocuments = [
   {
     _id: new ObjectId(),
     mappingType: 'equivalent' as MappingType,
+    synonyms: ['인텔', 'intel', '인탤'],
+    synonymType: 'vendor' as SynonymType
+  },
+  {
+    _id: new ObjectId(),
+    mappingType: 'equivalent' as MappingType,
     synonyms: ['asus', '에이수스', '에이서스', '아수스'],
     synonymType: 'vendor' as SynonymType
   },
@@ -27,7 +33,7 @@ export const SynonymsDocuments = [
     _id: new ObjectId(),
     mappingType: 'equivalent' as MappingType,
     synonyms: ['strix', '스트릭스'],
-    synonymType: 'vendor' as SynonymType
+    synonymType: 'word' as SynonymType
   },
   {
     _id: new ObjectId(),

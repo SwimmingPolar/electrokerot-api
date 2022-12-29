@@ -21,10 +21,13 @@ export class PartsService {
     // transform separated vendors into filters that mongodb can understand
     const vendorsFilter = transformVendorsListIntoFilter({}, vendorsInQuery)
 
+    // Convert vendors filter into mongodb understandable format
+    const parsedDetailsFilter = parseFilters(category, vendorsFilter)
+
     return await this.partsRepository.findPartsNamesByCategoryAndQuery(
       category,
       replacedQuery,
-      vendorsFilter
+      parsedDetailsFilter
     )
   }
 
@@ -34,17 +37,16 @@ export class PartsService {
     query,
     filters: details
   }: SearchPartsQuery) {
-    // parse details filter into mongodb understandable format
-    const parsedDetailsFilter = parseFilters(category, details)
-
     // Replace search query string with synonyms
     // and separate vendors from search query string
     const { query: replacedQuery, vendorsInQuery } =
       await this.synonymsService.replaceQueryWithSynonyms(query)
 
-    // Concat vendors list to the filter if it exists
-    console.log(parsedDetailsFilter)
-    transformVendorsListIntoFilter(parsedDetailsFilter, vendorsInQuery)
+    // Concat vendors list to the vendor filter
+    details = transformVendorsListIntoFilter(details, vendorsInQuery)
+
+    // parse details filter into mongodb understandable format
+    const parsedDetailsFilter = parseFilters(category, details)
 
     return await this.partsRepository.findPartsByFilters({
       category,

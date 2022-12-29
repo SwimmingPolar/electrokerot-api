@@ -28,10 +28,18 @@ export class SynonymsService {
     tokens.forEach(token => {
       synonyms.forEach(synonym => {
         if (synonym.synonyms.includes(token)) {
-          query = query.replace(token, synonym.synonyms[0])
-
           if (synonym.synonymType === 'vendor') {
+            // @Todo: 어떻게 하지?
+            //        A. 단어를 치환한다.
+            //        B. 단어를 제거한다.
+            // A. 단어를 치환한다. (예: '삼성' -> 'samsung')
+            // query = query.replace(token, synonym.synonyms[0])
+
+            // B. 단어를 제거한다. (예: '삼성' -> '')
+            query = query.replace(token, '')
             vendorsInQuery.push(synonym.synonyms[0])
+          } else {
+            query = query.replace(token, synonym.synonyms[0])
           }
 
           replacementCount--

@@ -1,10 +1,13 @@
 export const transformVendorsListIntoFilter = (
-  query: any,
+  filters: Record<string, string[]>,
   vendorsList: string[]
 ) => {
-  return vendorsList.length !== 0
-    ? (query['제조회사'].$in = [...query['제조회사'].$in].concat(
-        vendorsList.map(vendor => new RegExp(vendor, 'i'))
-      ))
-    : query
+  if (vendorsList.length === 0) {
+    return filters
+  }
+
+  const 제조회사 = filters['제조회사'] ?? []
+  filters['제조회사'] = [...제조회사, ...vendorsList]
+
+  return filters
 }
