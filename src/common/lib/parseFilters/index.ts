@@ -95,15 +95,17 @@ export const parseFilters = (() => {
       // Remove duplicate values
       const values = [...new Set(filters[key])]
 
+      let convertedValue: (string | number)[]
+
       switch (matchingType) {
         case 'exact':
           // If conversion is needed, convert the values to numbers
-          const convertedValues =
+          convertedValue =
             shouldConvert &&
             values.map(value => convertToNumbers(value, config[key])[0])
 
           query[fieldName] = {
-            $in: shouldConvert ? convertedValues : values
+            $in: shouldConvert ? convertedValue : values
           }
           break
 
@@ -151,12 +153,24 @@ export const parseFilters = (() => {
 
           break
 
-        // Reserved
         case 'max':
+          convertedValue = values.map(
+            value => convertToNumbers(value, config[key])[0]
+          )
+
+          query[fieldName] = {
+            $lte: convertedValue
+          }
           break
 
-        // Reserved
         case 'min':
+          convertedValue = values.map(
+            value => convertToNumbers(value, config[key])[0]
+          )
+
+          query[fieldName] = {
+            $gte: convertedValue
+          }
           break
       }
 
