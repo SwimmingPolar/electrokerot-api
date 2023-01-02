@@ -5,14 +5,22 @@
   },
   {
     "subCategory": "디스크 용량",
-    "values": ["~1TB", "1TB~2TB", "2TB~5TB", "5TB~10TB", "10TB~20TB", "20TB~"]
-  },
-  {
-    "subCategory": "두께",
-    "values": ["20.2mm", "20mm", "26.1mm", "26.11mm", "26mm"]
+    "values": [
+      "500GB",
+      "1TB",
+      "2TB",
+      "3TB",
+      "4TB",
+      "5TB",
+      "6TB",
+      "8TB",
+      "10TB",
+      "12TB",
+      "14TB"
+    ]
   },
   {
     "subCategory": "전송 속도",
-    "values": ["~100MV/s", "100MB/s~200MB/s", "100MB/s~300MB/s", "300MB/s~"]
+    "values": ["~100MB/s", "100-200MB/s", "100-300MB/s", "300MB/s~"]
   }
 ]

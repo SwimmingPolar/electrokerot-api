@@ -54,6 +54,7 @@ export const convertToNumbers = (
   }
 
   const convertedValue = value
+    .replace(/-/g, '~')
     // split the value if it has range value (ex, 1,000.00~2,000+500 MHz)
     .split('~')
     // iterate each token (["1,000.00", "2,000+500MHz"])

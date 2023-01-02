@@ -69,7 +69,7 @@
   { "subCategory": "라디에이터", "values": ["1열", "2열", "3열"] },
   {
     "subCategory": "TDP",
-    "values": ["~50W", "50W~100W", "100W~200W", "200W~300W", "300W~"]
+    "values": ["~50W", "50-100W", "100-200W", "200-300W", "300W~"]
   },
   {
     "subCategory": "팬 크기",
@@ -161,16 +161,16 @@
   },
   {
     "subCategory": "최대 소음",
-    "values": ["~15dBA", "15dBA~30dBA", "30dBA~45dBA", "45dBA~"]
+    "values": ["~15dBA", "15-30dBA", "30-45dBA", "45dBA~"]
   },
   {
     "subCategory": "최대 팬속도",
     "values": [
       "~1500RPM",
-      "1500RPM~3000RPM",
-      "3000RPM~4500RPM",
-      "4500RPM~6000RPM",
-      "6000RPM~7500RPM",
+      "1500-3000RPM",
+      "3000-4500RPM",
+      "4500-6000RPM",
+      "6000-7500RPM",
       "7500RPM~"
     ]
   },
@@ -178,35 +178,21 @@
     "subCategory": "최대 풍량",
     "values": [
       "~25CFM",
-      "25CFM~50CFM",
-      "50CFM~75CFM",
-      "75CFM~100CFM",
-      "100CFM~125CFM",
-      "125CFM~150CFM",
+      "25-50CFM",
+      "50-75CFM",
+      "75-100CFM",
+      "100-125CFM",
+      "125-150CFM",
       "150CFM~"
     ]
   },
   {
     "subCategory": "최대 풍압",
-    "values": [
-      "~1.5mmH2O",
-      "1.5mmH2O~3mmH2O",
-      "3mmH2O~4.5mmH2O",
-      "4.5mmH2O~6mmH2O",
-      "6mmH2O~7.5mmH2O",
-      "7.5mmH2O~"
-    ]
+    "values": ["~2mmH2O", "2-4mmH2O", "4-6mmH2O", "6mmH2O~"]
   },
   {
     "subCategory": "최저 소음",
-    "values": [
-      "~5dBA",
-      "5dBA~10dBA",
-      "10dBA~15dBA",
-      "15dBA~20dBA",
-      "20dBA~25dBA",
-      "25dBA~"
-    ]
+    "values": ["~5dBA", "5-10dBA", "10-15dBA", "15-20dBA", "20-25dBA", "25dBA~"]
   },
   {
     "subCategory": "컨넥터",
@@ -223,11 +209,11 @@
   },
   {
     "subCategory": "쿨러 높이",
-    "values": ["~50mm", "50mm~100mm", "100mm~150mm", "150mm~"]
+    "values": ["~50mm", "50-100mm", "100-150mm", "150mm~"]
   },
   {
     "subCategory": "히트파이프",
-    "values": ["1개~2개", "3개~4개", "5개~6개", "7개~8개", "9개~10개", "11개~"]
+    "values": ["1-2개", "3-4개", "5-6개", "7-8개", "9-10개", "11개~"]
   },
   {
     "subCategory": "LED색상",

@@ -30,7 +30,7 @@ export const filterTypes: FilterType = {
   '권장 파워용량': {
     unit: 'W',
     shouldExist: true,
-    matchingType: 'exact',
+    matchingType: 'min',
     shouldConvert: true
   },
   '팬 개수': {
@@ -57,9 +57,10 @@ export const filterTypes: FilterType = {
     shouldConvert: true
   },
   '모니터 지원': {
-    unit: '',
+    unit: '개',
     shouldExist: true,
-    matchingType: 'exact'
+    matchingType: 'min',
+    shouldConvert: true
   },
   냉각방식: {
     unit: '',
@@ -121,14 +122,16 @@ export const filterTypes: FilterType = {
     matchingType: 'exact'
   },
   DisplayPort: {
-    unit: '',
+    unit: '개',
     shouldExist: true,
-    matchingType: 'contains'
+    matchingType: 'min',
+    shouldConvert: true
   },
   HDMI: {
-    unit: '',
+    unit: '개',
     shouldExist: true,
-    matchingType: 'exact'
+    matchingType: 'exact',
+    shouldConvert: true
   },
   부가기능: {
     unit: '',

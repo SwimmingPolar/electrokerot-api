@@ -97,25 +97,11 @@
   },
   {
     "subCategory": "기본 클럭",
-    "values": [
-      "~1.0GHz",
-      "1.0GHz~2.0GHz",
-      "2.0GHz~3.0GHz",
-      "3.0GHz~4.0GHz",
-      "4.0GHz~5.0GHz",
-      "5.0Ghz~"
-    ]
+    "values": ["~1GHz", "1-2GHz", "2-3GHz", "3-4GHz", "4-5GHz", "5Ghz~"]
   },
   {
     "subCategory": "최대 클럭",
-    "values": [
-      "~1.0GHz",
-      "1.0GHz~2.0GHz",
-      "2.0GHz~3.0GHz",
-      "3.0GHz~4.0GHz",
-      "4.0GHz~5.0GHz",
-      "5.0Ghz~"
-    ]
+    "values": ["~1GHz", "1-2GHz", "2-3GHz", "3-4GHz", "4-5GHz", "5Ghz~"]
   },
   {
     "subCategory": "코어 수",
@@ -161,7 +147,7 @@
   },
   {
     "subCategory": "TDP",
-    "values": ["~100W", "100W~150W", "150W~200W", "200W~250W", "250W~"]
+    "values": ["~100W", "100-150W", "150-200W", "200-250W", "250W~"]
   },
   {
     "subCategory": "제조 공정",
@@ -187,7 +173,7 @@
   },
   {
     "subCategory": "최대 메모리 크기",
-    "values": ["64GB", "128GB", "256GB", "1TB", "2TB", "4TB", "4.5TB", "6TB"]
+    "values": ["64GB", "128GB", "256GB", "1TB", "2TB", "4TB", "8TB"]
   },
   {
     "subCategory": "최대 PCIe 레인수",
@@ -204,11 +190,11 @@
   },
   {
     "subCategory": "L2 캐시",
-    "values": ["~4MB", "4MB~8MB", "8MB~16MB", "16MB~32MB", "32MB~"]
+    "values": ["~4MB", "4-8MB", "8-16MB", "16-32MB", "32MB~"]
   },
   {
     "subCategory": "L3 캐시",
-    "values": ["~32MB", "32MB~64MB", "64MB~128MB", "128MB~256MB", "256MB~"]
+    "values": ["~32MB", "32-64MB", "64-128MB", "128-256MB", "256MB~"]
   },
   {
     "subCategory": "패키지 형태",
