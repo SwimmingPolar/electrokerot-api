@@ -157,7 +157,7 @@
     "subCategory": "메모리 규격",
     "values": ["DDR5", "DDR4", "DDR3L"]
   },
-  { "subCategory": "메모리 채널", "values": ["2", "4", "6", "8"] },
+  { "subCategory": "메모리 채널", "values": ["2개", "4개", "6개", "8개"] },
   {
     "subCategory": "메모리 클럭",
     "values": [
