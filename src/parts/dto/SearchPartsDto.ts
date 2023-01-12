@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer'
 import {
+  IsArray,
   IsEnum,
   IsNumber,
   IsObject,
@@ -9,12 +10,18 @@ import {
   MaxLength,
   Min,
   registerDecorator,
+  ValidateNested,
   ValidationArguments,
   ValidationOptions
 } from 'class-validator'
 import { Category } from '../../common/types'
 
-export class SearchPartsQuery {
+export type FiltersType = {
+  filterName: string
+  filterOptions: string[]
+}[]
+
+export class SearchPartsBody {
   @IsEnum(Category)
   category: keyof typeof Category
 
@@ -30,11 +37,22 @@ export class SearchPartsQuery {
   @IsOptional()
   query: string
 
-  @Transform(({ value }) => JSON.parse(decodeURIComponent(value)))
-  @IsObject()
-  @IsFilter('filters', { message: 'Invalid filter value' })
+  @IsObject({ each: true })
+  @Transform(({ value }) => {
+    // Parse only on string values
+    // otherwise will get 500 internal error
+    // @Issue: there's no 'stop on error' feature for now
+    if (typeof value === 'string') {
+      return JSON.parse(value)
+    } else {
+      return {}
+    }
+  })
+  @IsFilter('filters', {
+    message: 'Invalid filter value'
+  })
   @IsOptional()
-  filters: Record<string, string[]>
+  filters: FiltersType
 }
 
 function IsFilter(property: string, validationOptions?: ValidationOptions) {
@@ -48,30 +66,31 @@ function IsFilter(property: string, validationOptions?: ValidationOptions) {
       validator: {
         validate(value: any, args: ValidationArguments) {
           const [relatedPropertyName] = args.constraints
-          const filter = (args.object as any)[relatedPropertyName]
-          // const { filter } = args.object as { filter: Record<string, string[]> }
-          for (const key of Object.keys(filter)) {
-            // key must be string and its value must be an array
-            if (typeof key !== 'string' || !Array.isArray(filter[key])) {
-              return false
-            }
-            // limit key length to 100
-            if (key?.length > 100) {
-              return false
-            }
+          const filters = (args.object as any)[relatedPropertyName] as {
+            filterName: string
+            filterOptions: string[]
+          }[]
 
-            // filter value must be an array of strings
-            filter[key].forEach(value => {
-              if (typeof value !== 'string') {
-                return false
-              }
-              // limit value length to 100
-              if (value?.length > 100) {
-                return false
-              }
-            })
+          // Without this, will get 500 internal error
+          // @Issue: there's no 'stop on error' feature for now
+          if (!Array.isArray(filters)) {
+            return false
           }
-          return true
+
+          // Examine the length of the filter name and filter options
+          return filters?.every(({ filterName, filterOptions }) => {
+            // limit the length of the filter name to 100
+            if (filterName?.length > 100) {
+              return false
+            }
+            return filterOptions?.every(filterOption => {
+              // limit the length of the individual filter option to 100
+              if (filterOption?.length > 100) {
+                return false
+              }
+              return true
+            })
+          })
         }
       }
     })

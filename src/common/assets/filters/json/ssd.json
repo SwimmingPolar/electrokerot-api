@@ -83,16 +83,8 @@
     ]
   },
   {
-    "subCategory": "인터페이스",
-    "values": [
-      "PCIe3.0x2 (16GT/s)",
-      "PCIe3.0x4 (32GT/s)",
-      "PCIe4.0x4 (64GT/s)",
-      "SATA3 (6Gb/s)",
-      "SATA3(6Gb/s)",
-      "U.2 (PCIe3.0x4)",
-      "U.2 (PCIe4.0x4)"
-    ]
+    "subCategory": "용량",
+    "values": ["~1TB", "1-2TB", "2-5TB", "5-10TB", "10-20TB", "20TB~"]
   },
   {
     "subCategory": "폼팩터",
@@ -106,10 +98,6 @@
     ]
   },
   {
-    "subCategory": "용량",
-    "values": ["~1TB", "1-2TB", "2-5TB", "5-10TB", "10-20TB", "20TB~"]
-  },
-  {
     "subCategory": "메모리 타입",
     "values": [
       "TLC",
@@ -120,6 +108,18 @@
       "MLC(기타)",
       "QLC",
       "cMLC"
+    ]
+  },
+  {
+    "subCategory": "인터페이스",
+    "values": [
+      "PCIe3.0x2 (16GT/s)",
+      "PCIe3.0x4 (32GT/s)",
+      "PCIe4.0x4 (64GT/s)",
+      "SATA3 (6Gb/s)",
+      "SATA3(6Gb/s)",
+      "U.2 (PCIe3.0x4)",
+      "U.2 (PCIe4.0x4)"
     ]
   },
   {

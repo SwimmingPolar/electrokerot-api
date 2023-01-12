@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { FiltersType } from 'src/parts/dto/SearchPartsDto'
 import * as filterConfig from '../../assets/filters/config'
 import { Category, FilterConfiguration, FilterJson } from '../../types'
 import { convertToNumbers } from '../convertToNumbers/index'
@@ -40,7 +41,7 @@ export const parseFilters = (() => {
 
   return (
     category: keyof typeof Category,
-    filters: Record<string, string[]>
+    filters: FiltersType
   ): { [key: string]: any } => {
     if (!filters) {
       return {}
@@ -60,13 +61,14 @@ export const parseFilters = (() => {
     // Prepare json file and config based on the category
     const { json, config } = FiltersObject[partCategory]
 
-    for (const key in filters) {
-      const { shouldExist, matchingType, shouldConvert } = config[key] || {}
+    for (const { filterName, filterOptions } of filters) {
+      const { shouldExist, matchingType, shouldConvert } =
+        config[filterName] || {}
 
       // Extract trustable details key from the config file
       const detailsKey = Object.keys(FiltersObject[partCategory].config)
       // If the key given by the user doesn't exist in the config file, ignore it
-      if (!detailsKey.includes(key)) {
+      if (!detailsKey.includes(filterName)) {
         continue
       }
 
@@ -75,25 +77,27 @@ export const parseFilters = (() => {
       if (shouldExist) {
         // Trustable values saved in the json file at backend
         const originalValuesArray = json.find(
-          ({ category, subCategory }) => category === key || subCategory === key
+          ({ category, subCategory }) =>
+            category === filterName || subCategory === filterName
         ).values
-        const usersValueArray = filters[key]
+        const usersValueArray = filterOptions
 
         // Filter out the values that doesn't exist in the json file
         const sanitizedValues = usersValueArray.filter(value =>
           originalValuesArray.includes(value)
         )
 
-        // Save the sanitized values to the filters object
-        filters[key] = sanitizedValues
+        // Empty the original user's value array and
+        // save the sanitized values to the filters object
+        filterOptions.splice(0, filterOptions.length, ...sanitizedValues)
       }
 
       // Place to hold the query for each filter
       const query = {}
       // Field name in the database
-      const fieldName = `details.${key}.value`
+      const fieldName = `details.${filterName}.value`
       // Remove duplicate values
-      const values = [...new Set(filters[key])]
+      const values = [...new Set(filterOptions)]
 
       let convertedValue: (string | number)[]
 
@@ -102,7 +106,7 @@ export const parseFilters = (() => {
           // If conversion is needed, convert the values to numbers
           convertedValue =
             shouldConvert &&
-            values.map(value => convertToNumbers(value, config[key])[0])
+            values.map(value => convertToNumbers(value, config[filterName])[0])
 
           query[fieldName] = {
             $in: shouldConvert ? convertedValue : values
@@ -117,8 +121,11 @@ export const parseFilters = (() => {
           break
 
         case 'range':
-          query['$or'] = filters[key].map(value => {
-            const [min, max] = convertToNumbers(value, config[key]) as number[]
+          query['$or'] = filterOptions.map(value => {
+            const [min, max] = convertToNumbers(
+              value,
+              config[filterName]
+            ) as number[]
 
             // In case of '~32GB', match anything that has less than 32GB
             const onlyMax = /^~/.test(value)
@@ -155,7 +162,7 @@ export const parseFilters = (() => {
 
         case 'max':
           convertedValue = values.map(
-            value => convertToNumbers(value, config[key])[0]
+            value => convertToNumbers(value, config[filterName])[0]
           )
 
           query[fieldName] = {
@@ -165,7 +172,7 @@ export const parseFilters = (() => {
 
         case 'min':
           convertedValue = values.map(
-            value => convertToNumbers(value, config[key])[0]
+            value => convertToNumbers(value, config[filterName])[0]
           )
 
           query[fieldName] = {

@@ -66,7 +66,6 @@
       "topower"
     ]
   },
-  { "subCategory": "제품 분류", "values": ["ATX 파워", "M-ATX(SFX) 파워"] },
   {
     "subCategory": "정격출력",
     "values": [
@@ -93,6 +92,7 @@
     "subCategory": "케이블연결",
     "values": ["세미모듈러", "케이블일체형", "풀모듈러"]
   },
+  { "subCategory": "제품 분류", "values": ["ATX 파워", "M-ATX(SFX) 파워"] },
   {
     "subCategory": "깊이",
     "values": ["~100mm", "100-150mm", "150-200mm", "200-250mm", "250mm~"]

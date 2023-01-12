@@ -215,7 +215,12 @@ describe('integration test: PartsModule', () => {
     describe('Status 200', () => {
       test('with just the category', async () => {
         const { body } = await request
-          .get('/parts/search?category=cpu')
+          .post('/parts/search')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .send({
+            category: 'cpu'
+          })
           .expect(200)
 
         expect(body).toHaveLength(1)
@@ -223,7 +228,13 @@ describe('integration test: PartsModule', () => {
       })
       test('with category and page', async () => {
         const { body } = await request
-          .get('/parts/search?category=cpu&page=1')
+          .post('/parts/search')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .send({
+            category: 'cpu',
+            page: 1
+          })
           .expect(200)
 
         expect(body).toHaveLength(1)
@@ -235,23 +246,34 @@ describe('integration test: PartsModule', () => {
           .spyOn(partsRepository, 'findPartsByFilters')
           .mockImplementation(mockedFn)
 
-        const filters = encodeURIComponent(
-          JSON.stringify({
-            제조회사: ['인텔', 'AMD'],
-            '코어 수': ['8코어', '12코어'],
-            'L3 캐시': ['~32MB', '64MB~128MB', '256MB~']
-          })
-        )
+        const filters = [
+          {
+            filterName: '제조회사',
+            filterOptions: ['인텔', 'AMD']
+          },
+          {
+            filterName: '코어 수',
+            filterOptions: ['8코어', '12코어']
+          },
+          {
+            filterName: 'L3 캐시',
+            filterOptions: ['~32MB', '64-128MB', '256MB~']
+          }
+        ]
 
-        await request.get(
-          `/parts/search?category=cpu&page=1&query=
-            ${encodeURIComponent('인텔 i5')}&filters=${filters}`
-        )
+        await request
+          .post('/parts/search')
+          .set('Accept', 'application/json')
+          .send({
+            category: 'cpu',
+            page: 1,
+            query: '인텔 i5',
+            filters: JSON.stringify(filters)
+          })
+          .expect(200)
 
         expect(mockedFn).toHaveBeenCalledWith({
           category: 'cpu',
-          page: 1,
-          keyword: 'i5',
           details: {
             $and: [
               {
@@ -273,36 +295,56 @@ describe('integration test: PartsModule', () => {
                 ]
               }
             ]
-          }
+          },
+          keyword: 'i5',
+          page: 1
         })
       })
     })
     describe('Status 400', () => {
       test('without category', async () => {
-        await request.get('/parts/search').expect(400)
+        await request.post('/parts/search').expect(400)
       })
       test('with invalid category', async () => {
-        await request.get('/parts/search?category=invalid').expect(400)
+        await request.post('/parts/search?category=invalid').expect(400)
+      })
+      test('with invalid filters value', async () => {
+        const { body } = await request
+          .post('/parts/search')
+          .send({
+            category: 'cpu',
+            filters: {}
+          })
+          .expect(400)
       })
       test('with very long query keyword', async () => {
-        const keyword = encodeURIComponent('a'.repeat(101))
         await request
-          .get(`/parts/search?category=memory&query=${keyword}`)
+          .post('/parts/search')
+          .send({
+            category: 'cpu',
+            query: 'a'.repeat(101)
+          })
           .expect(400)
       })
       test('with very long filter key and value', async () => {
-        const key = 'a'.repeat(101)
-        const filters = encodeURIComponent(
-          JSON.stringify({
-            [key]: ['a'.repeat(101)]
-          })
-        )
         await request
-          .get(`/parts/search?category=cpu&filters=${filters}`)
+          .post('/parts/search')
+          .send({
+            category: 'cpu',
+            filters: JSON.stringify({
+              ['a'.repeat(101)]: ['b'.repeat(101)]
+            })
+          })
           .expect(400)
       })
       test('with very big page number', async () => {
-        await request.get('/parts/search?category=cpu&page=10000').expect(400)
+        await request
+          .post('/parts/search')
+          .send({
+            category: 'cpu',
+            page: 10000
+          })
+          .expect(400)
       })
     })
   })

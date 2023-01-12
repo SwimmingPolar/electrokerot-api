@@ -1,6 +1,6 @@
-import { Controller, Get, Query } from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Post, Query } from '@nestjs/common'
 import { PartsIdsQuery } from './dto/GetPartsByIdsDto'
-import { SearchPartsQuery } from './dto/SearchPartsDto'
+import { SearchPartsBody } from './dto/SearchPartsDto'
 import { SearchQueriesQuery } from './dto/SearchQueriesDto'
 import { PartsService } from './parts.service'
 
@@ -18,8 +18,9 @@ export class PartsController {
     return await this.partsService.getSearchQueries(searchQueriesQuery)
   }
 
-  @Get('search')
-  async searchParts(@Query() searchPartsQuery: SearchPartsQuery) {
-    return await this.partsService.searchParts(searchPartsQuery)
+  @Post('search')
+  @HttpCode(200)
+  async searchParts(@Body() searchPartsBody: SearchPartsBody) {
+    return await this.partsService.searchParts(searchPartsBody)
   }
 }

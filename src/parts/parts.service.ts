@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { ObjectId } from 'mongodb'
 import { SynonymsService } from '../synonyms/synonyms.service'
-import { SearchPartsQuery } from './dto/SearchPartsDto'
+import { SearchPartsBody } from './dto/SearchPartsDto'
 import { SearchQueriesQuery } from './dto/SearchQueriesDto'
 import { PartsRepository } from './parts.repository'
 import { transformVendorsListIntoFilter } from '../common/lib'
@@ -19,7 +19,7 @@ export class PartsService {
     const { query: replacedQuery, vendorsInQuery } =
       await this.synonymsService.replaceQueryWithSynonyms(query)
     // transform separated vendors into filters that mongodb can understand
-    const vendorsFilter = transformVendorsListIntoFilter({}, vendorsInQuery)
+    const vendorsFilter = transformVendorsListIntoFilter([], vendorsInQuery)
 
     // Convert vendors filter into mongodb understandable format
     const parsedDetailsFilter = parseFilters(category, vendorsFilter)
@@ -36,7 +36,7 @@ export class PartsService {
     page,
     query,
     filters: details
-  }: SearchPartsQuery) {
+  }: SearchPartsBody) {
     // Replace search query string with synonyms
     // and separate vendors from search query string
     const { query: replacedQuery, vendorsInQuery } =
