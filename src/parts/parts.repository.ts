@@ -205,6 +205,8 @@ export class PartsRepository extends EntityRepository<Part> {
       $match: match
     })
 
+    console.log(JSON.stringify(query))
+
     return await this.aggregate([
       ...query,
       {

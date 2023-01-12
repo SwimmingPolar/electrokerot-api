@@ -62,6 +62,10 @@ export const parseFilters = (() => {
     const { json, config } = FiltersObject[partCategory]
 
     for (const { filterName, filterOptions } of filters) {
+      if (filterOptions.length === 0) {
+        continue
+      }
+
       const { shouldExist, matchingType, shouldConvert } =
         config[filterName] || {}
 
@@ -184,8 +188,10 @@ export const parseFilters = (() => {
       andQuery.push(query)
     }
 
-    return {
-      $and: andQuery
-    }
+    return andQuery.length === 0
+      ? undefined
+      : {
+          $and: andQuery
+        }
   }
 })()
