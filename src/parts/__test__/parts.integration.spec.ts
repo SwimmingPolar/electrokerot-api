@@ -300,6 +300,107 @@ describe('integration test: PartsModule', () => {
           page: 1
         })
       })
+      test('with excluding filters options', async () => {
+        const spy = jest.spyOn(partsRepository, 'findPartsByFilters')
+
+        const filters = [
+          {
+            filterName: '제조회사',
+            filterOptions: ['!!인텔', 'AMD']
+          },
+          {
+            filterName: '코어 수',
+            filterOptions: ['8코어', '!!12코어']
+          },
+          {
+            filterName: 'L3 캐시',
+            filterOptions: ['~32MB', '!!64-128MB', '256MB~']
+          }
+        ]
+
+        await request
+          .post('/parts/search')
+          .set('Accept', 'application/json')
+          .send({
+            category: 'cpu',
+            filters: JSON.stringify(filters)
+          })
+          .expect(200)
+
+        expect(spy).toHaveBeenCalledWith({
+          category: 'cpu',
+          page: undefined,
+          keyword: undefined,
+          details: {
+            $and: [
+              {
+                $and: [
+                  {
+                    'details.제조회사.value': {
+                      $in: [/AMD/i]
+                    }
+                  },
+                  {
+                    'details.제조회사.value': {
+                      $not: {
+                        $in: [/인텔/i]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                $and: [
+                  {
+                    'details.코어 수.value': {
+                      $in: [8]
+                    }
+                  },
+                  {
+                    'details.코어 수.value': {
+                      $not: {
+                        $in: [12]
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                $or: [
+                  {
+                    'details.L3 캐시.value': {
+                      $lte: 32
+                    }
+                  },
+                  {
+                    $nor: [
+                      {
+                        $and: [
+                          {
+                            'details.L3 캐시.value': {
+                              $gte: 64
+                            }
+                          },
+                          {
+                            'details.L3 캐시.value': {
+                              $lte: 128
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    'details.L3 캐시.value': {
+                      $gte: 256
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        })
+      })
     })
     describe('Status 400', () => {
       test('without category', async () => {

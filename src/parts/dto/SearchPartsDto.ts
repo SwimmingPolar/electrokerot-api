@@ -1,6 +1,5 @@
 import { Transform } from 'class-transformer'
 import {
-  IsArray,
   IsEnum,
   IsNumber,
   IsObject,
@@ -10,7 +9,6 @@ import {
   MaxLength,
   Min,
   registerDecorator,
-  ValidateNested,
   ValidationArguments,
   ValidationOptions
 } from 'class-validator'

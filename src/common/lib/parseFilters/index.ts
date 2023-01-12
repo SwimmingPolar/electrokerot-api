@@ -44,7 +44,7 @@ export const parseFilters = (() => {
     filters: FiltersType
   ): { [key: string]: any } => {
     if (!filters) {
-      return {}
+      return undefined
     }
 
     let partCategory = category as keyof typeof filterConfig
@@ -87,8 +87,10 @@ export const parseFilters = (() => {
         const usersValueArray = filterOptions
 
         // Filter out the values that doesn't exist in the json file
-        const sanitizedValues = usersValueArray.filter(value =>
-          originalValuesArray.includes(value)
+        const sanitizedValues = usersValueArray.filter(
+          value =>
+            originalValuesArray.includes(value) ||
+            originalValuesArray.includes(value.replace(/^!!/, ''))
         )
 
         // Empty the original user's value array and
@@ -97,7 +99,7 @@ export const parseFilters = (() => {
       }
 
       // Place to hold the query for each filter
-      const query = {}
+      let query = {}
       // Field name in the database
       const fieldName = `details.${filterName}.value`
       // Remove duplicate values
@@ -107,25 +109,144 @@ export const parseFilters = (() => {
 
       switch (matchingType) {
         case 'exact':
-          // If conversion is needed, convert the values to numbers
-          convertedValue =
-            shouldConvert &&
-            values.map(value => convertToNumbers(value, config[filterName])[0])
-
-          query[fieldName] = {
-            $in: shouldConvert ? convertedValue : values
-          }
-          break
-
         case 'contains':
-          const regex = values.map(value => new RegExp(value as string, 'i'))
-          query[fieldName] = {
-            $in: regex
-          }
+          // Sample query for 'exact' matching type
+          // {
+          //   $and: [
+          //     {
+          //       'details.제조회사.value': { $not: { $in: [/AMD/i] } }
+          //     },
+          //     {
+          //       'details.제조회사.value': { $in: [/인텔/i] }
+          //     }
+          //   ]
+          // }
+
+          // Split the values into two arrays (values to include and values to exclude)
+          const valuesToInclude =
+            values.filter(value => value.startsWith('!!') === false) || []
+          const valuesToExclude =
+            values
+              // Values which are to be excluded in the query result
+              .filter(value => !valuesToInclude.includes(value))
+              // Remove the '!!' from the value
+              .map(value => value.replace(/^!!/, '')) || []
+
+          const queriesArray = [valuesToInclude, valuesToExclude]
+            // Remove empty arrays
+            .filter(e => e.length > 0)
+            .map((values, index) => {
+              // If conversion is needed, convert the values to numbers
+              convertedValue =
+                shouldConvert &&
+                values.map(
+                  value => convertToNumbers(value, config[filterName])[0]
+                )
+              let queryValues: (number | string | RegExp)[] = shouldConvert
+                ? convertedValue
+                : values
+              if (matchingType === 'contains') {
+                queryValues = queryValues.map(
+                  value => new RegExp(value as string, 'i')
+                )
+              }
+
+              return {
+                [fieldName]:
+                  // Element with index 0 is the values to include and
+                  // element with index 1 is the values to exclude
+                  index === 1
+                    ? {
+                        // Set $not operator to exclude the values
+                        $not: { $in: queryValues }
+                      }
+                    : { $in: queryValues }
+              }
+            })
+
+          // If there are more than one query, wrap them in $and operator
+          query =
+            queriesArray.length > 1 ? { $and: queriesArray } : queriesArray[0]
           break
 
         case 'range':
+          // Sample query for 'range' matching type
+          // $and: [
+          //   {
+          //     $and: [
+          //       {
+          //         'details.제조회사.value': {
+          //           $in: [/AMD/i]
+          //         }
+          //       },
+          //       {
+          //         'details.제조회사.value': {
+          //           $not: {
+          //             $in: [/인텔/i]
+          //           }
+          //         }
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     $and: [
+          //       {
+          //         'details.코어 수.value': {
+          //           $in: [8]
+          //         }
+          //       },
+          //       {
+          //         'details.코어 수.value': {
+          //           $not: {
+          //             $in: [12]
+          //           }
+          //         }
+          //       }
+          //     ]
+          //   },
+          //   {
+          //     $or: [
+          //       {
+          //         'details.L3 캐시.value': {
+          //           $lte: 32
+          //         }
+          //       },
+          //       {
+          //         $nor: [
+          //           {
+          //             $and: [
+          //               {
+          //                 'details.L3 캐시.value': {
+          //                   $gte: 64
+          //                 }
+          //               },
+          //               {
+          //                 'details.L3 캐시.value': {
+          //                   $lte: 128
+          //                 }
+          //               }
+          //             ]
+          //           }
+          //         ]
+          //       },
+          //       {
+          //         'details.L3 캐시.value': {
+          //           $gte: 256
+          //         }
+          //       }
+          //     ]
+          //   }
+          // ]
           query['$or'] = filterOptions.map(value => {
+            // Check if the value starts with '!!'
+            // which means that the user wants to exclude the value
+            const shouldExclude = /^!!/.test(value)
+            if (shouldExclude) {
+              value = value.replace(/^!!/, '')
+            }
+
+            let rangeQuery
+
             const [min, max] = convertToNumbers(
               value,
               config[filterName]
@@ -134,7 +255,7 @@ export const parseFilters = (() => {
             // In case of '~32GB', match anything that has less than 32GB
             const onlyMax = /^~/.test(value)
             if (onlyMax) {
-              return {
+              rangeQuery = {
                 [fieldName]: { $lte: min }
               }
             }
@@ -142,14 +263,14 @@ export const parseFilters = (() => {
             // In case of '32GB~', match anything that has greater than 32GB
             const onlyMin = /~$/.test(value)
             if (onlyMin) {
-              return {
+              rangeQuery = {
                 [fieldName]: { $gte: min }
               }
             }
 
             // Default case
             if (!onlyMax && !onlyMin) {
-              return {
+              rangeQuery = {
                 $and: [
                   {
                     [fieldName]: { $gte: min }
@@ -160,28 +281,31 @@ export const parseFilters = (() => {
                 ]
               }
             }
+
+            return shouldExclude ? { $nor: [rangeQuery] } : rangeQuery
           })
 
           break
 
         case 'max':
-          convertedValue = values.map(
-            value => convertToNumbers(value, config[filterName])[0]
-          )
-
-          query[fieldName] = {
-            $lte: convertedValue
-          }
-          break
-
         case 'min':
-          convertedValue = values.map(
-            value => convertToNumbers(value, config[filterName])[0]
-          )
+          // Check if the value starts with '!!'
+          // to exclude the value from the query result.
+          // And 'min' or 'max' should only have one value
+          const shouldExclude = /^!!/.test(values[0])
+          const value = convertToNumbers(
+            shouldExclude ? values[0].replace(/^!!/, '') : values[0],
+            config[filterName]
+          )[0]
 
-          query[fieldName] = {
-            $gte: convertedValue
+          const operator = matchingType === 'max' ? '$lte' : '$gte'
+
+          query = {
+            [fieldName]: shouldExclude
+              ? { $not: { [operator]: value } }
+              : { [operator]: value }
           }
+
           break
       }
 

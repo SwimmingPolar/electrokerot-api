@@ -129,7 +129,8 @@
       "정격파워 950W 이상",
       "정격파워 1000W 이상",
       "정격파워 1200W 이상"
-    ]
+    ],
+    "matchingType": "min"
   },
   {
     "subCategory": "사용전력",
@@ -158,7 +159,8 @@
       "최대 모니터 3개",
       "최대 모니터 4개",
       "최대 모니터 6개"
-    ]
+    ],
+    "matchingType": "max"
   },
   {
     "category": "냉각방식",
@@ -299,7 +301,8 @@
   },
   {
     "subCategory": "DisplayPort",
-    "values": ["1개", "2개", "3개", "4개", "6개"]
+    "values": ["1개", "2개", "3개", "4개", "6개"],
+    "matchingType": "min"
   },
   { "subCategory": "HDMI", "values": ["1개", "2개", "3개"] },
   {
