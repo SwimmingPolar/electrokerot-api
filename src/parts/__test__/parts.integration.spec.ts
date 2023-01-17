@@ -224,7 +224,7 @@ describe('integration test: PartsModule', () => {
           .expect(200)
 
         expect(body).toHaveLength(1)
-        expect(body[0].name.fullName).toBe(PartsStubs.cpu.name.fullName)
+        expect(body[0]).toBe(PartsStubs.cpu._id.toString())
       })
       test('with category and page', async () => {
         const { body } = await request
@@ -238,7 +238,7 @@ describe('integration test: PartsModule', () => {
           .expect(200)
 
         expect(body).toHaveLength(1)
-        expect(body[0].name.fullName).toBe(PartsStubs.cpu.name.fullName)
+        expect(body[0]).toBe(PartsStubs.cpu._id.toString())
       })
       test('with category, page, query and filters', async () => {
         const mockedFn = jest.fn()
@@ -268,7 +268,7 @@ describe('integration test: PartsModule', () => {
             category: 'cpu',
             page: 1,
             query: '인텔 i5',
-            filters: JSON.stringify(filters)
+            filters: filters
           })
           .expect(200)
 
@@ -323,7 +323,7 @@ describe('integration test: PartsModule', () => {
           .set('Accept', 'application/json')
           .send({
             category: 'cpu',
-            filters: JSON.stringify(filters)
+            filters: filters
           })
           .expect(200)
 
@@ -410,7 +410,7 @@ describe('integration test: PartsModule', () => {
         await request.post('/parts/search?category=invalid').expect(400)
       })
       test('with invalid filters value', async () => {
-        const { body } = await request
+        await request
           .post('/parts/search')
           .send({
             category: 'cpu',
@@ -432,9 +432,9 @@ describe('integration test: PartsModule', () => {
           .post('/parts/search')
           .send({
             category: 'cpu',
-            filters: JSON.stringify({
+            filters: {
               ['a'.repeat(101)]: ['b'.repeat(101)]
-            })
+            }
           })
           .expect(400)
       })

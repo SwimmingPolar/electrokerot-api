@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing'
 import { Collection, MongoClient, ObjectId } from 'mongodb'
 import { getClientToken, MongoModule } from 'nest-mongodb'
 import { PartsStubs } from '../../../__test__/stubs/part.stub'
-import { Category } from '../../common/types'
+import { PartCategory } from '../../common/types'
 import { Part } from '../entities/part.entity'
 import { PartsRepository } from '../parts.repository'
 
@@ -84,7 +84,7 @@ describe('unit test: PartsRepository', () => {
           '인텔 코어i5-12세대 12400 (엘더레이크)'
         ])
       const parts = await partsRepository.findPartsNamesByCategoryAndQuery(
-        Category['cpu'],
+        PartCategory['cpu'],
         '12400'
       )
       expect(parts.length).toBe(2)
