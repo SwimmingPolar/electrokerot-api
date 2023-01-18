@@ -11,7 +11,21 @@ export enum MarketType {
   cash = 'cash'
 }
 
-export enum Category {
+export enum PartCategory {
+  cpu = 'cpu',
+  memory = 'memory',
+  motherboard = 'motherboard',
+  graphics = 'graphics',
+  ssd = 'ssd',
+  hdd = 'hdd',
+  power = 'power',
+  case = 'case',
+  cooler = 'cooler'
+}
+
+export type PartCategoryType = keyof typeof PartCategory
+
+export enum BuildCategory {
   cpu = 'cpu',
   motherboard = 'motherboard',
   memory = 'memory',
@@ -23,6 +37,8 @@ export enum Category {
   cpuCooler = 'cpuCooler',
   systemCooler = 'systemCooler'
 }
+
+export type BuildCategoryType = keyof typeof BuildCategory
 
 export interface Vote {
   voter: ObjectId

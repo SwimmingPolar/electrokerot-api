@@ -22,7 +22,7 @@ export class InvalidJsonFilter implements ExceptionFilter {
 
     return response.json({
       error: name,
-      message
+      message: 'Invalid JSON format'
     })
   }
 }

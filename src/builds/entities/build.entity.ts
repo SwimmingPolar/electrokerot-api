@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer'
 import { ObjectId } from 'mongodb'
-import { Category, MarketType } from 'src/common/types'
+import { BuildCategory, MarketType } from 'src/common/types'
 import { TransformObjectId } from '../../common/decorators/TransformObjectId.decorator'
 
 class Filter {
@@ -83,8 +83,8 @@ export enum FilterStatus {
 class Optimization {
   hash: string
   optimizedAt: Date
-  lowestPrice: Record<Category, OptimizedPart>
-  leastPackage: Record<Category, OptimizedPart>
+  lowestPrice: Record<BuildCategory, OptimizedPart>
+  leastPackage: Record<BuildCategory, OptimizedPart>
 }
 
 class OptimizedPart {

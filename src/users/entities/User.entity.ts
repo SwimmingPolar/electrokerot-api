@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { Exclude, Type } from 'class-transformer'
 import { ObjectId } from 'mongodb'
 import { TransformObjectId } from 'src/common/decorators/TransformObjectId.decorator'
-import { Category } from 'src/common/types'
+import { BuildCategory } from 'src/common/types'
 
 export class User {
   @TransformObjectId()
@@ -24,7 +24,7 @@ export class User {
   bookmarks?: ObjectId[]
 
   @TransformObjectId()
-  build?: Record<Category, ObjectId>
+  build?: Record<BuildCategory, ObjectId>
 
   avatar?: string
 
@@ -59,7 +59,7 @@ export class User {
       this.role = Role.guest
       this.status = UserStatus.unverified
       this.bookmarks = []
-      this.build = {} as Record<Category, ObjectId>
+      this.build = {} as Record<BuildCategory, ObjectId>
       this.avatar = ''
       this.notifications = []
       this.warnings = []

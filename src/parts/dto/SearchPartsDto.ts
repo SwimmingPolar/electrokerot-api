@@ -1,6 +1,6 @@
 import { Transform } from 'class-transformer'
 import {
-  IsEnum,
+  IsIn,
   IsNumber,
   IsObject,
   IsOptional,
@@ -12,7 +12,7 @@ import {
   ValidationArguments,
   ValidationOptions
 } from 'class-validator'
-import { Category } from '../../common/types'
+import { PartCategory, PartCategoryType } from '../../common/types'
 
 export type FiltersType = {
   filterName: string
@@ -20,8 +20,8 @@ export type FiltersType = {
 }[]
 
 export class SearchPartsBody {
-  @IsEnum(Category)
-  category: keyof typeof Category
+  @IsIn(Object.keys(PartCategory))
+  category: PartCategoryType
 
   @Transform(({ value }) => Number(value))
   @IsNumber()
@@ -36,16 +36,6 @@ export class SearchPartsBody {
   query: string
 
   @IsObject({ each: true })
-  @Transform(({ value }) => {
-    // Parse only on string values
-    // otherwise will get 500 internal error
-    // @Issue: there's no 'stop on error' feature for now
-    if (typeof value === 'string') {
-      return JSON.parse(value)
-    } else {
-      return {}
-    }
-  })
   @IsFilter('filters', {
     message: 'Invalid filter value'
   })

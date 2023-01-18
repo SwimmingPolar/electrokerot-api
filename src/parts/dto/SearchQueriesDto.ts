@@ -1,9 +1,9 @@
-import { IsEnum, IsString, MaxLength } from 'class-validator'
-import { Category } from '../../common/types'
+import { IsIn, IsString, MaxLength } from 'class-validator'
+import { PartCategory, PartCategoryType } from '../../common/types'
 
 export class SearchQueriesQuery {
-  @IsEnum(Category)
-  category: keyof typeof Category
+  @IsIn(Object.keys(PartCategory))
+  category: PartCategoryType
 
   @IsString()
   @MaxLength(100)

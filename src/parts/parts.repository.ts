@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { Db, ObjectId } from 'mongodb'
 import { InjectDb } from 'nest-mongodb'
 import { EntityRepository } from '../common/repository/entity.repository'
-import { Category } from '../common/types'
+import { PartCategoryType } from '../common/types'
 import { Part } from './entities/part.entity'
 
 @Injectable()
@@ -16,11 +16,27 @@ export class PartsRepository extends EntityRepository<Part> {
   }
 
   async findPartsByPartIds(partIds: ObjectId[]) {
-    return await this.findMany({ _id: { $in: partIds } })
+    return await this.aggregate([
+      {
+        $match: {
+          _id: {
+            $in: partIds
+          }
+        }
+      },
+      {
+        $lookup: {
+          from: 'parts',
+          localField: 'variants',
+          foreignField: 'pcode',
+          as: 'variants'
+        }
+      }
+    ])
   }
 
   async findPartsNamesByCategoryAndQuery(
-    category: keyof typeof Category,
+    category: PartCategoryType,
     query: string,
     vendorsFilter?: any
   ): Promise<string[]> {
@@ -146,7 +162,7 @@ export class PartsRepository extends EntityRepository<Part> {
     details,
     extraFilter
   }: {
-    category: keyof typeof Category
+    category: PartCategoryType
     page: number
     keyword: string
     details: any
@@ -205,7 +221,7 @@ export class PartsRepository extends EntityRepository<Part> {
       $match: match
     })
 
-    return await this.aggregate([
+    const result = await this.aggregate([
       ...query,
       {
         $group: {
@@ -243,13 +259,12 @@ export class PartsRepository extends EntityRepository<Part> {
         $limit: 15 * page
       },
       {
-        $lookup: {
-          from: 'parts',
-          localField: 'variants',
-          foreignField: 'pcode',
-          as: 'variants'
+        $project: {
+          _id: 1
         }
       }
     ])
+
+    return result.map(part => part._id.toString())
   }
 }

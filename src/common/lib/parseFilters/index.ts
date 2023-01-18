@@ -1,7 +1,12 @@
 import fs from 'fs'
 import { FiltersType } from 'src/parts/dto/SearchPartsDto'
 import * as filterConfig from '../../assets/filters/config'
-import { Category, FilterConfiguration, FilterJson } from '../../types'
+import {
+  BuildCategoryType,
+  FilterConfiguration,
+  FilterJson,
+  PartCategoryType
+} from '../../types'
 import { convertToNumbers } from '../convertToNumbers/index'
 
 const FiltersObject = {} as {
@@ -40,7 +45,7 @@ export const parseFilters = (() => {
   init()
 
   return (
-    category: keyof typeof Category,
+    category: PartCategoryType,
     filters: FiltersType
   ): { [key: string]: any } => {
     if (!filters) {
@@ -48,11 +53,10 @@ export const parseFilters = (() => {
     }
 
     let partCategory = category as keyof typeof filterConfig
-    // @Issue: Find a way to make this more elegant
-    if (category === 'systemCooler' || category === 'cpuCooler') {
-      partCategory = 'cooler'
-    } else if (category === 'case') {
-      partCategory = '_case'
+    switch (category) {
+      case 'case':
+        partCategory = '_case'
+        break
     }
 
     // We need to perform 'and' operation on each filters

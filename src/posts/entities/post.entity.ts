@@ -1,9 +1,9 @@
 import { ObjectId } from 'mongodb'
-import { Category, Vote } from 'src/common/types'
+import { BuildCategory, Vote } from 'src/common/types'
 
 export class Post {
   _id: ObjectId
-  category: Category
+  category: BuildCategory
   owner: ObjectId
   nickname: string
   tag: Tag
@@ -26,7 +26,7 @@ enum Tag {
 
 type Builds = Build[]
 
-type Build = Record<Category, Part>
+type Build = Record<BuildCategory, Part>
 
 enum PostStatus {
   published = 'published',

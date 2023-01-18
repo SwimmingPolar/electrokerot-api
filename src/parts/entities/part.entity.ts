@@ -1,14 +1,16 @@
 import { Exclude } from 'class-transformer'
 import { ObjectId } from 'mongodb'
-import { Category, MarketType } from 'src/common/types'
+import { MarketType, PartCategoryType } from 'src/common/types'
 import { TransformObjectId } from '../../common/decorators/TransformObjectId.decorator'
 
 export class Part {
   @TransformObjectId()
   _id: ObjectId
+
+  @Exclude({ toPlainOnly: true })
   pcode: string
   name: FullName
-  category: keyof typeof Category
+  category: PartCategoryType
   variants: string[]
   sortOrder: number
   stock: boolean

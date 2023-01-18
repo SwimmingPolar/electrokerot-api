@@ -20,14 +20,14 @@ import {
 import { ObjectId } from 'mongodb'
 import { IsMongodbId } from '../../common/decorators/IsMongodbId'
 import { TransformObjectId } from '../../common/decorators/TransformObjectId.decorator'
-import { Category, MarketType } from '../../common/types'
+import { BuildCategory, MarketType } from '../../common/types'
 import { FilterStatus } from '../entities/build.entity'
 
 enum Reserved {
   reserved = 'reserved'
 }
 
-const PartCategory = { ...Category, ...Reserved }
+const PartCategory = { ...BuildCategory, ...Reserved }
 
 class OptimizedPart {
   @IsEnum(MarketType)
