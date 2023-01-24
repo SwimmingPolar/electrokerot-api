@@ -1,9 +1,32 @@
 import { Injectable } from '@nestjs/common'
 import { Db, ObjectId } from 'mongodb'
 import { InjectDb } from 'nest-mongodb'
+import { PartCategoryType } from 'src/common/types'
+import {
+  cooler,
+  cpu,
+  graphics,
+  hdd,
+  memory,
+  motherboard,
+  power,
+  ssd,
+  _case
+} from '../common/assets/filters/config'
 import { EntityRepository } from '../common/repository/entity.repository'
-import { PartCategoryType } from '../common/types'
 import { Part } from './entities/part.entity'
+
+const partsConfig = {
+  cpu,
+  cooler,
+  graphics,
+  hdd,
+  memory,
+  motherboard,
+  power,
+  ssd,
+  case: _case
+}
 
 @Injectable()
 export class PartsRepository extends EntityRepository<Part> {
@@ -16,23 +39,68 @@ export class PartsRepository extends EntityRepository<Part> {
   }
 
   async findPartsByPartIds(partIds: ObjectId[]) {
-    return await this.aggregate([
-      {
-        $match: {
-          _id: {
-            $in: partIds
+    return (
+      (
+        await this.aggregate([
+          {
+            $match: {
+              _id: {
+                $in: partIds
+              }
+            }
+          },
+          {
+            $lookup: {
+              from: 'parts',
+              localField: 'variants',
+              foreignField: 'pcode',
+              as: 'variants'
+            }
           }
-        }
-      },
-      {
-        $lookup: {
-          from: 'parts',
-          localField: 'variants',
-          foreignField: 'pcode',
-          as: 'variants'
-        }
-      }
-    ])
+        ])
+      )
+        // To not expose pcode to the client,
+        // we are replacing it with _id
+        .reduce((acc, part) => {
+          // Collect all ids including the current part
+          const variantsIds = part.variants
+            .map(variant => variant._id)
+            .concat(part._id)
+            .map(id => id.toString())
+          //  Flatten the parts including the current part and variants
+          const allParts = part.variants.concat(part)
+          // Replace variants with the ids string
+          allParts.forEach((part: any) => {
+            part.variants = variantsIds.filter(id => id !== part._id.toString())
+          })
+
+          return [...acc, ...allParts]
+        }, [] as Part[])
+        .map(part => {
+          let category = part.category as string
+          if (category === 'case') {
+            category = '_case'
+          }
+
+          // Get config for the current detail
+          const config = partsConfig[category]
+          // Iterate over details and
+          // decorate the value with the unit
+          Object.entries(part.details).forEach(([key, values]) => {
+            // Value points to the object reference
+            // so we can directly mutate it
+            const hasUnit =
+              config[key]?.unit !== undefined && config[key]?.unit !== ''
+
+            if (hasUnit) {
+              const value = values.value
+              values.value = `${value}${config[key].unit}`
+            }
+          })
+
+          return part
+        })
+    )
   }
 
   async findPartsNamesByCategoryAndQuery(
@@ -152,7 +220,8 @@ export class PartsRepository extends EntityRepository<Part> {
    *  TEXT SEARCH
    *  If the user is searching for a specific part by name (query) plus the details filter and the page,
    *  then sortOrder and isVariant are less important. So we delegate the sorting to the full text search engine
-   *  and we don't need to filter out the variants of the same part because the full text search engine will.
+   *  and we don't need to filter out the vaimport { PartCategoryType } from 'src/common/types';
+riants of the same part because the full text search engine will.
    *  Instead, we need to group the parts by name and return the first part of each group
    */
   async findPartsByFilters({

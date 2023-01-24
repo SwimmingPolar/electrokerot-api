@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer'
+import { Exclude, Transform, Type } from 'class-transformer'
 import { ObjectId } from 'mongodb'
 import { MarketType, PartCategoryType } from 'src/common/types'
 import { TransformObjectId } from '../../common/decorators/TransformObjectId.decorator'
@@ -11,7 +11,9 @@ export class Part {
   pcode: string
   name: FullName
   category: PartCategoryType
-  variants: string[]
+
+  @Type(() => Part)
+  variants: Part[]
   sortOrder: number
   stock: boolean
 
@@ -21,11 +23,14 @@ export class Part {
   @Exclude({ toPlainOnly: true })
   isUpdating: boolean
   details: Details
+
   vendors: Vendors
   prices: Prices
 
   @Exclude({ toPlainOnly: true })
   createdAt: Date
+
+  @Transform(({ value }) => new Date(value))
   updatedAt: Date
 }
 
@@ -56,5 +61,5 @@ type Prices = Price[]
 
 interface Price {
   timestamp: Date
-  price: number
+  value: number
 }
