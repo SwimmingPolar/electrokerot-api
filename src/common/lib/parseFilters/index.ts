@@ -1,12 +1,7 @@
 import fs from 'fs'
 import { FiltersType } from 'src/parts/dto/SearchPartsDto'
 import * as filterConfig from '../../assets/filters/config'
-import {
-  BuildCategoryType,
-  FilterConfiguration,
-  FilterJson,
-  PartCategoryType
-} from '../../types'
+import { FilterConfiguration, FilterJson, PartCategoryType } from '../../types'
 import { convertToNumbers } from '../convertToNumbers/index'
 
 const FiltersObject = {} as {
@@ -44,10 +39,7 @@ const init = () => {
 export const parseFilters = (() => {
   init()
 
-  return (
-    category: PartCategoryType,
-    filters: FiltersType
-  ): { [key: string]: any } => {
+  return (category: PartCategoryType, filters: FiltersType) => {
     if (!filters) {
       return undefined
     }

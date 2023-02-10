@@ -76,6 +76,7 @@ export class PartsRepository extends EntityRepository<Part> {
 
           return [...acc, ...allParts]
         }, [] as Part[])
+        // Append unit to details value
         .map(part => {
           let category = part.category as string
           if (category === 'case') {
@@ -90,11 +91,15 @@ export class PartsRepository extends EntityRepository<Part> {
             // Value points to the object reference
             // so we can directly mutate it
             const hasUnit =
-              config[key]?.unit !== undefined && config[key]?.unit !== ''
+              config?.[key] &&
+              config[key]?.unit !== undefined &&
+              config[key]?.unit !== ''
 
             if (hasUnit) {
               const value = values.value
               values.value = `${value}${config[key].unit}`
+            } else {
+              values.value = values.value.toString()
             }
           })
 
